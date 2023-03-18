@@ -1,15 +1,72 @@
-//
-// Created by mihai on 3/18/23.
-//
+#ifndef VECTOR2_H
+#define VECTOR2_H
 
-#ifndef IMAGEPROCESSING_VECTOR2_H
-#define IMAGEPROCESSING_VECTOR2_H
+//Designed after the structure of SFML's Vector2
+//https://github.com/SFML/SFML
 
-
-class Vector2
+namespace tools
 {
 
-};
+    template<typename T>
+    class Vector2
+    {
+    public:
+        T x;
+        T y;
+
+        constexpr Vector2() = default;
+
+        constexpr Vector2(T X, T Y);
+
+        template<typename U>
+        constexpr explicit Vector2(const Vector2<U>& vector);
 
 
-#endif //IMAGEPROCESSING_VECTOR2_H
+    };
+
+
+    template<typename T>
+    constexpr Vector2<T> &operator+=(Vector2<T> &left, const Vector2<T> &right);
+
+    template<typename T>
+    constexpr Vector2<T> &operator-=(Vector2<T> &left, const Vector2<T> &right);
+
+    template<typename T>
+    constexpr Vector2<T> operator+(const Vector2<T> &left, const Vector2<T> &right);
+
+    template<typename T>
+    constexpr Vector2<T> operator-(const Vector2<T> &right);
+
+    template<typename T>
+    constexpr Vector2<T> operator-(const Vector2<T> &left, const Vector2<T> &right);
+
+    template<typename T>
+    constexpr Vector2<T> operator*(const Vector2<T> &left, T right);
+
+    template<typename T>
+    constexpr Vector2<T> operator*(T left, const Vector2<T> &right);
+
+    template<typename T>
+    constexpr Vector2<T> &operator*=(Vector2<T> &left, T right);
+
+    template<typename T>
+    constexpr Vector2<T> operator/(const Vector2<T> &left, T right);
+
+    template<typename T>
+    constexpr Vector2<T> &operator/=(Vector2<T> &left, T right);
+
+    template<typename T>
+    constexpr bool operator==(const Vector2<T> &left, const Vector2<T> &right);
+
+    template<typename T>
+    constexpr bool operator!=(const Vector2<T> &left, const Vector2<T> &right);
+
+
+    typedef Vector2<int>          Vector2I;
+    typedef Vector2<unsigned int> Vector2U;
+    typedef Vector2<long long int> Vector2LL;
+    typedef Vector2<unsigned long long int> Vector2ULL;
+    typedef Vector2<float>        Vector2F;
+    typedef Vector2<double>        Vector2D;
+}
+#endif //VECTOR2_H
