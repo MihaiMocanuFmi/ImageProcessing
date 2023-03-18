@@ -284,6 +284,10 @@ bool PortablePixMap_Plain::m_findColors(std::string &rPlainFile, tools::ColorMat
         return false;
 }
 
+/*
+ * TODO: Move the loading logic into a different class,
+ * TODO: Cache the position in the file of all important values (Magic Number, Size, Max Value, Color start)
+ */
 
 
 ///*********************************************************************************************************************
