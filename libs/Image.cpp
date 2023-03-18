@@ -23,16 +23,19 @@ Image::Image(tools::Vector2U size) : m_size(size)
 
 bool Image::load(std::string imagePath)
 {
-    std::ifstream inputFile("imagePath");
+    std::ifstream inputFile(imagePath);
     std::stringstream buffer;
     buffer << inputFile.rdbuf();
 
     if (not ppm.loadPlain(buffer.str()))
         return false;
 
+    m_size = ppm.getSize();
+
     inputFile.close();
     return true;
 }
+
 bool Image::save(std::string imagePath)
 {
     std::string imageStr;
@@ -40,7 +43,7 @@ bool Image::save(std::string imagePath)
     if (not ppm.saveToString(imageStr))
         return false;
 
-    std::ofstream outputFile("imagePath");
+    std::ofstream outputFile(imagePath);
     outputFile << imageStr;
 
     outputFile.close();

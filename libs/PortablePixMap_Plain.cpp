@@ -191,6 +191,7 @@ bool PortablePixMap_Plain::m_findColorsP1Format(std::string &rPlainFile, tools::
         }
     }
 
+    m_magicNumber = MAGIC_NUMBER;
     return true;
 }
 
@@ -224,6 +225,7 @@ bool PortablePixMap_Plain::m_findColorsP2Format(std::string &rPlainFile, tools::
         }
     }
 
+    m_magicNumber = MAGIC_NUMBER;
     return true;
 }
 
@@ -263,6 +265,7 @@ bool PortablePixMap_Plain::m_findColorsP3Format(std::string &rPlainFile, tools::
             outColorMatrix[y][x] = {m_maxValue, {colors[0] , colors[1] , colors[2] }};
         }
     }
+
 
     return true;
 }

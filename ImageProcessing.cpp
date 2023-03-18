@@ -5,6 +5,7 @@
 
 int main()
 {
+    /*
     PortablePixMap_Plain ppm;
 
     std::string imageStr = "P21           # P3 means this is a RGB color image in ASCII\n"
@@ -41,6 +42,20 @@ int main()
               << convertedImageStr2 << "\n\n"
               << "#############################End-Conversion2#############################\n\n";
 
+    */
+    Image image;
 
+    image.load("star_field.ascii.ppm");
+
+    image.save("output.ppm");
+
+    for (int i = 0; i < 100; ++i)
+    {
+        image.load("output.ppm");
+
+        image.save("output.ppm");
+
+        std::cout << (i + 1) << "/100" << '\n';
+    }
     return 0;
 }
