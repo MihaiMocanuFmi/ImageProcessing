@@ -159,7 +159,7 @@ bool PortablePixMap_Plain::m_findColorsP1Format(std::string &rPlainFile, tools::
     outColorMatrix.resize(m_size.y);
     for (int y = 0; y < m_size.y; ++y)
     {
-        outColorMatrix.resize(m_size.x);
+        outColorMatrix[y].resize(m_size.x);
         for (int x = 0; x < m_size.x; ++x)
         {
             //if there wasn't any number
@@ -192,7 +192,7 @@ bool PortablePixMap_Plain::m_findColorsP2Format(std::string &rPlainFile, tools::
     outColorMatrix.resize(m_size.y);
     for (int y = 0; y < m_size.y; ++y)
     {
-        outColorMatrix.resize(m_size.x);
+        outColorMatrix[y].resize(m_size.x);
         for (int x = 0; x < m_size.x; ++x)
         {
             //if there wasn't any number
@@ -302,25 +302,33 @@ bool PortablePixMap_Plain::loadPlain(std::string plainFile)
 
 bool PortablePixMap_Plain::saveToString(std::string &outPlainFile)
 {
-    outPlainFile = "";
-    outPlainFile += m_magicNumber + "\t#Magic Number\n";
-    outPlainFile += std::to_string(m_size.x) + " " + std::to_string(m_size.y) + "\t#Size width and height\n";
-    outPlainFile += std::to_string(m_maxValue) + "\t#Max color value\n";
-
-    for (int y = 0; y < m_size.y; ++y)
+    try
     {
-        outPlainFile += "\n";
-        for (int x = 0; x < m_size.x; ++x)
-        {
-            outPlainFile +=  std::to_string(m_colorDataMatrix[y][x].getColorR());
-            outPlainFile += " ";
-            outPlainFile +=  std::to_string(m_colorDataMatrix[y][x].getColorG());
-            outPlainFile += " ";
-            outPlainFile +=  std::to_string(m_colorDataMatrix[y][x].getColorB());
+        outPlainFile = "";
+        outPlainFile += m_magicNumber + "\t#Magic Number\n";
+        outPlainFile += std::to_string(m_size.x) + " " + std::to_string(m_size.y) + "\t#Size width and height\n";
+        outPlainFile += std::to_string(m_maxValue) + "\t#Max color value\n";
 
-            outPlainFile += "\t";
+        for (int y = 0; y < m_size.y; ++y)
+        {
+            outPlainFile += "\n";
+            for (int x = 0; x < m_size.x; ++x)
+            {
+                outPlainFile += std::to_string(m_colorDataMatrix[y][x].getColorR());
+                outPlainFile += "\t";
+                outPlainFile += std::to_string(m_colorDataMatrix[y][x].getColorG());
+                outPlainFile += "\t";
+                outPlainFile += std::to_string(m_colorDataMatrix[y][x].getColorB());
+
+                outPlainFile += "\t\t\t";
+            }
+
         }
 
+        return true;
+    }
+    catch (...){
+        return false;
     }
 }
 
