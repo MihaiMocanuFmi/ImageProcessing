@@ -20,11 +20,13 @@ namespace tools
 
     public:
         static constexpr unsigned int EIGHT_BIT = 255;
-        RgbColor();
-        RgbColor(unsigned int maxValue);
+        RgbColor(); // sets all values to zero
+        explicit RgbColor(unsigned int maxValue);
         RgbColor(unsigned int maxValue, unsigned int R, unsigned int G, unsigned int B);
+        RgbColor(unsigned int maxValue, const m_Color &color);
 
         void setColor(unsigned int R, unsigned int G, unsigned int B);
+        void setColor(const m_Color &color);
         void setColorR(unsigned int R);
         void setColorG(unsigned int G);
         void setColorB(unsigned int B);

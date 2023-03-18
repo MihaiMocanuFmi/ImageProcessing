@@ -1,6 +1,7 @@
 #include "PortablePixMap_Plain.h"
 
 #include <cstring>
+#include <array>
 
 /////////////////////////PRIVATE////////////////////////////////////////////
 
@@ -144,17 +145,108 @@ bool PortablePixMap_Plain::m_findMaxValue(std::string &rPlainFile, unsigned int 
 
 bool PortablePixMap_Plain::m_findColorsP1Format(std::string &rPlainFile, tools::ColorMatrix &outColorMatrix)
 {
+    //TODO: Maybe add checking for these searches, even though if the rest of the methods were called, these calls will
+    // also be valid
+    int magicNumber = rPlainFile.find(m_magicNumber);
+    int posFirstSizeComp = rPlainFile.find(std::to_string(m_size.x), magicNumber + 3);
+    int posSecondSizeComp = rPlainFile.find(std::to_string(m_size.y), posFirstSizeComp + 2);
+    int posNextWhiteSpace = posSecondSizeComp + std::to_string(m_size.y).length();
 
+
+    int startingPos = -1;
+    int endingPos = posNextWhiteSpace;
+
+    outColorMatrix.resize(m_size.y);
+    for (int y = 0; y < m_size.y; ++y)
+    {
+        outColorMatrix.resize(m_size.x);
+        for (int x = 0; x < m_size.x; ++x)
+        {
+            //if there wasn't any number
+            if (not m_findFirstNumber(rPlainFile, endingPos + 1, startingPos, endingPos))
+                return false;
+
+            std::string colorValueStr = rPlainFile.substr(startingPos, endingPos - startingPos + 1);
+            unsigned int colorValue = std::stoi(colorValueStr);
+
+            outColorMatrix[y][x] = {m_maxValue, {colorValue, colorValue, colorValue}};
+        }
+    }
+
+    return true;
 }
 
 bool PortablePixMap_Plain::m_findColorsP2Format(std::string &rPlainFile, tools::ColorMatrix &outColorMatrix)
 {
+    //TODO: Maybe add checking for these searches, even though if the rest of the methods were called, these calls will
+    // also be valid
+    int magicNumber = rPlainFile.find(m_magicNumber);
+    int posFirstSizeComp = rPlainFile.find(std::to_string(m_size.x), magicNumber + 3);
+    int posSecondSizeComp = rPlainFile.find(std::to_string(m_size.y), posFirstSizeComp + 2);
+    int posMaxValue =  rPlainFile.find(std::to_string(m_maxValue), posSecondSizeComp + 1);
+    int posNextWhiteSpace = posMaxValue + std::to_string(m_maxValue).length();
 
+    int startingPos = -1;
+    int endingPos = posNextWhiteSpace;
+
+    outColorMatrix.resize(m_size.y);
+    for (int y = 0; y < m_size.y; ++y)
+    {
+        outColorMatrix.resize(m_size.x);
+        for (int x = 0; x < m_size.x; ++x)
+        {
+            //if there wasn't any number
+            if (not m_findFirstNumber(rPlainFile, endingPos + 1, startingPos, endingPos))
+                return false;
+
+            std::string colorValueStr = rPlainFile.substr(startingPos, endingPos - startingPos + 1);
+            unsigned int colorValue = std::stoi(colorValueStr);
+
+            outColorMatrix[y][x] = {m_maxValue, {colorValue, colorValue, colorValue}};
+        }
+    }
+
+    return true;
 }
 
 bool PortablePixMap_Plain::m_findColorsP3Format(std::string &rPlainFile, tools::ColorMatrix &outColorMatrix)
 {
+    //TODO: Maybe add checking for these searches, even though if the rest of the methods were called, these calls will
+    // also be valid
+    int magicNumber = rPlainFile.find(m_magicNumber);
+    int posFirstSizeComp = rPlainFile.find(std::to_string(m_size.x), magicNumber + 3);
+    int posSecondSizeComp = rPlainFile.find(std::to_string(m_size.y), posFirstSizeComp + 2);
+    int posMaxValue =  rPlainFile.find(std::to_string(m_maxValue), posSecondSizeComp + 1);
+    int posNextWhiteSpace = posMaxValue + std::to_string(m_maxValue).length();
 
+    int startingPos = -1;
+    int endingPos = posNextWhiteSpace;
+
+    outColorMatrix.resize(m_size.y);
+    for (int y = 0; y < m_size.y; ++y)
+    {
+        outColorMatrix[y].resize(m_size.x);
+        for (int x = 0; x < m_size.x; ++x)
+        {
+            std::array<unsigned int, 3> colors;
+            for (int i = 0; i < 3; ++i)
+            {
+                //if there wasn't any number
+                if (not m_findFirstNumber(rPlainFile, endingPos + 1, startingPos, endingPos))
+                    return false;
+
+                std::string colorValueStr = rPlainFile.substr(startingPos, endingPos - startingPos + 1);
+                unsigned int colorValue = std::stoi(colorValueStr);
+
+                colors[i] = colorValue;
+            }
+
+
+            outColorMatrix[y][x] = {m_maxValue, {colors[0] , colors[1] , colors[2] }};
+        }
+    }
+
+    return true;
 }
 
 bool PortablePixMap_Plain::m_findColors(std::string &rPlainFile, tools::ColorMatrix &outColorMatrix)
@@ -200,6 +292,11 @@ bool PortablePixMap_Plain::loadPlain(std::string plainFile)
         return false;
 
     m_maxValue = maxValue;
+
+    tools::ColorMatrix colorMatrix;
+    if (not m_findColors(plainFile, colorMatrix))
+        return false;
+    m_colorDataMatrix = colorMatrix;
 
     std::cout << plainFile;
 
