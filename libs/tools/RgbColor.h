@@ -1,6 +1,8 @@
 #ifndef RGB_COLOR_H
 #define RGB_COLOR_H
 
+#include <vector>
+
 namespace tools
 {
 
@@ -28,6 +30,8 @@ namespace tools
         void setColorB(unsigned int B);
     };
 
+
+    typedef std::vector<std::vector<tools::RgbColor>> ColorMatrix;
 } // tools
 
 #endif //RGBCOLOR_H
