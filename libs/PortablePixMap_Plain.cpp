@@ -267,7 +267,6 @@ PortablePixMap_Plain::PortablePixMap_Plain() : m_size{0,0}, m_maxValue{0}
 {
 }
 
-#include <iostream>
 bool PortablePixMap_Plain::loadPlain(std::string plainFile)
 {
     m_preProcessPPM(plainFile);
@@ -298,23 +297,34 @@ bool PortablePixMap_Plain::loadPlain(std::string plainFile)
         return false;
     m_colorDataMatrix = colorMatrix;
 
-    std::cout << plainFile;
-
     return true;
 }
 
-void PortablePixMap_Plain::loadGivenColor(unsigned int maxValue,
-                                          const std::vector<std::vector<tools::RgbColor>> &colorDataMatrix)
+bool PortablePixMap_Plain::saveToString(std::string &outPlainFile)
 {
-    m_colorDataMatrix = colorDataMatrix;
+    outPlainFile = "";
+    outPlainFile += m_magicNumber + "\t#Magic Number\n";
+    outPlainFile += std::to_string(m_size.x) + " " + std::to_string(m_size.y) + "\t#Size width and height\n";
+    outPlainFile += std::to_string(m_maxValue) + "\t#Max color value\n";
 
-    const unsigned int sizeY = m_colorDataMatrix.size();
-    const unsigned int sizeX = m_colorDataMatrix[0].size();
+    for (int y = 0; y < m_size.y; ++y)
+    {
+        outPlainFile += "\n";
+        for (int x = 0; x < m_size.x; ++x)
+        {
+            outPlainFile +=  std::to_string(m_colorDataMatrix[y][x].getColorR());
+            outPlainFile += " ";
+            outPlainFile +=  std::to_string(m_colorDataMatrix[y][x].getColorG());
+            outPlainFile += " ";
+            outPlainFile +=  std::to_string(m_colorDataMatrix[y][x].getColorB());
 
-    m_size = {sizeX, sizeY};
-    m_maxValue = maxValue;
+            outPlainFile += "\t";
+        }
 
+    }
 }
+
+
 
 
 

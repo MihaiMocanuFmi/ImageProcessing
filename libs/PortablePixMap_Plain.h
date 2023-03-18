@@ -85,10 +85,8 @@ public:
      */
     bool loadPlain(std::string plainFile);
 
-    /* It is assumed that colorDataMatrix a rectangle and has at least size {1,1} and that all color components in matrix
-     * are less than or equal to maxValue
-     */
-    void loadGivenColor(unsigned int maxValue, const std::vector<std::vector<tools::RgbColor>> &colorDataMatrix);
+    bool saveToString(std::string &outPlainFile);
+
 
 };
 
