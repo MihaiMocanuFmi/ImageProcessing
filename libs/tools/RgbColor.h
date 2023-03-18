@@ -11,7 +11,7 @@ namespace tools
     private:
         unsigned int m_maxValue;
 
-        struct m_Color
+        struct Color
         {
             unsigned int R;
             unsigned int G;
@@ -23,13 +23,21 @@ namespace tools
         RgbColor(); // sets all values to zero
         explicit RgbColor(unsigned int maxValue);
         RgbColor(unsigned int maxValue, unsigned int R, unsigned int G, unsigned int B);
-        RgbColor(unsigned int maxValue, const m_Color &color);
+        RgbColor(unsigned int maxValue, const Color &color);
 
         void setColor(unsigned int R, unsigned int G, unsigned int B);
-        void setColor(const m_Color &color);
+
+        void setColor(const Color &color);
+        const Color &getColor() const;
+
         void setColorR(unsigned int R);
+        unsigned int getColorR() const;
+
         void setColorG(unsigned int G);
+        unsigned int getColorG() const;
+
         void setColorB(unsigned int B);
+        unsigned int getColorB() const;
     };
 
 
