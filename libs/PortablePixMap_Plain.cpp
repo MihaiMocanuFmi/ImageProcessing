@@ -3,7 +3,13 @@
 #include <cstring>
 #include <array>
 
-/////////////////////////PRIVATE////////////////////////////////////////////
+
+
+///*********************************************************************************************************************
+///*****************************************PRIVATE*********************************************************************
+///*********************************************************************************************************************
+
+
 
 void PortablePixMap_Plain::m_removeComments(std::string &rPlainFile)
 {
@@ -23,10 +29,14 @@ void PortablePixMap_Plain::m_removeComments(std::string &rPlainFile)
     }
 }
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 void PortablePixMap_Plain::m_preProcessPPM(std::string &rPlainFile)
 {
     m_removeComments(rPlainFile);
 }
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 bool PortablePixMap_Plain::m_findMagicNumber(std::string &rPlainFile, std::string &outMagicNumber)
 {
@@ -59,6 +69,8 @@ bool PortablePixMap_Plain::m_findMagicNumber(std::string &rPlainFile, std::strin
     return true;
 }
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 bool PortablePixMap_Plain::m_findFirstNumber(const std::string &str, unsigned int startingPos, int &outStartPos,
                                              int &outEndPos)
 {
@@ -76,6 +88,8 @@ bool PortablePixMap_Plain::m_findFirstNumber(const std::string &str, unsigned in
     outEndPos = posDigit - 1;
     return true;
 }
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 bool PortablePixMap_Plain::m_findSize(std::string &rPlainFile, tools::Vector2U &outSize)
 {
@@ -114,6 +128,8 @@ bool PortablePixMap_Plain::m_findSize(std::string &rPlainFile, tools::Vector2U &
 
 }
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 bool PortablePixMap_Plain::m_findMaxValue(std::string &rPlainFile, unsigned int &outMaxValue)
 {
     if (m_magicNumber == PBM_MAGIC_NUMBER)
@@ -142,6 +158,8 @@ bool PortablePixMap_Plain::m_findMaxValue(std::string &rPlainFile, unsigned int 
     outMaxValue = maxValue;
     return true;
 }
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 bool PortablePixMap_Plain::m_findColorsP1Format(std::string &rPlainFile, tools::ColorMatrix &outColorMatrix)
 {
@@ -249,6 +267,8 @@ bool PortablePixMap_Plain::m_findColorsP3Format(std::string &rPlainFile, tools::
     return true;
 }
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 bool PortablePixMap_Plain::m_findColors(std::string &rPlainFile, tools::ColorMatrix &outColorMatrix)
 {
     if (m_magicNumber == PBM_MAGIC_NUMBER)
@@ -261,11 +281,19 @@ bool PortablePixMap_Plain::m_findColors(std::string &rPlainFile, tools::ColorMat
         return false;
 }
 
-/////////////////////////PUBLIC/////////////////////////////////////////////
+
+
+///*********************************************************************************************************************
+///*****************************************PUBLIC**********************************************************************
+///*********************************************************************************************************************
+
+
 
 PortablePixMap_Plain::PortablePixMap_Plain() : m_size{0,0}, m_maxValue{0}
 {
 }
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 bool PortablePixMap_Plain::loadPlain(std::string plainFile)
 {
@@ -300,6 +328,8 @@ bool PortablePixMap_Plain::loadPlain(std::string plainFile)
     return true;
 }
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 bool PortablePixMap_Plain::saveToString(std::string &outPlainFile)
 {
     try
@@ -332,9 +362,33 @@ bool PortablePixMap_Plain::saveToString(std::string &outPlainFile)
     }
 }
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+const std::string &PortablePixMap_Plain::getMagicNumber() const
+{
+    return m_magicNumber;
+}
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+const tools::Vector2U &PortablePixMap_Plain::getSize() const
+{
+    return m_size;
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+unsigned int PortablePixMap_Plain::getMaxValue() const
+{
+    return m_maxValue;
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+const tools::ColorMatrix &PortablePixMap_Plain::getColorMatrix() const
+{
+    return m_colorDataMatrix;
+}
 
 
 

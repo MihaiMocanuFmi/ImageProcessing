@@ -87,6 +87,11 @@ public:
 
     bool saveToString(std::string &outPlainFile);
 
+    const std::string &getMagicNumber() const;
+    const tools::Vector2U &getSize() const;
+    unsigned int getMaxValue() const;
+
+    const tools::ColorMatrix &getColorMatrix() const;
 
 };
 
