@@ -339,6 +339,8 @@ bool PortablePixMap_Plain::loadPlain(std::string plainFile)
 
 bool PortablePixMap_Plain::saveToString(std::string &outPlainFile)
 {
+    int sizeMaxValue = std::to_string(m_maxValue).length();
+    constexpr int MAX_LINE_LENGTH = 70;
     try
     {
         outPlainFile = "";
@@ -349,15 +351,28 @@ bool PortablePixMap_Plain::saveToString(std::string &outPlainFile)
         for (int y = 0; y < m_size.y; ++y)
         {
             outPlainFile += "\n";
+
+            int lineLength = 0;
             for (int x = 0; x < m_size.x; ++x)
             {
+
+                //PPM introduces a line length limit of 70 characters
+                const int currentLineLength = sizeMaxValue * 3 + 3;
+                if (lineLength + currentLineLength >= MAX_LINE_LENGTH)
+                {
+                    outPlainFile += "\n";
+                    lineLength = 0;
+                }
+
                 outPlainFile += std::to_string(m_colorDataMatrix[y][x].getColorR());
-                outPlainFile += "\t";
+                outPlainFile += " ";
                 outPlainFile += std::to_string(m_colorDataMatrix[y][x].getColorG());
-                outPlainFile += "\t";
+                outPlainFile += " ";
                 outPlainFile += std::to_string(m_colorDataMatrix[y][x].getColorB());
 
-                outPlainFile += "\t\t\t";
+                outPlainFile += " ";
+
+                lineLength += currentLineLength;
             }
 
         }
