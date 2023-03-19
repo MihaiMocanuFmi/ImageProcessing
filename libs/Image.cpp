@@ -28,7 +28,10 @@ bool Image::load(std::string imagePath)
     buffer << inputFile.rdbuf();
 
     if (not ppm.loadPlain(buffer.str()))
+    {
+        inputFile.close();
         return false;
+    }
 
     m_size = ppm.getSize();
 
@@ -42,6 +45,7 @@ bool Image::save(std::string imagePath)
 
     if (not ppm.saveToString(imageStr))
         return false;
+
 
     std::ofstream outputFile(imagePath);
     outputFile << imageStr;

@@ -45,10 +45,15 @@ int main()
     */
     Image image;
 
-    image.load("star_field.ascii.ppm");
+    if (image.load("input.ppm"))
+    {
+        if(not image.save("output.ppm"))
+            std::cout << "Error on save";
+    }
+    else
+        std::cout << "Error on load";
 
-    image.save("output.ppm");
-
+    /*
     for (int i = 0; i < 100; ++i)
     {
         image.load("output.ppm");
@@ -57,5 +62,6 @@ int main()
 
         std::cout << (i + 1) << "/100" << '\n';
     }
+     */
     return 0;
 }
