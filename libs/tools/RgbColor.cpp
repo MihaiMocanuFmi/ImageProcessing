@@ -1,6 +1,7 @@
 #include "RgbColor.h"
 
 #include <algorithm>
+#include <limits>
 
 namespace tools
 {
@@ -12,6 +13,11 @@ namespace tools
     {
         m_maxValue = 0;
         setColor(0,0,0);
+    }
+
+    RgbColor::RgbColor(const Color &color) : m_color{color}, m_maxValue{std::numeric_limits<unsigned int>::max()}
+    {
+
     }
 
     RgbColor::RgbColor(unsigned int maxValue) : m_maxValue{maxValue}
@@ -27,6 +33,18 @@ namespace tools
     RgbColor::RgbColor(unsigned int maxValue, const RgbColor::Color &color) : m_maxValue{maxValue}
     {
         setColor(color);
+    }
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    void RgbColor::setMaxValue(unsigned int maxValue)
+    {
+        m_maxValue = maxValue;
+    }
+
+    unsigned int RgbColor::getMaxValue() const
+    {
+        return m_maxValue;
     }
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
