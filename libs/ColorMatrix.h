@@ -1,8 +1,8 @@
 #ifndef COLOR_MATRIX_H
 #define COLOR_MATRIX_H
 
-#include "libs/tools/RgbColor.h"
-#include "libs/tools/Vector2.h"
+#include "tools/RgbColor.h"
+#include "tools/Vector2.h"
 
 class ColorMatrix
 {
