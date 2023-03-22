@@ -104,8 +104,23 @@ namespace tools
         return m_color.B;
     }
 
+    RgbColor RgbColor::operator+(const RgbColor &other) const
+    {
+        unsigned int maxValue = this->m_maxValue + other.m_maxValue;
+        unsigned int R = this->getColorR() + other.getColorR();
+        unsigned int G = this->getColorG() + other.getColorG();
+        unsigned int B = this->getColorB() + other.getColorB();
+        return {maxValue, R, G, B};
+    }
 
-
+    RgbColor RgbColor::operator-(const RgbColor &other) const
+    {
+        unsigned int maxValue = this->m_maxValue + other.m_maxValue;
+        unsigned int R = this->getColorR() + other.getColorR();
+        unsigned int G = this->getColorG() + other.getColorG();
+        unsigned int B = this->getColorB() + other.getColorB();
+        return {maxValue, R, G, B};
+    }
 
 
 } // tools

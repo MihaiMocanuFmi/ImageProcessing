@@ -5,6 +5,7 @@
 
 #include "PortablePixMap_Plain.h"
 #include "tools/Vector2.h"
+#include "tools/Rectangle.h";
 
 
 class Image
@@ -18,13 +19,22 @@ public:
     Image() = default;
 
     Image(unsigned int width, unsigned int height);
-    Image(tools::Vector2U size);
+    explicit Image(tools::Vector2U size);
 
     bool load(std::string imagePath);
     bool save(std::string imagePath);
 
+    Image operator+(const Image &i);
+    Image operator-(const Image &i);
+    Image operator*(const Image &i);
+    friend Image operator*(float scalar, const Image &image);
+
+    bool getROI(Image &roiImg, tools::Rectangle roiRect);
+    bool getROI(Image &roiImg, unsigned int x, unsigned int y, unsigned int width, unsigned int height);
+
 
 };
+
 
 
 #endif //IMAGE_H

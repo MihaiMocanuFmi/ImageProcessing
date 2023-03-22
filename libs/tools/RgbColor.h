@@ -28,6 +28,14 @@ namespace tools
         RgbColor(unsigned int maxValue, unsigned int R, unsigned int G, unsigned int B);
         RgbColor(unsigned int maxValue, const Color &color);
 
+        RgbColor operator+(const RgbColor &other) const;
+        RgbColor operator-(const RgbColor &other) const;
+        RgbColor operator*(const RgbColor &other);
+
+        friend RgbColor operator+(float scalar, const RgbColor &colorMatrix);
+        friend RgbColor operator-(float scalar, const RgbColor &colorMatrix);
+        friend RgbColor operator*(float scalar, const RgbColor &colorMatrix);
+
 
         void setMaxValue(unsigned int maxValue);
         unsigned int getMaxValue() const;
