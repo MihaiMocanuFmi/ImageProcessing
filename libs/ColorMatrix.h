@@ -9,7 +9,7 @@ class ColorMatrix
 private:
     unsigned int m_globalMaxValue = 0;
 
-    tools::RgbColor **m_matrix = nullptr;
+    tools::RgbColor *m_matrix = nullptr;
     tools::Vector2U m_size = {0, 0};
 
 public:
@@ -21,6 +21,10 @@ public:
     ColorMatrix(const ColorMatrix &other);
     ~ColorMatrix();
 
+    //TODO: redefine it through an [][] operator overload
+    void setAt(const tools::Vector2U &position, const tools::RgbColor &color);
+    tools::RgbColor& getAt(const tools::Vector2U &position);
+    const tools::RgbColor& getAt(const tools::Vector2U &position) const;
 
     void resize(const tools::Vector2U &newSize);
     void resize(const tools::Vector2U &newSize, const tools::RgbColor &defaultValue);
