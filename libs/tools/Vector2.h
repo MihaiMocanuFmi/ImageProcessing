@@ -14,52 +14,53 @@ namespace tools
         T x;
         T y;
 
-        constexpr Vector2() = default;
+        Vector2() = default;
 
-        constexpr Vector2(T X, T Y);
+        Vector2(T X, T Y);
 
         template<typename U>
-        constexpr explicit Vector2(const Vector2<U>& vector);
+        explicit Vector2(const Vector2<U>& vector);
 
 
     };
 
 
     template<typename T>
-    constexpr Vector2<T> &operator+=(Vector2<T> &left, const Vector2<T> &right);
+    Vector2<T> &operator+=(Vector2<T> &left, const Vector2<T> &right);
 
     template<typename T>
-    constexpr Vector2<T> &operator-=(Vector2<T> &left, const Vector2<T> &right);
+    Vector2<T> &operator-=(Vector2<T> &left, const Vector2<T> &right);
 
     template<typename T>
-    constexpr Vector2<T> operator+(const Vector2<T> &left, const Vector2<T> &right);
+    Vector2<T> operator+(const Vector2<T> &left, const Vector2<T> &right);
 
     template<typename T>
-    constexpr Vector2<T> operator-(const Vector2<T> &right);
+    Vector2<T> operator-(const Vector2<T> &right);
 
     template<typename T>
-    constexpr Vector2<T> operator-(const Vector2<T> &left, const Vector2<T> &right);
+    Vector2<T> operator-(const Vector2<T> &left, const Vector2<T> &right);
 
     template<typename T>
-    constexpr Vector2<T> operator*(const Vector2<T> &left, T right);
+    Vector2<T> operator*(const Vector2<T> &left, T right);
 
     template<typename T>
-    constexpr Vector2<T> operator*(T left, const Vector2<T> &right);
+    Vector2<T> operator*(T left, const Vector2<T> &right);
 
     template<typename T>
-    constexpr Vector2<T> &operator*=(Vector2<T> &left, T right);
+    Vector2<T> &operator*=(Vector2<T> &left, T right);
 
     template<typename T>
-    constexpr Vector2<T> operator/(const Vector2<T> &left, T right);
+    Vector2<T> operator/(const Vector2<T> &left, T right);
 
     template<typename T>
-    constexpr Vector2<T> &operator/=(Vector2<T> &left, T right);
+    Vector2<T> &operator/=(Vector2<T> &left, T right);
+
+    //TODO: why dont these 2 work
+    template<typename T>
+    bool operator==(const Vector2<T> &left, const Vector2<T> &right);
 
     template<typename T>
-    constexpr bool operator==(const Vector2<T> &left, const Vector2<T> &right);
-
-    template<typename T>
-    constexpr bool operator!=(const Vector2<T> &left, const Vector2<T> &right);
+    bool operator!=(const Vector2<T> &left, const Vector2<T> &right);
 
 
     typedef Vector2<int>          Vector2I;
@@ -69,4 +70,6 @@ namespace tools
     typedef Vector2<float>        Vector2F;
     typedef Vector2<double>        Vector2D;
 }
+
+
 #endif //VECTOR2_H

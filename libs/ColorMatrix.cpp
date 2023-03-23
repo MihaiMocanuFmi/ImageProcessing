@@ -32,8 +32,9 @@ ColorMatrix &ColorMatrix::operator=(const ColorMatrix &other)
         return *this;
 
     //TODO: Find why this doesnt work
-    //if (this->m_size != other.m_size) //if the dimension is different we can't copy directly
-    if(this->m_size.x * this->m_size.y != other.m_size.x * other.m_size.y)
+    tools::Vector2U test =  other.m_size + this->m_size;
+    if (this->m_size != other.m_size) //if the dimension is different we can't copy directly
+    //if(this->m_size.x * this->m_size.y != other.m_size.x * other.m_size.y)
     {
         //we first need to free the existing memory;
         delete[] m_matrix;
@@ -58,7 +59,7 @@ ColorMatrix &ColorMatrix::operator=(const ColorMatrix &other)
                 this->setAt({i, j}, other.getAt({i, j}));
     }
 
-
+    return *this;
 }
 
 

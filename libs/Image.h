@@ -5,7 +5,7 @@
 
 #include "PortablePixMap_Plain.h"
 #include "tools/Vector2.h"
-#include "tools/Rectangle.h";
+#include "tools/Rectangle.h"
 
 
 class Image
