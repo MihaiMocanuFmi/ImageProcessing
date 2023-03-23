@@ -32,9 +32,15 @@ namespace tools
         RgbColor operator-(const RgbColor &other) const;
         RgbColor operator*(const RgbColor &other);
 
+
         friend RgbColor operator+(float scalar, const RgbColor &colorMatrix);
+        friend RgbColor operator+(const RgbColor &colorMatrix, float scalar);
+
         friend RgbColor operator-(float scalar, const RgbColor &colorMatrix);
+        friend RgbColor operator-( const RgbColor &colorMatrix, float scalar);
+
         friend RgbColor operator*(float scalar, const RgbColor &colorMatrix);
+        friend RgbColor operator*(const RgbColor &colorMatrix, float scalar);
 
 
         void setMaxValue(unsigned int maxValue);
@@ -59,4 +65,4 @@ namespace tools
     typedef std::vector<std::vector<tools::RgbColor>> ColorMatrix;
 } // tools
 
-#endif //RGBCOLOR_H
+#endif //RGB_COLOR_H
