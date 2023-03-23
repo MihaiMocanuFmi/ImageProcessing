@@ -26,8 +26,13 @@ public:
     ColorMatrix operator*(const ColorMatrix &other);
 
     friend ColorMatrix operator+(float scalar, const ColorMatrix &colorMatrix);
+    friend ColorMatrix operator+(const ColorMatrix &colorMatrix, float scalar);
+
     friend ColorMatrix operator-(float scalar, const ColorMatrix &colorMatrix);
+    friend ColorMatrix operator-(const ColorMatrix &colorMatrix, float scalar);
+
     friend ColorMatrix operator*(float scalar, const ColorMatrix &colorMatrix);
+    friend ColorMatrix operator*(const ColorMatrix &colorMatrix, float scalar);
 
     //TODO: redefine it through an [][] operator overload
     void setAt(const tools::Vector2U &position, const tools::RgbColor &color);
@@ -36,7 +41,6 @@ public:
 
     void resize(const tools::Vector2U &newSize);
     void resize(const tools::Vector2U &newSize, const tools::RgbColor &defaultValue);
-
 
 
 };

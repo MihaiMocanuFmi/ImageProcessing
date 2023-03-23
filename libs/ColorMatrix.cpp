@@ -101,6 +101,8 @@ const tools::RgbColor &ColorMatrix::getAt(const tools::Vector2U &position) const
     return m_matrix[m_size.y * position.y + position.x];
 }
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 ColorMatrix ColorMatrix::operator+(const ColorMatrix &other)
 {
     if (this->m_size != other.m_size)
@@ -112,10 +114,114 @@ ColorMatrix ColorMatrix::operator+(const ColorMatrix &other)
         for (unsigned int x = 0; x < this->m_size.x; ++x)
         {
             tools::RgbColor newValue = this->getAt({x,y}) + other.getAt({x,y});
+            newValue.setMaxValue(maxValue);
             newMatrix.setAt({x,y}, newValue);
         }
 
     return newMatrix;
 }
 
+ColorMatrix ColorMatrix::operator-(const ColorMatrix &other)
+{
+    if (this->m_size != other.m_size)
+        throw std::runtime_error("The matrices aren't of same size");
+
+    unsigned int maxValue = (this->m_globalMaxValue > other.m_globalMaxValue)? this->m_globalMaxValue : other.m_globalMaxValue;
+    ColorMatrix newMatrix(m_size, maxValue);
+    for (unsigned int y = 0; y < this->m_size.y; ++y)
+        for (unsigned int x = 0; x < this->m_size.x; ++x)
+        {
+            tools::RgbColor newValue = this->getAt({x,y}) - other.getAt({x,y});
+            newValue.setMaxValue(maxValue);
+            newMatrix.setAt({x,y}, newValue);
+        }
+
+    return newMatrix;
+}
+
+ColorMatrix ColorMatrix::operator*(const ColorMatrix &other)
+{
+    if (this->m_size != other.m_size)
+        throw std::runtime_error("The matrices aren't of same size");
+
+    unsigned int maxValue = this->m_globalMaxValue * other.m_globalMaxValue;
+    ColorMatrix newMatrix(m_size, maxValue);
+    for (unsigned int y = 0; y < this->m_size.y; ++y)
+        for (unsigned int x = 0; x < this->m_size.x; ++x)
+        {
+            tools::RgbColor newValue = this->getAt({x,y}) + other.getAt({x,y});
+            newValue.setMaxValue(maxValue);
+            newMatrix.setAt({x,y}, newValue);
+        }
+
+    return newMatrix;
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+ColorMatrix operator+(float scalar, const ColorMatrix &colorMatrix)
+{
+    unsigned int maxValue = scalar + (float)colorMatrix.m_globalMaxValue;
+    ColorMatrix newMatrix(colorMatrix.m_size, maxValue);
+    for (unsigned int y = 0; y < colorMatrix.m_size.y; ++y)
+        for (unsigned int x = 0; x < colorMatrix.m_size.x; ++x)
+        {
+            tools::RgbColor newValue = scalar + colorMatrix.getAt({x,y});
+            newValue.setMaxValue(maxValue);
+            newMatrix.setAt({x,y}, newValue);
+        }
+
+    return newMatrix;
+}
+
+ColorMatrix operator+(const ColorMatrix &colorMatrix, float scalar)
+{
+    return scalar + colorMatrix;
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+ColorMatrix operator-(float scalar, const ColorMatrix &colorMatrix)
+{
+    unsigned int maxValue = colorMatrix.m_globalMaxValue;
+    ColorMatrix newMatrix(colorMatrix.m_size, maxValue);
+    for (unsigned int y = 0; y < colorMatrix.m_size.y; ++y)
+        for (unsigned int x = 0; x < colorMatrix.m_size.x; ++x)
+        {
+            tools::RgbColor newValue = scalar - colorMatrix.getAt({x,y});
+            newValue.setMaxValue(maxValue);
+            newMatrix.setAt({x,y}, newValue);
+        }
+
+    return newMatrix;
+}
+
+ColorMatrix operator-(const ColorMatrix &colorMatrix, float scalar)
+{
+    return -scalar + colorMatrix;
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+ColorMatrix operator*(float scalar, const ColorMatrix &colorMatrix)
+{
+    unsigned int maxValue = scalar * (float)colorMatrix.m_globalMaxValue;
+    ColorMatrix newMatrix(colorMatrix.m_size, maxValue);
+    for (unsigned int y = 0; y < colorMatrix.m_size.y; ++y)
+        for (unsigned int x = 0; x < colorMatrix.m_size.x; ++x)
+        {
+            tools::RgbColor newValue = scalar * colorMatrix.getAt({x,y});
+            newValue.setMaxValue(maxValue);
+            newMatrix.setAt({x,y}, newValue);
+        }
+
+    return newMatrix;
+}
+
+ColorMatrix operator*(const ColorMatrix &colorMatrix, float scalar)
+{
+    return scalar * colorMatrix;
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
