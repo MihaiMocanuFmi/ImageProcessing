@@ -63,7 +63,7 @@ bool PortablePixMap_Plain::m_findMagicNumber(std::string &rPlainFile, std::strin
     outMagicNumber = std::string(1, rPlainFile[positionOfP]) + std::string(1, digitAfter);
 
     //if the magic number doesn't represent a format understood by PPM
-    if (outMagicNumber != MAGIC_NUMBER and outMagicNumber != PGM_MAGIC_NUMBER and outMagicNumber != PBM_MAGIC_NUMBER)
+    if (outMagicNumber != PPM_MAGIC_NUMBER and outMagicNumber != PGM_MAGIC_NUMBER and outMagicNumber != PBM_MAGIC_NUMBER)
         return false;
 
     return true;
@@ -190,7 +190,7 @@ bool PortablePixMap_Plain::m_findColorsP1Format(std::string &rPlainFile, ColorDa
         }
     }
 
-    m_magicNumber = MAGIC_NUMBER;
+    m_magicNumber = PPM_MAGIC_NUMBER;
     return true;
 }
 
@@ -224,7 +224,7 @@ bool PortablePixMap_Plain::m_findColorsP2Format(std::string &rPlainFile, ColorDa
         }
     }
 
-    m_magicNumber = MAGIC_NUMBER;
+    m_magicNumber = PPM_MAGIC_NUMBER;
     return true;
 }
 
@@ -276,7 +276,7 @@ bool PortablePixMap_Plain::m_findColors(std::string &rPlainFile, ColorData &outC
         return m_findColorsP1Format(rPlainFile, outColorMatrix);
     else if (m_magicNumber == PGM_MAGIC_NUMBER)
         return m_findColorsP2Format(rPlainFile, outColorMatrix);
-    else if (m_magicNumber == MAGIC_NUMBER)
+    else if (m_magicNumber == PPM_MAGIC_NUMBER)
         return m_findColorsP3Format(rPlainFile, outColorMatrix);
     else
         return false;
@@ -383,36 +383,7 @@ bool PortablePixMap_Plain::saveToString(std::string &outPlainFile, const ColorDa
     }
 }
 
-/*
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-const std::string &PortablePixMap_Plain::getMagicNumber() const
-{
-    return m_magicNumber;
-}
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-const tools::Vector2U &PortablePixMap_Plain::getSize() const
-{
-    return m_size;
-}
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-unsigned int PortablePixMap_Plain::getMaxValue() const
-{
-    return m_maxValue;
-}
-
-const ColorData &PortablePixMap_Plain::getColorMatrix() const
-{
-    return m_colorMatrix;
-}
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-*/
+/
 
 
 

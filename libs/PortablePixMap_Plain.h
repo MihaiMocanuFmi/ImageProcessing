@@ -16,7 +16,6 @@ private:
     tools::Vector2U m_size;
     unsigned int m_maxValue;
 
-    //ColorData m_colorMatrix;
 
     /*
      * Will remove all comments, keeps newlines and spaces before the comment
@@ -68,11 +67,10 @@ private:
      */
     bool m_findColors(std::string &rPlainFile, ColorData &outColorMatrix);
 public:
-    static constexpr char MAGIC_NUMBER[] = "P3";
+    static constexpr char PPM_MAGIC_NUMBER[] = "P3";
     static constexpr char PGM_MAGIC_NUMBER[] = "P2";
     static constexpr char PBM_MAGIC_NUMBER[] = "P1";
 
-    static constexpr char EXTENSION[] = ".ppm";
 
     PortablePixMap_Plain();
 
@@ -89,13 +87,6 @@ public:
 
     bool saveToString(std::string &outPlainFile, const ColorData &data);
 
-    /*
-    const std::string &getMagicNumber() const;
-    const tools::Vector2U &getSize() const;
-    unsigned int getMaxValue() const;
-
-    const ColorData &getColorMatrix() const;
-    */
 };
 
 
