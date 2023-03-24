@@ -8,6 +8,7 @@
 #include "tools/RgbColor.h"
 #include "ColorMatrix.h"
 
+
 class PortablePixMap_Plain
 {
 private:
@@ -15,7 +16,7 @@ private:
     tools::Vector2U m_size;
     unsigned int m_maxValue;
 
-    ColorMatrix m_colorMatrix;
+    //ColorMatrix m_colorMatrix;
 
     /*
      * Will remove all comments, keeps newlines and spaces before the comment
@@ -84,16 +85,17 @@ public:
      * returns true on success, false otherwise
      *
      */
-    bool loadPlain(std::string plainFile);
+    bool loadPlain(std::string plainFile, ColorMatrix &outData);
 
-    bool saveToString(std::string &outPlainFile);
+    bool saveToString(std::string &outPlainFile, const ColorMatrix &data);
 
+    /*
     const std::string &getMagicNumber() const;
     const tools::Vector2U &getSize() const;
     unsigned int getMaxValue() const;
 
     const ColorMatrix &getColorMatrix() const;
-
+    */
 };
 
 

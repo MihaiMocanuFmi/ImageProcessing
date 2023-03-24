@@ -300,7 +300,7 @@ PortablePixMap_Plain::PortablePixMap_Plain() : m_size{0,0}, m_maxValue{0}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-bool PortablePixMap_Plain::loadPlain(std::string plainFile)
+bool PortablePixMap_Plain::loadPlain(std::string plainFile, ColorMatrix &outData)
 {
     m_preProcessPPM(plainFile);
 
@@ -329,14 +329,14 @@ bool PortablePixMap_Plain::loadPlain(std::string plainFile)
     if (not m_findColors(plainFile, colorMatrix))
         return false;
 
-    m_colorMatrix = colorMatrix;
+    outData = colorMatrix;
 
     return true;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-bool PortablePixMap_Plain::saveToString(std::string &outPlainFile)
+bool PortablePixMap_Plain::saveToString(std::string &outPlainFile, const ColorMatrix &data)
 {
     int sizeMaxValue = std::to_string(m_maxValue).length();
     constexpr int MAX_LINE_LENGTH = 70;
@@ -363,11 +363,11 @@ bool PortablePixMap_Plain::saveToString(std::string &outPlainFile)
                     lineLength = 0;
                 }
 
-                outPlainFile += std::to_string(m_colorMatrix.getAt({x, y}).getColorR());
+                outPlainFile += std::to_string(data.getAt({x, y}).getColorR());
                 outPlainFile += " ";
-                outPlainFile += std::to_string(m_colorMatrix.getAt({x, y}).getColorG());
+                outPlainFile += std::to_string(data.getAt({x, y}).getColorG());
                 outPlainFile += " ";
-                outPlainFile += std::to_string(m_colorMatrix.getAt({x, y}).getColorB());
+                outPlainFile += std::to_string(data.getAt({x, y}).getColorB());
 
                 outPlainFile += " ";
 
@@ -383,6 +383,7 @@ bool PortablePixMap_Plain::saveToString(std::string &outPlainFile)
     }
 }
 
+/*
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const std::string &PortablePixMap_Plain::getMagicNumber() const
@@ -404,9 +405,14 @@ unsigned int PortablePixMap_Plain::getMaxValue() const
     return m_maxValue;
 }
 
+const ColorMatrix &PortablePixMap_Plain::getColorMatrix() const
+{
+    return m_colorMatrix;
+}
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
+*/
 
 
 

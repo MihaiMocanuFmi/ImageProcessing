@@ -27,13 +27,13 @@ bool Image::load(std::string imagePath)
     std::stringstream buffer;
     buffer << inputFile.rdbuf();
 
-    if (not ppm.loadPlain(buffer.str()))
+    if (not ppm.loadPlain(buffer.str(), colorData))
     {
         inputFile.close();
         return false;
     }
 
-    m_size = ppm.getSize();
+    m_size = colorData.getSize();
 
     inputFile.close();
     return true;
@@ -43,7 +43,7 @@ bool Image::save(std::string imagePath)
 {
     std::string imageStr;
 
-    if (not ppm.saveToString(imageStr))
+    if (not ppm.saveToString(imageStr, colorData))
         return false;
 
 
