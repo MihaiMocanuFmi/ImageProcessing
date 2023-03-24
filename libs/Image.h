@@ -30,6 +30,7 @@ public:
     bool getROI(Image &roiImg, tools::Rectangle roiRect);
     bool getROI(Image &roiImg, unsigned int x, unsigned int y, unsigned int width, unsigned int height);
 
+    void release();
 
     Image operator+(const Image &i);
     Image operator-(const Image &i);

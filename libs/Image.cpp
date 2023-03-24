@@ -113,3 +113,10 @@ Image operator*(const Image &image, float scalar)
     return Image( image.m_colorData * scalar);
 }
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+void Image::release()
+{
+    m_colorData = ColorData();
+}
+
