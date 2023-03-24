@@ -34,7 +34,6 @@ ColorMatrix &ColorMatrix::operator=(const ColorMatrix &other)
     //TODO: Find why this doesnt work
     tools::Vector2U test =  other.m_size + this->m_size;
     if (this->m_size != other.m_size) //if the dimension is different we can't copy directly
-    //if(this->m_size.x * this->m_size.y != other.m_size.x * other.m_size.y)
     {
         //we first need to free the existing memory;
         delete[] m_matrix;
@@ -223,6 +222,35 @@ ColorMatrix operator*(const ColorMatrix &colorMatrix, float scalar)
 {
     return scalar * colorMatrix;
 }
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+void ColorMatrix::resize(const tools::Vector2U &newSize)
+{
+    if(m_size.x * m_size.y < newSize.x * newSize.y)
+    {
+        tools::RgbColor *newMatrix = new tools::RgbColor[m_size.y * m_size.x];
+        for (int i = 0; i < m_size.x * m_size.y; ++i)
+            newMatrix[i] = m_matrix[i];
+
+        delete[] m_matrix;
+        m_matrix = newMatrix;
+    }
+
+    m_size = newSize;
+}
+
+void ColorMatrix::resize(const tools::Vector2U &newSize, const tools::RgbColor &defaultValue)
+{
+    delete[] m_matrix;
+    m_matrix = new tools::RgbColor[m_size.y * m_size.x];
+    for (int i = 0; i < m_size.x * m_size.y; ++i)
+        m_matrix[i] = defaultValue;
+
+    m_size = newSize;
+}
+
+
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
