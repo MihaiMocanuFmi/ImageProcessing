@@ -61,8 +61,6 @@ namespace tools
         unsigned int getColorB() const;
     };
 
-
-    typedef std::vector<std::vector<tools::RgbColor>> ColorMatrixType;
 } // tools
 
 #endif //RGB_COLOR_H
