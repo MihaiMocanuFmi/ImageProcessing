@@ -14,19 +14,19 @@ namespace tools
         T x;
         T y;
 
-        Vector2() = default;
+        constexpr Vector2() = default;
 
-        Vector2(T X, T Y);
+        constexpr Vector2(T X, T Y);
 
         template<typename U>
-        explicit Vector2(const Vector2<U>& vector);
+        constexpr explicit Vector2(const Vector2<U>& vector);
 
 
     };
 
 
     template <typename T>
-    Vector2<T>& operator+=(Vector2<T>& left, const Vector2<T>& right)
+    constexpr Vector2<T>& operator+=(Vector2<T>& left, const Vector2<T>& right)
     {
         left.x += right.x;
         left.y += right.y;
@@ -35,7 +35,7 @@ namespace tools
     }
 
     template <typename T>
-    Vector2<T>& operator-=(Vector2<T>& left, const Vector2<T>& right)
+    constexpr Vector2<T>& operator-=(Vector2<T>& left, const Vector2<T>& right)
     {
         left.x -= right.x;
         left.y -= right.y;
@@ -45,41 +45,41 @@ namespace tools
 
 
     template <typename T>
-    Vector2<T> operator+(const Vector2<T>& left, const Vector2<T>& right)
+    constexpr Vector2<T> operator+(const Vector2<T>& left, const Vector2<T>& right)
     {
         return Vector2<T>(left.x + right.x, left.y + right.y);
     }
 
 
     template<typename T>
-    Vector2 <T> operator-(const Vector2<T> &right)
+    constexpr Vector2 <T> operator-(const Vector2<T> &right)
     {
         return Vector2<T>(-right.x, -right.y);
     }
 
     template <typename T>
-    Vector2<T> operator-(const Vector2<T>& left, const Vector2<T>& right)
+    constexpr Vector2<T> operator-(const Vector2<T>& left, const Vector2<T>& right)
     {
         return Vector2<T>(left.x - right.x, left.y - right.y);
     }
 
 
     template <typename T>
-    Vector2<T> operator*(const Vector2<T>& left, T right)
+    constexpr Vector2<T> operator*(const Vector2<T>& left, T right)
     {
         return Vector2<T>(left.x * right, left.y * right);
     }
 
 
     template <typename T>
-    Vector2<T> operator*(T left, const Vector2<T>& right)
+    constexpr Vector2<T> operator*(T left, const Vector2<T>& right)
     {
         return Vector2<T>(right.x * left, right.y * left);
     }
 
 
     template <typename T>
-    Vector2<T>& operator*=(Vector2<T>& left, T right)
+    constexpr Vector2<T>& operator*=(Vector2<T>& left, T right)
     {
         left.x *= right;
         left.y *= right;
@@ -89,14 +89,14 @@ namespace tools
 
 
     template <typename T>
-    Vector2<T> operator/(const Vector2<T>& left, T right)
+    constexpr Vector2<T> operator/(const Vector2<T>& left, T right)
     {
         return Vector2<T>(left.x / right, left.y / right);
     }
 
 
     template <typename T>
-    Vector2<T>& operator/=(Vector2<T>& left, T right)
+    constexpr Vector2<T>& operator/=(Vector2<T>& left, T right)
     {
         left.x /= right;
         left.y /= right;
@@ -106,14 +106,14 @@ namespace tools
 
 
     template <typename T>
-    bool operator==(const Vector2<T>& left, const Vector2<T>& right)
+    constexpr bool operator==(const Vector2<T>& left, const Vector2<T>& right)
     {
         return (left.x == right.x) and (left.y == right.y);
     }
 
 
     template <typename T>
-    bool operator!=(const Vector2<T>& left, const Vector2<T>& right)
+    constexpr bool operator!=(const Vector2<T>& left, const Vector2<T>& right)
     {
         return (left.x != right.x) or (left.y != right.y);
     }
