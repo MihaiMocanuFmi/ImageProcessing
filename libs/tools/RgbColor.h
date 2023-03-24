@@ -62,7 +62,7 @@ namespace tools
     };
 
 
-    typedef std::vector<std::vector<tools::RgbColor>> ColorMatrix;
+    typedef std::vector<std::vector<tools::RgbColor>> ColorMatrixType;
 } // tools
 
 #endif //RGB_COLOR_H
