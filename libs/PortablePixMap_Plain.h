@@ -6,6 +6,7 @@
 
 #include "tools/Vector2.h"
 #include "tools/RgbColor.h"
+#include "ColorMatrix.h"
 
 class PortablePixMap_Plain
 {
@@ -14,7 +15,7 @@ private:
     tools::Vector2U m_size;
     unsigned int m_maxValue;
 
-    tools::ColorMatrix m_colorDataMatrix;
+    ColorMatrix m_colorMatrix;
 
     /*
      * Will remove all comments, keeps newlines and spaces before the comment
@@ -47,24 +48,24 @@ private:
      * Will search for colors in a string following the P1 format. The output colorMatrix will be converted into
      * P3 format
      */
-    bool m_findColorsP1Format(std::string &rPlainFile, tools::ColorMatrix &outColorMatrix);
+    bool m_findColorsP1Format(std::string &rPlainFile, ColorMatrix &outColorMatrix);
 
     /*
      * Will search for colors in a string following the P2format. The output colorMatrix will be converted into
      * P3 format
      */
-    bool m_findColorsP2Format(std::string &rPlainFile, tools::ColorMatrix &outColorMatrix);
+    bool m_findColorsP2Format(std::string &rPlainFile, ColorMatrix &outColorMatrix);
 
     /*
      * Will search for colors in a string following the P3 format. The output colorMatrix will be converted into
      * P3 format
      */
-    bool m_findColorsP3Format(std::string &rPlainFile, tools::ColorMatrix &outColorMatrix);
+    bool m_findColorsP3Format(std::string &rPlainFile, ColorMatrix &outColorMatrix);
 
     /*
      * Will find the color matrix in the given string file
      */
-    bool m_findColors(std::string &rPlainFile, tools::ColorMatrix &outColorMatrix);
+    bool m_findColors(std::string &rPlainFile, ColorMatrix &outColorMatrix);
 public:
     static constexpr char MAGIC_NUMBER[] = "P3";
     static constexpr char PGM_MAGIC_NUMBER[] = "P2";
@@ -91,7 +92,7 @@ public:
     const tools::Vector2U &getSize() const;
     unsigned int getMaxValue() const;
 
-    const tools::ColorMatrix &getColorMatrix() const;
+    const ColorMatrix &getColorMatrix() const;
 
 };
 

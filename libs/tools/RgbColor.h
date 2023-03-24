@@ -3,6 +3,7 @@
 
 #include <vector>
 
+
 namespace tools
 {
 
@@ -21,9 +22,29 @@ namespace tools
     public:
         static constexpr unsigned int EIGHT_BIT = 255;
         RgbColor(); // sets all values to zero
+
+        RgbColor(const Color &color);
         explicit RgbColor(unsigned int maxValue);
         RgbColor(unsigned int maxValue, unsigned int R, unsigned int G, unsigned int B);
         RgbColor(unsigned int maxValue, const Color &color);
+
+        RgbColor operator+(const RgbColor &other) const;
+        RgbColor operator-(const RgbColor &other) const;
+        RgbColor operator*(const RgbColor &other);
+
+
+        friend RgbColor operator+(float scalar, const RgbColor &colorMatrix);
+        friend RgbColor operator+(const RgbColor &colorMatrix, float scalar);
+
+        friend RgbColor operator-(float scalar, const RgbColor &colorMatrix);
+        friend RgbColor operator-( const RgbColor &colorMatrix, float scalar);
+
+        friend RgbColor operator*(float scalar, const RgbColor &colorMatrix);
+        friend RgbColor operator*(const RgbColor &colorMatrix, float scalar);
+
+
+        void setMaxValue(unsigned int maxValue);
+        unsigned int getMaxValue() const;
 
         void setColor(unsigned int R, unsigned int G, unsigned int B);
 
@@ -40,8 +61,6 @@ namespace tools
         unsigned int getColorB() const;
     };
 
-
-    typedef std::vector<std::vector<tools::RgbColor>> ColorMatrix;
 } // tools
 
-#endif //RGBCOLOR_H
+#endif //RGB_COLOR_H

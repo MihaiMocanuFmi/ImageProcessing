@@ -5,7 +5,8 @@
 
 int main()
 {
-
+    //TODO: operator overload
+    //TODO: matrix [][]?
     Image image;
 
     if (image.load("input.ppm"))

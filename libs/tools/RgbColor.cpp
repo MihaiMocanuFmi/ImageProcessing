@@ -1,6 +1,7 @@
 #include "RgbColor.h"
 
 #include <algorithm>
+#include <limits>
 
 namespace tools
 {
@@ -12,6 +13,11 @@ namespace tools
     {
         m_maxValue = 0;
         setColor(0,0,0);
+    }
+
+    RgbColor::RgbColor(const Color &color) : m_color{color}, m_maxValue{std::numeric_limits<unsigned int>::max()}
+    {
+
     }
 
     RgbColor::RgbColor(unsigned int maxValue) : m_maxValue{maxValue}
@@ -27,6 +33,18 @@ namespace tools
     RgbColor::RgbColor(unsigned int maxValue, const RgbColor::Color &color) : m_maxValue{maxValue}
     {
         setColor(color);
+    }
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    void RgbColor::setMaxValue(unsigned int maxValue)
+    {
+        m_maxValue = maxValue;
+    }
+
+    unsigned int RgbColor::getMaxValue() const
+    {
+        return m_maxValue;
     }
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -86,8 +104,88 @@ namespace tools
         return m_color.B;
     }
 
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    RgbColor RgbColor::operator+(const RgbColor &other) const
+    {
+        unsigned int maxValue = this->m_maxValue + other.m_maxValue;
+        unsigned int R = this->getColorR() + other.getColorR();
+        unsigned int G = this->getColorG() + other.getColorG();
+        unsigned int B = this->getColorB() + other.getColorB();
+        return {maxValue, R, G, B};
+    }
 
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    RgbColor RgbColor::operator-(const RgbColor &other) const
+    {
+        unsigned int maxValue = (this->m_maxValue > other.m_maxValue)? this->m_maxValue : other.m_maxValue;
+        unsigned int R = this->getColorR() - other.getColorR();
+        unsigned int G = this->getColorG() - other.getColorG();
+        unsigned int B = this->getColorB() - other.getColorB();
+        return {maxValue, R, G, B};
+    }
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    RgbColor RgbColor::operator*(const RgbColor &other)
+    {
+        unsigned int maxValue = this->m_maxValue * other.m_maxValue;
+        unsigned int R = this->getColorR() * other.getColorR();
+        unsigned int G = this->getColorG() * other.getColorG();
+        unsigned int B = this->getColorB() * other.getColorB();
+        return {maxValue, R, G, B};
+    }
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    RgbColor operator+(float scalar, const RgbColor &colorMatrix)
+    {
+        unsigned int maxValue = scalar + (float)colorMatrix.m_maxValue;
+        unsigned int R = scalar + (float)colorMatrix.getColorR();
+        unsigned int G = scalar + (float)colorMatrix.getColorG();
+        unsigned int B = scalar + (float)colorMatrix.getColorB();
+        return {maxValue, R, G, B};
+    }
+
+    RgbColor operator+(const RgbColor &colorMatrix, float scalar)
+    {
+        return scalar + colorMatrix;
+    }
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    RgbColor operator-(float scalar, const RgbColor &colorMatrix)
+    {
+        unsigned int maxValue = colorMatrix.m_maxValue;
+        unsigned int R = scalar - (float)colorMatrix.getColorR();
+        unsigned int G = scalar - (float)colorMatrix.getColorG();
+        unsigned int B = scalar - (float)colorMatrix.getColorB();
+        return {maxValue, R, G, B};
+    }
+
+    RgbColor operator-(const RgbColor &colorMatrix, float scalar)
+    {
+        return -scalar + colorMatrix;
+    }
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    RgbColor operator*(float scalar, const RgbColor &colorMatrix)
+    {
+        unsigned int maxValue = scalar * (float)colorMatrix.m_maxValue;
+        unsigned int R = scalar - (float)colorMatrix.getColorR();
+        unsigned int G = scalar - (float)colorMatrix.getColorG();
+        unsigned int B = scalar - (float)colorMatrix.getColorB();
+        return {maxValue, R, G, B};
+    }
+
+    RgbColor operator*(const RgbColor &colorMatrix, float scalar)
+    {
+        return scalar * colorMatrix;
+    }
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 } // tools
