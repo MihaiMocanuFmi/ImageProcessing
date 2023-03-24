@@ -161,7 +161,7 @@ bool PortablePixMap_Plain::m_findMaxValue(std::string &rPlainFile, unsigned int 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-bool PortablePixMap_Plain::m_findColorsP1Format(std::string &rPlainFile, ColorMatrix &outColorMatrix)
+bool PortablePixMap_Plain::m_findColorsP1Format(std::string &rPlainFile, ColorData &outColorMatrix)
 {
     //TODO: Maybe add checking for these searches, even though if the rest of the methods were called, these calls will
     // also be valid
@@ -194,7 +194,7 @@ bool PortablePixMap_Plain::m_findColorsP1Format(std::string &rPlainFile, ColorMa
     return true;
 }
 
-bool PortablePixMap_Plain::m_findColorsP2Format(std::string &rPlainFile, ColorMatrix &outColorMatrix)
+bool PortablePixMap_Plain::m_findColorsP2Format(std::string &rPlainFile, ColorData &outColorMatrix)
 {
     //TODO: Maybe add checking for these searches, even though if the rest of the methods were called, these calls will
     // also be valid
@@ -228,7 +228,7 @@ bool PortablePixMap_Plain::m_findColorsP2Format(std::string &rPlainFile, ColorMa
     return true;
 }
 
-bool PortablePixMap_Plain::m_findColorsP3Format(std::string &rPlainFile, ColorMatrix &outColorMatrix)
+bool PortablePixMap_Plain::m_findColorsP3Format(std::string &rPlainFile, ColorData &outColorMatrix)
 {
     //TODO: Maybe add checking for these searches, even though if the rest of the methods were called, these calls will
     // also be valid
@@ -270,7 +270,7 @@ bool PortablePixMap_Plain::m_findColorsP3Format(std::string &rPlainFile, ColorMa
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-bool PortablePixMap_Plain::m_findColors(std::string &rPlainFile, ColorMatrix &outColorMatrix)
+bool PortablePixMap_Plain::m_findColors(std::string &rPlainFile, ColorData &outColorMatrix)
 {
     if (m_magicNumber == PBM_MAGIC_NUMBER)
         return m_findColorsP1Format(rPlainFile, outColorMatrix);
@@ -300,7 +300,7 @@ PortablePixMap_Plain::PortablePixMap_Plain() : m_size{0,0}, m_maxValue{0}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-bool PortablePixMap_Plain::loadPlain(std::string plainFile, ColorMatrix &outData)
+bool PortablePixMap_Plain::loadPlain(std::string plainFile, ColorData &outData)
 {
     m_preProcessPPM(plainFile);
 
@@ -325,7 +325,7 @@ bool PortablePixMap_Plain::loadPlain(std::string plainFile, ColorMatrix &outData
 
     m_maxValue = maxValue;
 
-    ColorMatrix colorMatrix;
+    ColorData colorMatrix;
     if (not m_findColors(plainFile, colorMatrix))
         return false;
 
@@ -336,7 +336,7 @@ bool PortablePixMap_Plain::loadPlain(std::string plainFile, ColorMatrix &outData
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-bool PortablePixMap_Plain::saveToString(std::string &outPlainFile, const ColorMatrix &data)
+bool PortablePixMap_Plain::saveToString(std::string &outPlainFile, const ColorData &data)
 {
     int sizeMaxValue = std::to_string(m_maxValue).length();
     constexpr int MAX_LINE_LENGTH = 70;
@@ -405,7 +405,7 @@ unsigned int PortablePixMap_Plain::getMaxValue() const
     return m_maxValue;
 }
 
-const ColorMatrix &PortablePixMap_Plain::getColorMatrix() const
+const ColorData &PortablePixMap_Plain::getColorMatrix() const
 {
     return m_colorMatrix;
 }

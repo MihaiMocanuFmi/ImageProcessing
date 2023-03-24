@@ -1,4 +1,4 @@
-#include "ColorMatrix.h"
+#include "ColorData.h"
 
 #include <stdexcept>
 
@@ -7,14 +7,14 @@
 
 /////////////////////////PUBLIC////////////////////////////////////////////////////////////////////////////////////
 
-ColorMatrix::ColorMatrix(const tools::Vector2U &size, unsigned int maxValue)
+ColorData::ColorData(const tools::Vector2U &size, unsigned int maxValue)
         : m_size{size}, m_globalMaxValue{maxValue}
 {
     m_matrix = new tools::RgbColor[m_size.y * m_size.x];
 
 }
 
-ColorMatrix::ColorMatrix(const tools::Vector2U &size, const tools::RgbColor &defaultValue)
+ColorData::ColorData(const tools::Vector2U &size, const tools::RgbColor &defaultValue)
         : m_size{size}, m_globalMaxValue{defaultValue.getMaxValue()}
 {
     m_matrix = new tools::RgbColor[m_size.y * m_size.x];
@@ -26,7 +26,7 @@ ColorMatrix::ColorMatrix(const tools::Vector2U &size, const tools::RgbColor &def
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-ColorMatrix &ColorMatrix::operator=(const ColorMatrix &other)
+ColorData &ColorData::operator=(const ColorData &other)
 {
     if (this == &other)
         return *this;
@@ -62,7 +62,7 @@ ColorMatrix &ColorMatrix::operator=(const ColorMatrix &other)
 }
 
 
-ColorMatrix::ColorMatrix(const ColorMatrix &other)
+ColorData::ColorData(const ColorData &other)
 {
     this->m_size = other.m_size;
     this->m_globalMaxValue = other.m_globalMaxValue;
@@ -78,41 +78,41 @@ ColorMatrix::ColorMatrix(const ColorMatrix &other)
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-ColorMatrix::~ColorMatrix()
+ColorData::~ColorData()
 {
     delete[] m_matrix;
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void ColorMatrix::setAt(const tools::Vector2U &position, const tools::RgbColor &color)
+void ColorData::setAt(const tools::Vector2U &position, const tools::RgbColor &color)
 {
     m_matrix[m_size.x * position.y + position.x] = color;
 }
 
-void ColorMatrix::setAt(unsigned int x, unsigned int y, const tools::RgbColor &color)
+void ColorData::setAt(unsigned int x, unsigned int y, const tools::RgbColor &color)
 {
     return setAt({x, y}, color);
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-tools::RgbColor& ColorMatrix::getAt(const tools::Vector2U &position)
+tools::RgbColor& ColorData::getAt(const tools::Vector2U &position)
 {
     return m_matrix[m_size.x * position.y + position.x];
 }
 
-tools::RgbColor& ColorMatrix::getAt(unsigned int x, unsigned int y)
+tools::RgbColor& ColorData::getAt(unsigned int x, unsigned int y)
 {
     return getAt({x, y});
 }
 
-const tools::RgbColor& ColorMatrix::getAt(const tools::Vector2U &position) const
+const tools::RgbColor& ColorData::getAt(const tools::Vector2U &position) const
 {
     return m_matrix[m_size.x * position.y + position.x];
 }
 
-const tools::RgbColor& ColorMatrix::getAt(unsigned int x, unsigned int y) const
+const tools::RgbColor& ColorData::getAt(unsigned int x, unsigned int y) const
 {
     return getAt({x, y});
 }
@@ -120,20 +120,20 @@ const tools::RgbColor& ColorMatrix::getAt(unsigned int x, unsigned int y) const
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-const tools::Vector2U &ColorMatrix::getSize()
+const tools::Vector2U &ColorData::getSize()
 {
     return m_size;
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-ColorMatrix ColorMatrix::operator+(const ColorMatrix &other)
+ColorData ColorData::operator+(const ColorData &other)
 {
     if (this->m_size != other.m_size)
         throw std::runtime_error("The matrices aren't of same size");
 
     unsigned int maxValue = this->m_globalMaxValue + other.m_globalMaxValue;
-    ColorMatrix newMatrix(m_size, maxValue);
+    ColorData newMatrix(m_size, maxValue);
     for (unsigned int y = 0; y < this->m_size.y; ++y)
         for (unsigned int x = 0; x < this->m_size.x; ++x)
         {
@@ -145,13 +145,13 @@ ColorMatrix ColorMatrix::operator+(const ColorMatrix &other)
     return newMatrix;
 }
 
-ColorMatrix ColorMatrix::operator-(const ColorMatrix &other)
+ColorData ColorData::operator-(const ColorData &other)
 {
     if (this->m_size != other.m_size)
         throw std::runtime_error("The matrices aren't of same size");
 
     unsigned int maxValue = (this->m_globalMaxValue > other.m_globalMaxValue)? this->m_globalMaxValue : other.m_globalMaxValue;
-    ColorMatrix newMatrix(m_size, maxValue);
+    ColorData newMatrix(m_size, maxValue);
     for (unsigned int y = 0; y < this->m_size.y; ++y)
         for (unsigned int x = 0; x < this->m_size.x; ++x)
         {
@@ -163,13 +163,13 @@ ColorMatrix ColorMatrix::operator-(const ColorMatrix &other)
     return newMatrix;
 }
 
-ColorMatrix ColorMatrix::operator*(const ColorMatrix &other)
+ColorData ColorData::operator*(const ColorData &other)
 {
     if (this->m_size != other.m_size)
         throw std::runtime_error("The matrices aren't of same size");
 
     unsigned int maxValue = this->m_globalMaxValue * other.m_globalMaxValue;
-    ColorMatrix newMatrix(m_size, maxValue);
+    ColorData newMatrix(m_size, maxValue);
     for (unsigned int y = 0; y < this->m_size.y; ++y)
         for (unsigned int x = 0; x < this->m_size.x; ++x)
         {
@@ -183,10 +183,10 @@ ColorMatrix ColorMatrix::operator*(const ColorMatrix &other)
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-ColorMatrix operator+(float scalar, const ColorMatrix &colorMatrix)
+ColorData operator+(float scalar, const ColorData &colorMatrix)
 {
     unsigned int maxValue = scalar + (float)colorMatrix.m_globalMaxValue;
-    ColorMatrix newMatrix(colorMatrix.m_size, maxValue);
+    ColorData newMatrix(colorMatrix.m_size, maxValue);
     for (unsigned int y = 0; y < colorMatrix.m_size.y; ++y)
         for (unsigned int x = 0; x < colorMatrix.m_size.x; ++x)
         {
@@ -198,17 +198,17 @@ ColorMatrix operator+(float scalar, const ColorMatrix &colorMatrix)
     return newMatrix;
 }
 
-ColorMatrix operator+(const ColorMatrix &colorMatrix, float scalar)
+ColorData operator+(const ColorData &colorMatrix, float scalar)
 {
     return scalar + colorMatrix;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-ColorMatrix operator-(float scalar, const ColorMatrix &colorMatrix)
+ColorData operator-(float scalar, const ColorData &colorMatrix)
 {
     unsigned int maxValue = colorMatrix.m_globalMaxValue;
-    ColorMatrix newMatrix(colorMatrix.m_size, maxValue);
+    ColorData newMatrix(colorMatrix.m_size, maxValue);
     for (unsigned int y = 0; y < colorMatrix.m_size.y; ++y)
         for (unsigned int x = 0; x < colorMatrix.m_size.x; ++x)
         {
@@ -220,17 +220,17 @@ ColorMatrix operator-(float scalar, const ColorMatrix &colorMatrix)
     return newMatrix;
 }
 
-ColorMatrix operator-(const ColorMatrix &colorMatrix, float scalar)
+ColorData operator-(const ColorData &colorMatrix, float scalar)
 {
     return -scalar + colorMatrix;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-ColorMatrix operator*(float scalar, const ColorMatrix &colorMatrix)
+ColorData operator*(float scalar, const ColorData &colorMatrix)
 {
     unsigned int maxValue = scalar * (float)colorMatrix.m_globalMaxValue;
-    ColorMatrix newMatrix(colorMatrix.m_size, maxValue);
+    ColorData newMatrix(colorMatrix.m_size, maxValue);
     for (unsigned int y = 0; y < colorMatrix.m_size.y; ++y)
         for (unsigned int x = 0; x < colorMatrix.m_size.x; ++x)
         {
@@ -242,14 +242,14 @@ ColorMatrix operator*(float scalar, const ColorMatrix &colorMatrix)
     return newMatrix;
 }
 
-ColorMatrix operator*(const ColorMatrix &colorMatrix, float scalar)
+ColorData operator*(const ColorData &colorMatrix, float scalar)
 {
     return scalar * colorMatrix;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void ColorMatrix::resize(const tools::Vector2U &newSize)
+void ColorData::resize(const tools::Vector2U &newSize)
 {
     if(m_size.x * m_size.y < newSize.x * newSize.y)
     {
@@ -264,7 +264,7 @@ void ColorMatrix::resize(const tools::Vector2U &newSize)
     m_size = newSize;
 }
 
-void ColorMatrix::resize(const tools::Vector2U &newSize, const tools::RgbColor &defaultValue)
+void ColorData::resize(const tools::Vector2U &newSize, const tools::RgbColor &defaultValue)
 {
     delete[] m_matrix;
     m_matrix = new tools::RgbColor[newSize.y * newSize.x];

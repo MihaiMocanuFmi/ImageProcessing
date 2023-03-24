@@ -6,7 +6,7 @@
 #include "PortablePixMap_Plain.h"
 #include "tools/Vector2.h"
 #include "tools/Rectangle.h"
-#include "ColorMatrix.h"
+#include "ColorData.h"
 
 class Image
 {
@@ -14,7 +14,7 @@ private:
     tools::Vector2U m_size = {};
 
     PortablePixMap_Plain ppm = {};
-    ColorMatrix colorData = {};
+    ColorData colorData = {};
 
 public:
     Image() = default;

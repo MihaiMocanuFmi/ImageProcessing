@@ -6,7 +6,7 @@
 
 #include "tools/Vector2.h"
 #include "tools/RgbColor.h"
-#include "ColorMatrix.h"
+#include "ColorData.h"
 
 
 class PortablePixMap_Plain
@@ -16,7 +16,7 @@ private:
     tools::Vector2U m_size;
     unsigned int m_maxValue;
 
-    //ColorMatrix m_colorMatrix;
+    //ColorData m_colorMatrix;
 
     /*
      * Will remove all comments, keeps newlines and spaces before the comment
@@ -49,24 +49,24 @@ private:
      * Will search for colors in a string following the P1 format. The output colorMatrix will be converted into
      * P3 format
      */
-    bool m_findColorsP1Format(std::string &rPlainFile, ColorMatrix &outColorMatrix);
+    bool m_findColorsP1Format(std::string &rPlainFile, ColorData &outColorMatrix);
 
     /*
      * Will search for colors in a string following the P2format. The output colorMatrix will be converted into
      * P3 format
      */
-    bool m_findColorsP2Format(std::string &rPlainFile, ColorMatrix &outColorMatrix);
+    bool m_findColorsP2Format(std::string &rPlainFile, ColorData &outColorMatrix);
 
     /*
      * Will search for colors in a string following the P3 format. The output colorMatrix will be converted into
      * P3 format
      */
-    bool m_findColorsP3Format(std::string &rPlainFile, ColorMatrix &outColorMatrix);
+    bool m_findColorsP3Format(std::string &rPlainFile, ColorData &outColorMatrix);
 
     /*
      * Will find the color matrix in the given string file
      */
-    bool m_findColors(std::string &rPlainFile, ColorMatrix &outColorMatrix);
+    bool m_findColors(std::string &rPlainFile, ColorData &outColorMatrix);
 public:
     static constexpr char MAGIC_NUMBER[] = "P3";
     static constexpr char PGM_MAGIC_NUMBER[] = "P2";
@@ -85,16 +85,16 @@ public:
      * returns true on success, false otherwise
      *
      */
-    bool loadPlain(std::string plainFile, ColorMatrix &outData);
+    bool loadPlain(std::string plainFile, ColorData &outData);
 
-    bool saveToString(std::string &outPlainFile, const ColorMatrix &data);
+    bool saveToString(std::string &outPlainFile, const ColorData &data);
 
     /*
     const std::string &getMagicNumber() const;
     const tools::Vector2U &getSize() const;
     unsigned int getMaxValue() const;
 
-    const ColorMatrix &getColorMatrix() const;
+    const ColorData &getColorMatrix() const;
     */
 };
 
