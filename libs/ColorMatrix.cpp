@@ -90,15 +90,33 @@ void ColorMatrix::setAt(const tools::Vector2U &position, const tools::RgbColor &
     m_matrix[m_size.x * position.y + position.x] = color;
 }
 
-tools::RgbColor &ColorMatrix::getAt(const tools::Vector2U &position)
+void ColorMatrix::setAt(unsigned int x, unsigned int y, const tools::RgbColor &color)
+{
+    return setAt({x, y}, color);
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+tools::RgbColor& ColorMatrix::getAt(const tools::Vector2U &position)
 {
     return m_matrix[m_size.x * position.y + position.x];
 }
 
-const tools::RgbColor &ColorMatrix::getAt(const tools::Vector2U &position) const
+tools::RgbColor& ColorMatrix::getAt(unsigned int x, unsigned int y)
+{
+    return getAt({x, y});
+}
+
+const tools::RgbColor& ColorMatrix::getAt(const tools::Vector2U &position) const
 {
     return m_matrix[m_size.x * position.y + position.x];
 }
+
+const tools::RgbColor& ColorMatrix::getAt(unsigned int x, unsigned int y) const
+{
+    return getAt({x, y});
+}
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -248,8 +266,6 @@ void ColorMatrix::resize(const tools::Vector2U &newSize, const tools::RgbColor &
 
     m_size = newSize;
 }
-
-
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

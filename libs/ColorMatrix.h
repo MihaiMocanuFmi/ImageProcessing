@@ -17,9 +17,23 @@ public:
     ColorMatrix(const tools::Vector2U &size, unsigned int maxValue);
     ColorMatrix(const tools::Vector2U &size, const tools::RgbColor &defaultValue);
 
-    ColorMatrix& operator=(const ColorMatrix &other);
     ColorMatrix(const ColorMatrix &other);
+    ColorMatrix& operator=(const ColorMatrix &other);
     ~ColorMatrix();
+
+
+    //TODO: redefine it through an [][] operator overload
+    void setAt(const tools::Vector2U &position, const tools::RgbColor &color);
+    void setAt(unsigned int x, unsigned int y, const tools::RgbColor &color);
+
+    tools::RgbColor& getAt(const tools::Vector2U &position);
+    tools::RgbColor& getAt(unsigned int x, unsigned int y);
+
+    const tools::RgbColor& getAt(const tools::Vector2U &position) const;
+    const tools::RgbColor& getAt(unsigned int x, unsigned int y) const;
+
+    void resize(const tools::Vector2U &newSize);
+    void resize(const tools::Vector2U &newSize, const tools::RgbColor &defaultValue);
 
     ColorMatrix operator+(const ColorMatrix &other);
     ColorMatrix operator-(const ColorMatrix &other);
@@ -33,16 +47,6 @@ public:
 
     friend ColorMatrix operator*(float scalar, const ColorMatrix &colorMatrix);
     friend ColorMatrix operator*(const ColorMatrix &colorMatrix, float scalar);
-
-    //TODO: redefine it through an [][] operator overload
-    void setAt(const tools::Vector2U &position, const tools::RgbColor &color);
-    tools::RgbColor& getAt(const tools::Vector2U &position);
-    const tools::RgbColor& getAt(const tools::Vector2U &position) const;
-
-    void resize(const tools::Vector2U &newSize);
-    void resize(const tools::Vector2U &newSize, const tools::RgbColor &defaultValue);
-
-
 };
 
 
