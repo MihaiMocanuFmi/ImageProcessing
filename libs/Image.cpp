@@ -10,11 +10,16 @@
 
 
 
-Image::Image(unsigned int width, unsigned int height) : m_size({width, height})
+Image::Image(unsigned int width, unsigned int height) : m_colorData{{width, height}, 0}
 {
 }
 
-Image::Image(tools::Vector2U size) : m_size(size)
+Image::Image(const ColorData &colorData) : m_colorData{colorData}
+{
+
+
+}
+Image::Image(tools::Vector2U size) : m_colorData{size, 0}
 {
 
 }
@@ -27,13 +32,13 @@ bool Image::load(std::string imagePath)
     std::stringstream buffer;
     buffer << inputFile.rdbuf();
 
-    if (not ppm.loadPlain(buffer.str(), colorData))
+    if (not ppm.loadPlain(buffer.str(), m_colorData))
     {
         inputFile.close();
         return false;
     }
 
-    m_size = colorData.getSize();
+    //m_size = m_colorData.getSize();
 
     inputFile.close();
     return true;
@@ -43,7 +48,7 @@ bool Image::save(std::string imagePath)
 {
     std::string imageStr;
 
-    if (not ppm.saveToString(imageStr, colorData))
+    if (not ppm.saveToString(imageStr, m_colorData))
         return false;
 
 
@@ -55,3 +60,56 @@ bool Image::save(std::string imagePath)
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+Image Image::operator+(const Image &i)
+{
+
+    return Image(this->m_colorData + i.m_colorData);
+}
+
+Image Image::operator-(const Image &i)
+{
+    return Image(this->m_colorData - i.m_colorData);
+}
+
+Image Image::operator*(const Image &i)
+{
+    return Image(this->m_colorData * i.m_colorData);
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+Image operator+(float scalar, const Image &image)
+{
+    return Image(scalar + image.m_colorData);
+}
+
+Image operator+(const Image &image, float scalar)
+{
+    return Image( image.m_colorData + scalar);
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+Image operator-(float scalar, const Image &image)
+{
+    return Image(scalar - image.m_colorData);
+}
+
+Image operator-(const Image &image, float scalar)
+{
+    return Image( image.m_colorData - scalar);
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+Image operator*(float scalar, const Image &image)
+{
+    return Image(scalar * image.m_colorData);
+}
+
+Image operator*(const Image &image, float scalar)
+{
+    return Image( image.m_colorData * scalar);
+}
+

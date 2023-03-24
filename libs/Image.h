@@ -11,15 +11,16 @@
 class Image
 {
 private:
-    tools::Vector2U m_size = {};
+    //tools::Vector2U m_size = {};
 
     PortablePixMap_Plain ppm = {};
-    ColorData colorData = {};
+    ColorData m_colorData = {};
 
 public:
     Image() = default;
 
     Image(unsigned int width, unsigned int height);
+    Image(const ColorData &colorData);
     explicit Image(tools::Vector2U size);
 
     bool load(std::string imagePath);

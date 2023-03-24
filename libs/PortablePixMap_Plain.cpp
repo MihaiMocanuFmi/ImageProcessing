@@ -383,7 +383,7 @@ bool PortablePixMap_Plain::saveToString(std::string &outPlainFile, const ColorDa
     }
 }
 
-/
+
 
 
 
