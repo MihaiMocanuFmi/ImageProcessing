@@ -30,7 +30,16 @@ public:
     bool getROI(Image &roiImg, tools::Rectangle roiRect);
     bool getROI(Image &roiImg, int x, int y, int width, int height);
 
+    bool isEmpty() const;
     void release();
+
+    tools::Vector2I size() const;
+
+    tools::RgbColor& at(const tools::Vector2I &position);
+    tools::RgbColor& at(int x, int y);
+
+    const tools::RgbColor& at(const tools::Vector2I &position) const;
+    const tools::RgbColor& at(int x, int y) const;
 
     Image operator+(const Image &i);
     Image operator-(const Image &i);

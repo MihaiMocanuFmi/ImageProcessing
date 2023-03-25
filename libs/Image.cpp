@@ -38,7 +38,7 @@ bool Image::load(std::string imagePath)
         return false;
     }
 
-    //m_size = m_colorData.getSize();
+    //m_size = m_colorData.size();
 
     inputFile.close();
     return true;

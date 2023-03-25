@@ -26,14 +26,15 @@ public:
 
 
     //TODO: redefine it through an [][] operator overload
+    /*
     void setAt(const tools::Vector2I &position, const tools::RgbColor &color);
     void setAt(int x, int y, const tools::RgbColor &color);
+    */
+    tools::RgbColor& at(const tools::Vector2I &position);
+    tools::RgbColor& at(int x, int y);
 
-    tools::RgbColor& getAt(const tools::Vector2I &position);
-    tools::RgbColor& getAt(int x, int y);
-
-    const tools::RgbColor& getAt(const tools::Vector2I &position) const;
-    const tools::RgbColor& getAt(int x, int y) const;
+    const tools::RgbColor& at(const tools::Vector2I &position) const;
+    const tools::RgbColor& at(int x, int y) const;
 
     const tools::Vector2I& size();
 

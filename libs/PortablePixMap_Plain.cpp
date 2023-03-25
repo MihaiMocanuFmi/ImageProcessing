@@ -186,7 +186,7 @@ bool PortablePixMap_Plain::m_findColorsP1Format(std::string &rPlainFile, ColorDa
             std::string colorValueStr = rPlainFile.substr(startingPos, endingPos - startingPos + 1);
             int colorValue = std::stoi(colorValueStr);
 
-            outColorMatrix.setAt({x,y}, {m_maxValue, {colorValue, colorValue, colorValue}});
+            outColorMatrix.at(x,y) = tools::RgbColor(m_maxValue, colorValue, colorValue, colorValue);
         }
     }
 
@@ -219,7 +219,7 @@ bool PortablePixMap_Plain::m_findColorsP2Format(std::string &rPlainFile, ColorDa
             std::string colorValueStr = rPlainFile.substr(startingPos, endingPos - startingPos + 1);
             int colorValue = std::stoi(colorValueStr);
 
-            outColorMatrix.setAt({x,y}, {m_maxValue, {colorValue, colorValue, colorValue}});
+            outColorMatrix.at(x,y) = tools::RgbColor(m_maxValue, colorValue, colorValue, colorValue);
 
         }
     }
@@ -260,7 +260,7 @@ bool PortablePixMap_Plain::m_findColorsP3Format(std::string &rPlainFile, ColorDa
             }
 
 
-            outColorMatrix.setAt({x, y}, {m_maxValue, {colors[0] , colors[1] , colors[2] }});
+            outColorMatrix.at(x, y) = tools::RgbColor(m_maxValue, colors[0] , colors[1] , colors[2]);
         }
     }
 
@@ -363,11 +363,11 @@ bool PortablePixMap_Plain::saveToString(std::string &outPlainFile, const ColorDa
                     lineLength = 0;
                 }
 
-                outPlainFile += std::to_string(data.getAt({x, y}).getColorR());
+                outPlainFile += std::to_string(data.at({x, y}).getColorR());
                 outPlainFile += " ";
-                outPlainFile += std::to_string(data.getAt({x, y}).getColorG());
+                outPlainFile += std::to_string(data.at({x, y}).getColorG());
                 outPlainFile += " ";
-                outPlainFile += std::to_string(data.getAt({x, y}).getColorB());
+                outPlainFile += std::to_string(data.at({x, y}).getColorB());
 
                 outPlainFile += " ";
 

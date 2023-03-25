@@ -20,7 +20,7 @@ ColorData::ColorData(const tools::Vector2I &size, const tools::RgbColor &default
     m_matrix = new tools::RgbColor[m_size.y * m_size.x];
     for (int i = 0; i < m_size.y; ++i)
         for (int j = 0; j < m_size.x; ++j)
-            this->getAt({i, j}) = defaultValue;
+            this->at({i, j}) = defaultValue;
 
 }
 
@@ -45,16 +45,16 @@ ColorData &ColorData::operator=(const ColorData &other)
         m_matrix = new tools::RgbColor[m_size.y * m_size.x];
         for (int y = 0; y < m_size.y; ++y)
             for (int x = 0; x < m_size.x; ++x)
-                this->setAt({x, y}, other.getAt({x, y}));
+                this->at(x, y) = other.at(x, y);
 
 
     } else
     {
         this->m_globalMaxValue = other.m_globalMaxValue;
 
-        for (int i = 0; i < m_size.y; ++i)
-            for (int j = 0; j < m_size.x; ++j)
-                this->setAt({i, j}, other.getAt({i, j}));
+        for (int y = 0; y < m_size.y; ++y)
+            for (int x = 0; x < m_size.x; ++x)
+                this->at(x, y) = other.at(x, y);
     }
 
     return *this;
@@ -68,9 +68,9 @@ ColorData::ColorData(const ColorData &other)
 
     //TODO: Change this to a memcopy perhaps
     this->m_matrix = new tools::RgbColor[m_size.y * m_size.x];
-    for (int i = 0; i < m_size.y; ++i)
-        for (int j = 0; j < m_size.x; ++j)
-            this->setAt({i, j}, other.getAt({i, j}));
+    for (int x = 0; x < m_size.y; ++x)
+        for (int y = 0; y < m_size.x; ++y)
+            this->at(x, y) = other.at(x, y);
 
 }
 
@@ -84,6 +84,7 @@ ColorData::~ColorData()
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+/*
 void ColorData::setAt(const tools::Vector2I &position, const tools::RgbColor &color)
 {
     m_matrix[m_size.x * position.y + position.x] = color;
@@ -93,27 +94,27 @@ void ColorData::setAt(int x, int y, const tools::RgbColor &color)
 {
     return setAt({x, y}, color);
 }
-
+*/
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-tools::RgbColor& ColorData::getAt(const tools::Vector2I &position)
+tools::RgbColor& ColorData::at(const tools::Vector2I &position)
 {
     return m_matrix[m_size.x * position.y + position.x];
 }
 
-tools::RgbColor& ColorData::getAt(int x, int y)
+tools::RgbColor& ColorData::at(int x, int y)
 {
-    return getAt({x, y});
+    return at({x, y});
 }
 
-const tools::RgbColor& ColorData::getAt(const tools::Vector2I &position) const
+const tools::RgbColor& ColorData::at(const tools::Vector2I &position) const
 {
     return m_matrix[m_size.x * position.y + position.x];
 }
 
-const tools::RgbColor& ColorData::getAt(int x, int y) const
+const tools::RgbColor& ColorData::at(int x, int y) const
 {
-    return getAt({x, y});
+    return at({x, y});
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -136,9 +137,9 @@ ColorData ColorData::operator+(const ColorData &other)
     for (int y = 0; y < this->m_size.y; ++y)
         for (int x = 0; x < this->m_size.x; ++x)
         {
-            tools::RgbColor newValue = this->getAt({x,y}) + other.getAt({x,y});
+            tools::RgbColor newValue = this->at({x, y}) + other.at({x, y});
             newValue.setMaxValue(maxValue);
-            newMatrix.setAt({x,y}, newValue);
+            newMatrix.at(x,y) =  newValue;
         }
 
     return newMatrix;
@@ -154,9 +155,9 @@ ColorData ColorData::operator-(const ColorData &other)
     for (int y = 0; y < this->m_size.y; ++y)
         for (int x = 0; x < this->m_size.x; ++x)
         {
-            tools::RgbColor newValue = this->getAt({x,y}) - other.getAt({x,y});
+            tools::RgbColor newValue = this->at({x, y}) - other.at({x, y});
             newValue.setMaxValue(maxValue);
-            newMatrix.setAt({x,y}, newValue);
+            newMatrix.at(x,y) =  newValue;
         }
 
     return newMatrix;
@@ -172,9 +173,9 @@ ColorData ColorData::operator*(const ColorData &other)
     for (int y = 0; y < this->m_size.y; ++y)
         for (int x = 0; x < this->m_size.x; ++x)
         {
-            tools::RgbColor newValue = this->getAt({x,y}) + other.getAt({x,y});
+            tools::RgbColor newValue = this->at({x, y}) + other.at({x, y});
             newValue.setMaxValue(maxValue);
-            newMatrix.setAt({x,y}, newValue);
+            newMatrix.at(x,y) =  newValue;
         }
 
     return newMatrix;
@@ -189,9 +190,9 @@ ColorData operator+(float scalar, const ColorData &colorMatrix)
     for (int y = 0; y < colorMatrix.m_size.y; ++y)
         for (int x = 0; x < colorMatrix.m_size.x; ++x)
         {
-            tools::RgbColor newValue = scalar + colorMatrix.getAt({x,y});
+            tools::RgbColor newValue = scalar + colorMatrix.at({x, y});
             newValue.setMaxValue(maxValue);
-            newMatrix.setAt({x,y}, newValue);
+            newMatrix.at(x,y) =  newValue;
         }
 
     return newMatrix;
@@ -211,9 +212,9 @@ ColorData operator-(float scalar, const ColorData &colorMatrix)
     for (int y = 0; y < colorMatrix.m_size.y; ++y)
         for (int x = 0; x < colorMatrix.m_size.x; ++x)
         {
-            tools::RgbColor newValue = scalar - colorMatrix.getAt({x,y});
+            tools::RgbColor newValue = scalar - colorMatrix.at({x, y});
             newValue.setMaxValue(maxValue);
-            newMatrix.setAt({x,y}, newValue);
+            newMatrix.at(x,y) =  newValue;
         }
 
     return newMatrix;
@@ -233,9 +234,9 @@ ColorData operator*(float scalar, const ColorData &colorMatrix)
     for (int y = 0; y < colorMatrix.m_size.y; ++y)
         for (int x = 0; x < colorMatrix.m_size.x; ++x)
         {
-            tools::RgbColor newValue = scalar * colorMatrix.getAt({x,y});
+            tools::RgbColor newValue = scalar * colorMatrix.at({x, y});
             newValue.setMaxValue(maxValue);
-            newMatrix.setAt({x,y}, newValue);
+            newMatrix.at(x,y) =  newValue;
         }
 
     return newMatrix;
