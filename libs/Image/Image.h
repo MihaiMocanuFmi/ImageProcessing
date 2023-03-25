@@ -4,15 +4,15 @@
 #include <string>
 
 #include "PortablePixMap_Plain.h"
-#include "tools/Vector2.h"
-#include "tools/Rectangle.h"
+#include "../Tools/Vector2.h"
+#include "../Tools/Rectangle.h"
 #include "ColorData.h"
 
 //this class is more like an ImageManager, I'm keeping the name Image to coincide with the given example
 class Image
 {
 private:
-    //tools::Vector2I m_size = {};
+    //Tools::Vector2I m_size = {};
 
     PortablePixMap_Plain ppm = {};
     ColorData m_colorData = {};

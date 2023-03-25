@@ -64,6 +64,6 @@ namespace tools
         friend RgbColor operator*(const RgbColor &colorMatrix, float scalar);
     };
 
-} // tools
+} // Tools
 
 #endif //RGB_COLOR_H

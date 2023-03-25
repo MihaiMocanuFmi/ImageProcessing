@@ -2,12 +2,12 @@
 
 //it seems that the explicit definition of template types doesn't really work
 /*
-template class tools::Vector2<int>;
-template class tools::Vector2<unsigned int>;
-template class tools::Vector2<long long int>;
-template class tools::Vector2<unsigned long long int>;
-template class tools::Vector2<float>;
-template class tools::Vector2<double>;
+template class Tools::Vector2<int>;
+template class Tools::Vector2<unsigned int>;
+template class Tools::Vector2<long long int>;
+template class Tools::Vector2<unsigned long long int>;
+template class Tools::Vector2<float>;
+template class Tools::Vector2<double>;
 */
 namespace tools
 {

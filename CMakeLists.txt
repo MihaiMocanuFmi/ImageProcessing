@@ -8,8 +8,12 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/builds")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -fsanitize=address")
 set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -fsanitize=address")
 
+add_subdirectory(Tests)
+
 add_executable(ImageProcessing
-        ImageProcessing.cpp
-        libs/PortablePixMap_Plain.cpp libs/Image.cpp
-        libs/tools/RgbColor.cpp libs/tools/RgbColor.h libs/tools/Vector2.cpp libs/tools/Rectangle.cpp
-        libs/ColorData.cpp libs/ColorData.h)
+        main.cpp
+        libs/Image/PortablePixMap_Plain.cpp libs/Image/Image.cpp libs/Image/ColorData.cpp
+        libs/Tools/RgbColor.cpp libs/Tools/RgbColor.h libs/Tools/Vector2.cpp libs/Tools/Rectangle.cpp
+        libs/Processing/ImageProcessing.cpp libs/Processing/ContrastBrightness.cpp libs/Processing/Gamma.cpp
+        libs/Processing/Convolution.cpp
+        libs/Draw/Draw.cpp Tests/test.cpp)

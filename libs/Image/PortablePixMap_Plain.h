@@ -4,8 +4,8 @@
 #include <vector>
 #include <string>
 
-#include "tools/Vector2.h"
-#include "tools/RgbColor.h"
+#include "../Tools/Vector2.h"
+#include "../Tools/RgbColor.h"
 #include "ColorData.h"
 
 

@@ -1,8 +1,7 @@
 #include <iostream>
 
-#include "libs/Image.h"
-#include "libs/PortablePixMap_Plain.h"
-#include "libs/tools/Rectangle.h"
+#include "libs/Image/Image.h"
+#include "libs/Tools/Rectangle.h"
 
 int main()
 {

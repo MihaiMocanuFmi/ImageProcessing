@@ -2,9 +2,9 @@
 #define COLOR_MATRIX_H
 
 #include <ostream>
-#include "tools/RgbColor.h"
-#include "tools/Vector2.h"
-#include "tools/Rectangle.h"
+#include "../Tools/RgbColor.h"
+#include "../Tools/Vector2.h"
+#include "../Tools/Rectangle.h"
 
 class ColorData
 {
@@ -30,8 +30,8 @@ public:
 
     //TODO: redefine it through an [][] operator overload
     /*
-    void setAt(const tools::Vector2I &position, const tools::RgbColor &color);
-    void setAt(int x, int y, const tools::RgbColor &color);
+    void setAt(const Tools::Vector2I &position, const Tools::RgbColor &color);
+    void setAt(int x, int y, const Tools::RgbColor &color);
     */
     tools::RgbColor& at(const tools::Vector2I &position);
     tools::RgbColor& at(int x, int y);

@@ -25,6 +25,6 @@ namespace tools
         static bool isContainedInside(const Rectangle &inner, const Rectangle &outer);
     };
 
-} // tools
+} // Tools
 
 #endif //RECTANGLE_H
