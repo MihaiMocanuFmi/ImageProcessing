@@ -12,7 +12,7 @@ namespace tools
 
     RgbColor::RgbColor()
     {
-        m_maxValue = 0;
+        m_maxValue = std::numeric_limits<int>::max();
         setColor(0,0,0);
     }
 

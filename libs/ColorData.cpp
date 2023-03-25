@@ -68,8 +68,8 @@ ColorData::ColorData(const ColorData &other)
 
     //TODO: Change this to a memcopy perhaps
     this->m_matrix = new tools::RgbColor[m_size.y * m_size.x];
-    for (int x = 0; x < m_size.y; ++x)
-        for (int y = 0; y < m_size.x; ++y)
+    for (int y = 0; y < m_size.y; ++y)
+        for (int x = 0; x < m_size.x; ++x)
             this->at(x, y) = other.at(x, y);
 
 }
@@ -128,8 +128,10 @@ bool ColorData::getROI(ColorData &roiColorData, tools::Rectangle roiRect)
              * (I dont understand why yet, but here it is)
              */
             int currentElement = y * roiRect.size.x + x;
-            int originRect = roiRect.upperLeftCorner.y * this->m_size.x + roiRect.upperLeftCorner.x;
-            *(roiColorData.m_matrix + currentElement) = *(this->m_matrix + originRect + currentElement);
+            int xInParent = roiRect.upperLeftCorner.x + x;
+            int yInParent = roiRect.upperLeftCorner.y + y;
+            *(roiColorData.m_matrix + currentElement) = *(this->m_matrix + m_size.x * yInParent  + xInParent);
+
         }
     }
     return true;

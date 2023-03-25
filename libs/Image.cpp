@@ -2,6 +2,7 @@
 
 #include <fstream>
 #include <sstream>
+#include <limits>
 
 
 ///*********************************************************************************************************************
@@ -10,7 +11,7 @@
 
 
 
-Image::Image(int width, int height) : m_colorData{{width, height}, 0}
+Image::Image(int width, int height) : m_colorData{{width, height}, std::numeric_limits<int>::max()}
 {
 }
 
@@ -67,7 +68,7 @@ bool Image::getROI(Image &roiImg, tools::Rectangle roiRect)
     if (not m_colorData.getROI(colorData, roiRect))
         return false;
 
-    roiImg = Image(colorData);
+   roiImg = Image(colorData);
     return true;
 }
 

@@ -347,10 +347,12 @@ bool PortablePixMap_Plain::loadPlain(std::string plainFile, ColorData &outData)
 
 bool PortablePixMap_Plain::saveToString(std::string &outPlainFile, const ColorData &data)
 {
+    cacheDataParameters(data);
+
     int sizeMaxValue = std::to_string(m_maxValue).length();
     constexpr int MAX_LINE_LENGTH = 70;
 
-    cacheDataParameters(data);
+
     try
     {
         outPlainFile = "";
