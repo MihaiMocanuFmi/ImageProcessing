@@ -32,7 +32,6 @@ ColorData &ColorData::operator=(const ColorData &other)
         return *this;
 
     //TODO: Find why this doesnt work
-    tools::Vector2I test =  other.m_size + this->m_size;
     if (this->m_size != other.m_size) //if the dimension is different we can't copy directly
     {
         //we first need to free the existing memory;

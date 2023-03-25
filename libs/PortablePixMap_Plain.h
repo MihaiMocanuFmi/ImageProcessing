@@ -33,7 +33,7 @@ private:
      * Given a string it finds the first number in it;
      * It returns through the out* parameters the position in str of the starting digit and the last digit (inclusive)
      */
-    bool m_findFirstNumber(const std::string &str, int startingPos, int &outStartPos, int &outEndPos);
+    bool m_findFirstNumber(const std::string &str, std::size_t startingPos, std::size_t &outStartPos, std::size_t &outEndPos);
 
     /*
      * MUST NOT CONTAIN COMMENTS

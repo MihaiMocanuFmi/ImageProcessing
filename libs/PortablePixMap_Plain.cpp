@@ -13,11 +13,11 @@
 
 void PortablePixMap_Plain::m_removeComments(std::string &rPlainFile)
 {
-    int commentStart = rPlainFile.find('#');
+    std::size_t commentStart = rPlainFile.find('#');
 
     while(commentStart != std::string::npos)
     {
-        int commentEnd = rPlainFile.find('\n', commentStart);
+        std::size_t commentEnd = rPlainFile.find('\n', commentStart);
 
         //if the found comment is actually the last part of the string
         if(commentEnd == std::string::npos)
@@ -40,7 +40,7 @@ void PortablePixMap_Plain::m_preProcessPPM(std::string &rPlainFile)
 
 bool PortablePixMap_Plain::m_findMagicNumber(std::string &rPlainFile, std::string &outMagicNumber)
 {
-    int positionOfP = rPlainFile.find("P");
+    std::size_t positionOfP = rPlainFile.find('P');
 
     //if there's no P
     if (positionOfP == std::string::npos)
@@ -71,11 +71,11 @@ bool PortablePixMap_Plain::m_findMagicNumber(std::string &rPlainFile, std::strin
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-bool PortablePixMap_Plain::m_findFirstNumber(const std::string &str, int startingPos, int &outStartPos,
-                                             int &outEndPos)
+bool PortablePixMap_Plain::m_findFirstNumber(const std::string &str, std::size_t startingPos, std::size_t &outStartPos,
+                                             std::size_t &outEndPos)
 {
     const char numbers[] = "0123456789";
-    int posDigit = str.find_first_of(numbers, startingPos);
+    std::size_t posDigit = str.find_first_of(numbers, startingPos);
 
     //if there's no digit in str
     if (posDigit == std::string::npos)
@@ -93,13 +93,13 @@ bool PortablePixMap_Plain::m_findFirstNumber(const std::string &str, int startin
 
 bool PortablePixMap_Plain::m_findSize(std::string &rPlainFile, tools::Vector2I &outSize)
 {
-    int posOfMagicNumber = rPlainFile.find(m_magicNumber);
+    std::size_t posOfMagicNumber = rPlainFile.find(m_magicNumber);
 
     //if magic number is the last element
     if(posOfMagicNumber + 2 == rPlainFile.size())
         return false;
 
-    int startingPos, endingPos;
+    std::size_t startingPos, endingPos;
     //if it couldn't find a number
     if (not m_findFirstNumber(rPlainFile, posOfMagicNumber + 2, startingPos, endingPos))
         return false;
@@ -147,7 +147,7 @@ bool PortablePixMap_Plain::m_findMaxValue(std::string &rPlainFile, int &outMaxVa
     int posNextWhiteSpace = posSecondSizeComp + std::to_string(m_size.y).length();
 
 
-    int startingPos, endingPos;
+    std::size_t startingPos, endingPos;
     //if there wasn't any number
     if (not m_findFirstNumber(rPlainFile, posNextWhiteSpace, startingPos, endingPos))
         return false;
@@ -171,8 +171,8 @@ bool PortablePixMap_Plain::m_findColorsP1Format(std::string &rPlainFile, ColorDa
     int posNextWhiteSpace = posSecondSizeComp + std::to_string(m_size.y).length();
 
 
-    int startingPos = -1;
-    int endingPos = posNextWhiteSpace;
+    std::size_t startingPos;
+    std::size_t endingPos = posNextWhiteSpace;
 
     outColorMatrix.resize(m_size);
     for (int y = 0; y < m_size.y; ++y)
@@ -204,8 +204,8 @@ bool PortablePixMap_Plain::m_findColorsP2Format(std::string &rPlainFile, ColorDa
     int posMaxValue =  rPlainFile.find(std::to_string(m_maxValue), posSecondSizeComp + 1);
     int posNextWhiteSpace = posMaxValue + std::to_string(m_maxValue).length();
 
-    int startingPos = -1;
-    int endingPos = posNextWhiteSpace;
+    std::size_t startingPos;
+    std::size_t endingPos = posNextWhiteSpace;
 
     outColorMatrix.resize(m_size);
     for (int y = 0; y < m_size.y; ++y)
@@ -238,8 +238,8 @@ bool PortablePixMap_Plain::m_findColorsP3Format(std::string &rPlainFile, ColorDa
     int posMaxValue =  rPlainFile.find(std::to_string(m_maxValue), posSecondSizeComp + 1);
     int posNextWhiteSpace = posMaxValue + std::to_string(m_maxValue).length();
 
-    int startingPos = -1;
-    int endingPos = posNextWhiteSpace;
+    std::size_t startingPos;
+    std::size_t endingPos = posNextWhiteSpace;
 
     outColorMatrix.resize(m_size);
     for (int y = 0; y < m_size.y; ++y)
