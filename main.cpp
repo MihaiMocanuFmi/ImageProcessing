@@ -1,7 +1,7 @@
 #include <iostream>
 
-#include "libs/Image/Image.h"
-#include "libs/Tools/Rectangle.h"
+#include "Libs/Image/Image.h"
+#include "Libs/Tools/Rectangle.h"
 
 int main()
 {

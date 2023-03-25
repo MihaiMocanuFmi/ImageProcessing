@@ -12,8 +12,8 @@ add_subdirectory(Tests)
 
 add_executable(ImageProcessing
         main.cpp
-        libs/Image/PortablePixMap_Plain.cpp libs/Image/Image.cpp libs/Image/ColorData.cpp
-        libs/Tools/RgbColor.cpp libs/Tools/RgbColor.h libs/Tools/Vector2.cpp libs/Tools/Rectangle.cpp
-        libs/Processing/ImageProcessing.cpp libs/Processing/ContrastBrightness.cpp libs/Processing/Gamma.cpp
-        libs/Processing/Convolution.cpp
-        libs/Draw/Draw.cpp Tests/test.cpp)
+        Libs/Image/PortablePixMap_Plain.cpp Libs/Image/Image.cpp Libs/Image/ColorData.cpp
+        Libs/Tools/RgbColor.cpp Libs/Tools/RgbColor.h Libs/Tools/Vector2.cpp Libs/Tools/Rectangle.cpp
+        Libs/Processing/ImageProcessing.cpp Libs/Processing/ContrastBrightness.cpp Libs/Processing/Gamma.cpp
+        Libs/Processing/Convolution.cpp
+        Libs/Draw/Draw.cpp)
