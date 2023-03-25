@@ -11,6 +11,7 @@ int main()
 
     if (image.load("input.ppm"))
     {
+        std::cout << image;
         if(not image.save("output.ppm"))
             std::cout << "Error on save";
     }

@@ -147,11 +147,17 @@ const tools::Vector2I &ColorData::size() const
 
 std::ostream &operator<<(std::ostream &os, const ColorData &dt)
 {
+    const int emptySize = std::string("(, , )").length();
+    const int maxSize = emptySize + 3 * std::to_string(dt.m_globalMaxValue).length();
+    const int finalGroupSize = maxSize + 10;
     for (int y = 0; y < dt.m_size.y; ++y)
     {
         for (int x = 0; x < dt.m_size.x; ++x)
         {
-            os << dt.at(x,y) << '\t';
+            int groupSize = emptySize + std::to_string(dt.at(x,y).getColorR()).length();
+            groupSize += std::to_string(dt.at(x,y).getColorG()).length();
+            groupSize += std::to_string(dt.at(x,y).getColorB()).length();
+            os << dt.at(x,y) << std::setw(finalGroupSize - groupSize);
         }
         os << '\n';
     }
