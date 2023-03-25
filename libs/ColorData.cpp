@@ -119,7 +119,7 @@ const tools::RgbColor& ColorData::getAt(int x, int y) const
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-const tools::Vector2I &ColorData::getSize()
+const tools::Vector2I &ColorData::size()
 {
     return m_size;
 }

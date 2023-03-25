@@ -35,7 +35,7 @@ public:
     const tools::RgbColor& getAt(const tools::Vector2I &position) const;
     const tools::RgbColor& getAt(int x, int y) const;
 
-    const tools::Vector2I& getSize();
+    const tools::Vector2I& size();
 
     ColorData operator+(const ColorData &other);
     ColorData operator-(const ColorData &other);
