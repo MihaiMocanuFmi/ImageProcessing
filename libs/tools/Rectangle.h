@@ -9,8 +9,8 @@ namespace tools
     class Rectangle
     {
     public:
-        Vector2U upperLeftCorner;
-        Vector2U size;
+        Vector2I upperLeftCorner;
+        Vector2I size;
     };
 
 } // tools
