@@ -8,14 +8,14 @@
 /////////////////////////PUBLIC////////////////////////////////////////////////////////////////////////////////////
 
 ColorData::ColorData(const tools::Vector2I &size, int maxValue)
-        : m_size{size}, m_globalMaxValue{maxValue}
+        : m_globalMaxValue{maxValue}, m_size{size}
 {
     m_matrix = new tools::RgbColor[m_size.y * m_size.x];
 
 }
 
 ColorData::ColorData(const tools::Vector2I &size, const tools::RgbColor &defaultValue)
-        : m_size{size}, m_globalMaxValue{defaultValue.getMaxValue()}
+        : m_globalMaxValue{defaultValue.getMaxValue()}, m_size{size}
 {
     m_matrix = new tools::RgbColor[m_size.y * m_size.x];
     for (int i = 0; i < m_size.y; ++i)
