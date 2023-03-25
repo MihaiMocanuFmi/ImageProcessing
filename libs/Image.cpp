@@ -61,6 +61,23 @@ bool Image::save(std::string imagePath)
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+bool Image::getROI(Image &roiImg, tools::Rectangle roiRect)
+{
+    ColorData colorData;
+    if (not m_colorData.getROI(colorData, roiRect))
+        return false;
+
+    roiImg = Image(colorData);
+    return true;
+}
+
+bool Image::getROI(Image &roiImg, int x, int y, int width, int height)
+{
+    return getROI(roiImg, tools::Rectangle(x, y, width, height));
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 void Image::release()
 {
     m_colorData = ColorData();
@@ -189,7 +206,3 @@ tools::RgbColor *Image::row(int y)
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-bool Image::getROI(Image &roiImg, tools::Rectangle roiRect)
-{
-    return false;
-}

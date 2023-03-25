@@ -118,7 +118,21 @@ bool ColorData::getROI(ColorData &roiColorData, tools::Rectangle roiRect)
                                                                                     m_size)))
         return false;
 
-    return false;
+    roiColorData = ColorData(roiRect.size, this->m_globalMaxValue);
+    for (int y = 0; y < roiRect.size.y; ++y)
+    {
+        for (int x = 0; x < roiRect.size.x; ++x)
+        {
+            /*
+             * >> You should use only pointer arithmetic for this (so don’t use the indexing operator []);
+             * (I dont understand why yet, but here it is)
+             */
+            int currentElement = y * roiRect.size.x + x;
+            int originRect = roiRect.upperLeftCorner.y * this->m_size.x + roiRect.upperLeftCorner.x;
+            *(roiColorData.m_matrix + currentElement) = *(this->m_matrix + originRect + currentElement);
+        }
+    }
+    return true;
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
