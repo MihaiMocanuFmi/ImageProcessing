@@ -1,6 +1,7 @@
 #ifndef COLOR_MATRIX_H
 #define COLOR_MATRIX_H
 
+#include <ostream>
 #include "tools/RgbColor.h"
 #include "tools/Vector2.h"
 
@@ -36,7 +37,11 @@ public:
     const tools::RgbColor& at(const tools::Vector2I &position) const;
     const tools::RgbColor& at(int x, int y) const;
 
-    const tools::Vector2I& size();
+    tools::RgbColor* row(int y);
+
+    const tools::Vector2I& size() const;
+
+    friend std::ostream& operator<<(std::ostream& os, const ColorData& dt);
 
     ColorData operator+(const ColorData &other);
     ColorData operator-(const ColorData &other);

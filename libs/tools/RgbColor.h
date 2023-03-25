@@ -2,7 +2,7 @@
 #define RGB_COLOR_H
 
 #include <vector>
-
+#include <ostream>
 
 namespace tools
 {
@@ -30,21 +30,6 @@ namespace tools
         RgbColor(int maxValue, int R, int G, int B);
         RgbColor(int maxValue, const Color &color);
 
-        RgbColor operator+(const RgbColor &other) const;
-        RgbColor operator-(const RgbColor &other) const;
-        RgbColor operator*(const RgbColor &other);
-
-
-        friend RgbColor operator+(float scalar, const RgbColor &colorMatrix);
-        friend RgbColor operator+(const RgbColor &colorMatrix, float scalar);
-
-        friend RgbColor operator-(float scalar, const RgbColor &colorMatrix);
-        friend RgbColor operator-( const RgbColor &colorMatrix, float scalar);
-
-        friend RgbColor operator*(float scalar, const RgbColor &colorMatrix);
-        friend RgbColor operator*(const RgbColor &colorMatrix, float scalar);
-
-
         void setMaxValue(int maxValue);
         int getMaxValue() const;
 
@@ -61,6 +46,22 @@ namespace tools
 
         void setColorB(int B);
         int getColorB() const;
+
+        friend std::ostream& operator<<(std::ostream& os, const RgbColor& dt);
+
+        RgbColor operator+(const RgbColor &other) const;
+        RgbColor operator-(const RgbColor &other) const;
+        RgbColor operator*(const RgbColor &other);
+
+
+        friend RgbColor operator+(float scalar, const RgbColor &colorMatrix);
+        friend RgbColor operator+(const RgbColor &colorMatrix, float scalar);
+
+        friend RgbColor operator-(float scalar, const RgbColor &colorMatrix);
+        friend RgbColor operator-( const RgbColor &colorMatrix, float scalar);
+
+        friend RgbColor operator*(float scalar, const RgbColor &colorMatrix);
+        friend RgbColor operator*(const RgbColor &colorMatrix, float scalar);
     };
 
 } // tools

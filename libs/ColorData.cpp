@@ -1,7 +1,7 @@
 #include "ColorData.h"
 
 #include <stdexcept>
-
+#include <iomanip>
 
 /////////////////////////PRIVATE///////////////////////////////////////////////////////////////////////////////////
 
@@ -84,17 +84,31 @@ ColorData::~ColorData()
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-/*
-void ColorData::setAt(const tools::Vector2I &position, const tools::RgbColor &color)
+void ColorData::resize(const tools::Vector2I &newSize)
 {
-    m_matrix[m_size.x * position.y + position.x] = color;
+    if(m_size.x * m_size.y < newSize.x * newSize.y)
+    {
+        tools::RgbColor *newMatrix = new tools::RgbColor[newSize.y * newSize.x];
+        for (int i = 0; i < m_size.x * m_size.y; ++i)
+            newMatrix[i] = m_matrix[i];
+
+        delete[] m_matrix;
+        m_matrix = newMatrix;
+    }
+
+    m_size = newSize;
 }
 
-void ColorData::setAt(int x, int y, const tools::RgbColor &color)
+void ColorData::resize(const tools::Vector2I &newSize, const tools::RgbColor &defaultValue)
 {
-    return setAt({x, y}, color);
+    delete[] m_matrix;
+    m_matrix = new tools::RgbColor[newSize.y * newSize.x];
+    for (int i = 0; i < newSize.x * newSize.y; ++i)
+        m_matrix[i] = defaultValue;
+
+    m_size = newSize;
 }
-*/
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 tools::RgbColor& ColorData::at(const tools::Vector2I &position)
@@ -116,13 +130,32 @@ const tools::RgbColor& ColorData::at(int x, int y) const
 {
     return at({x, y});
 }
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+tools::RgbColor *ColorData::row(int y)
+{
+    return &(this->at(0,y));
+}
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
-const tools::Vector2I &ColorData::size()
+const tools::Vector2I &ColorData::size() const
 {
     return m_size;
+}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+std::ostream &operator<<(std::ostream &os, const ColorData &dt)
+{
+    for (int y = 0; y < dt.m_size.y; ++y)
+    {
+        for (int x = 0; x < dt.m_size.x; ++x)
+        {
+            os << dt.at(x,y) << '\t';
+        }
+        os << '\n';
+    }
+    return os;
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -246,34 +279,6 @@ ColorData operator*(const ColorData &colorMatrix, float scalar)
 {
     return scalar * colorMatrix;
 }
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-void ColorData::resize(const tools::Vector2I &newSize)
-{
-    if(m_size.x * m_size.y < newSize.x * newSize.y)
-    {
-        tools::RgbColor *newMatrix = new tools::RgbColor[newSize.y * newSize.x];
-        for (int i = 0; i < m_size.x * m_size.y; ++i)
-            newMatrix[i] = m_matrix[i];
-
-        delete[] m_matrix;
-        m_matrix = newMatrix;
-    }
-
-    m_size = newSize;
-}
-
-void ColorData::resize(const tools::Vector2I &newSize, const tools::RgbColor &defaultValue)
-{
-    delete[] m_matrix;
-    m_matrix = new tools::RgbColor[newSize.y * newSize.x];
-    for (int i = 0; i < newSize.x * newSize.y; ++i)
-        m_matrix[i] = defaultValue;
-
-    m_size = newSize;
-}
-
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

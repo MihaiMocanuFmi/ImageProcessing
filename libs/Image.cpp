@@ -61,12 +61,72 @@ bool Image::save(std::string imagePath)
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
 void Image::release()
 {
     m_colorData = ColorData();
 }
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+bool Image::isEmpty() const
+{
+    return m_colorData.size().x > 0 and m_colorData.size().y > 0;
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+const tools::Vector2I &Image::size() const
+{
+    return m_colorData.size();
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+tools::RgbColor &Image::at(const tools::Vector2I &position)
+{
+    return m_colorData.at(position);
+}
+
+tools::RgbColor &Image::at(int x, int y)
+{
+    return m_colorData.at(x, y);
+}
+
+const tools::RgbColor &Image::at(const tools::Vector2I &position) const
+{
+    return m_colorData.at(position);
+}
+
+const tools::RgbColor &Image::at(int x, int y) const
+{
+    return m_colorData.at(x, y);
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+Image Image::zeros(int width, int height)
+{
+    tools::Vector2I size = {width, height};
+    tools::RgbColor defaultColor = {{0, 0, 0}};
+    ColorData colorMatrix(size, defaultColor);
+    return Image(colorMatrix);
+}
+
+Image Image::ones(int width, int height)
+{
+    tools::Vector2I size = {width, height};
+    tools::RgbColor defaultColor = {{1, 1, 1}};
+    ColorData colorMatrix(size, defaultColor);
+    return Image(colorMatrix);
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+std::ostream &operator<<(std::ostream &os, const Image &dt)
+{
+    os << dt.m_colorData;
+    return os;
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -120,6 +180,11 @@ Image operator*(float scalar, const Image &image)
 Image operator*(const Image &image, float scalar)
 {
     return Image( image.m_colorData * scalar);
+}
+
+tools::RgbColor *Image::row(int y)
+{
+    return m_colorData.row(y);
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
