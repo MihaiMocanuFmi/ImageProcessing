@@ -4,6 +4,7 @@
 #include <ostream>
 #include "tools/RgbColor.h"
 #include "tools/Vector2.h"
+#include "tools/Rectangle.h"
 
 class ColorData
 {
@@ -25,6 +26,7 @@ public:
     void resize(const tools::Vector2I &newSize);
     void resize(const tools::Vector2I &newSize, const tools::RgbColor &defaultValue);
 
+    bool getROI(ColorData &roiColorData, tools::Rectangle roiRect);
 
     //TODO: redefine it through an [][] operator overload
     /*

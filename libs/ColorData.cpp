@@ -111,6 +111,18 @@ void ColorData::resize(const tools::Vector2I &newSize, const tools::RgbColor &de
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+
+bool ColorData::getROI(ColorData &roiColorData, tools::Rectangle roiRect)
+{
+    if (not tools::Rectangle::isContainedInside(roiRect,tools::Rectangle({0, 0},
+                                                                                    m_size)))
+        return false;
+
+    return false;
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 tools::RgbColor& ColorData::at(const tools::Vector2I &position)
 {
     return m_matrix[m_size.x * position.y + position.x];
