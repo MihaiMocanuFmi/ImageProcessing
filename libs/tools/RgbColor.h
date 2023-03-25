@@ -10,23 +10,25 @@ namespace tools
     class RgbColor
     {
     private:
-        unsigned int m_maxValue;
+        int m_maxValue;
 
         struct Color
         {
-            unsigned int R;
-            unsigned int G;
-            unsigned int B;
+            //They cannot be unsigned because:
+            //{10,10,10} - {20, 20, 20} should be {0,0,0}, not maxValue^3 after clamping
+            int R;
+            int G;
+            int B;
         }m_color;
 
     public:
-        static constexpr unsigned int EIGHT_BIT = 255;
+        static constexpr int EIGHT_BIT = 255;
         RgbColor(); // sets all values to zero
 
         RgbColor(const Color &color);
-        explicit RgbColor(unsigned int maxValue);
-        RgbColor(unsigned int maxValue, unsigned int R, unsigned int G, unsigned int B);
-        RgbColor(unsigned int maxValue, const Color &color);
+        explicit RgbColor(int maxValue);
+        RgbColor(int maxValue, int R, int G, int B);
+        RgbColor(int maxValue, const Color &color);
 
         RgbColor operator+(const RgbColor &other) const;
         RgbColor operator-(const RgbColor &other) const;
@@ -43,22 +45,22 @@ namespace tools
         friend RgbColor operator*(const RgbColor &colorMatrix, float scalar);
 
 
-        void setMaxValue(unsigned int maxValue);
-        unsigned int getMaxValue() const;
+        void setMaxValue(int maxValue);
+        int getMaxValue() const;
 
-        void setColor(unsigned int R, unsigned int G, unsigned int B);
+        void setColor(int R, int G, int B);
 
         void setColor(const Color &color);
         const Color &getColor() const;
 
-        void setColorR(unsigned int R);
-        unsigned int getColorR() const;
+        void setColorR(int R);
+        int getColorR() const;
 
-        void setColorG(unsigned int G);
-        unsigned int getColorG() const;
+        void setColorG(int G);
+        int getColorG() const;
 
-        void setColorB(unsigned int B);
-        unsigned int getColorB() const;
+        void setColorB(int B);
+        int getColorB() const;
     };
 
 } // tools
