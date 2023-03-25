@@ -16,10 +16,14 @@ namespace tools
 
         constexpr Vector2() = default;
 
-        constexpr Vector2(T X, T Y);
+        constexpr Vector2(T X, T Y) : x{X}, y{Y}
+        {
+        }
 
         template<typename U>
-        constexpr explicit Vector2(const Vector2<U>& vector);
+        constexpr explicit Vector2(const Vector2<U>& vector): x{static_cast<T>(vector.x)}, y{static_cast<T>(vector.y)}
+        {
+        }
 
 
     };
