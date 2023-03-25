@@ -66,6 +66,8 @@ private:
      * Will find the color matrix in the given string file
      */
     bool m_findColors(std::string &rPlainFile, ColorData &outColorMatrix);
+
+    void cacheDataParameters(const ColorData &data);
 public:
     static constexpr char PPM_MAGIC_NUMBER[] = "P3";
     static constexpr char PGM_MAGIC_NUMBER[] = "P2";
