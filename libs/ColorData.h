@@ -7,35 +7,35 @@
 class ColorData
 {
 private:
-    unsigned int m_globalMaxValue = 0;
+    int m_globalMaxValue = 0;
 
     tools::RgbColor *m_matrix = nullptr;
-    tools::Vector2U m_size = {0, 0};
+    tools::Vector2I m_size = {0, 0};
 
 public:
     ColorData() = default;
-    ColorData(const tools::Vector2U &size, unsigned int maxValue);
-    ColorData(const tools::Vector2U &size, const tools::RgbColor &defaultValue);
+    ColorData(const tools::Vector2I &size, int maxValue);
+    ColorData(const tools::Vector2I &size, const tools::RgbColor &defaultValue);
 
     ColorData(const ColorData &other);
     ColorData& operator=(const ColorData &other);
     ~ColorData();
 
-    void resize(const tools::Vector2U &newSize);
-    void resize(const tools::Vector2U &newSize, const tools::RgbColor &defaultValue);
+    void resize(const tools::Vector2I &newSize);
+    void resize(const tools::Vector2I &newSize, const tools::RgbColor &defaultValue);
 
 
     //TODO: redefine it through an [][] operator overload
-    void setAt(const tools::Vector2U &position, const tools::RgbColor &color);
-    void setAt(unsigned int x, unsigned int y, const tools::RgbColor &color);
+    void setAt(const tools::Vector2I &position, const tools::RgbColor &color);
+    void setAt(int x, int y, const tools::RgbColor &color);
 
-    tools::RgbColor& getAt(const tools::Vector2U &position);
-    tools::RgbColor& getAt(unsigned int x, unsigned int y);
+    tools::RgbColor& getAt(const tools::Vector2I &position);
+    tools::RgbColor& getAt(int x, int y);
 
-    const tools::RgbColor& getAt(const tools::Vector2U &position) const;
-    const tools::RgbColor& getAt(unsigned int x, unsigned int y) const;
+    const tools::RgbColor& getAt(const tools::Vector2I &position) const;
+    const tools::RgbColor& getAt(int x, int y) const;
 
-    const tools::Vector2U& getSize();
+    const tools::Vector2I& getSize();
 
     ColorData operator+(const ColorData &other);
     ColorData operator-(const ColorData &other);

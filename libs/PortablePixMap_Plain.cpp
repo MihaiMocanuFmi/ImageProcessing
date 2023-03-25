@@ -71,7 +71,7 @@ bool PortablePixMap_Plain::m_findMagicNumber(std::string &rPlainFile, std::strin
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-bool PortablePixMap_Plain::m_findFirstNumber(const std::string &str, unsigned int startingPos, int &outStartPos,
+bool PortablePixMap_Plain::m_findFirstNumber(const std::string &str, int startingPos, int &outStartPos,
                                              int &outEndPos)
 {
     const char numbers[] = "0123456789";
@@ -91,7 +91,7 @@ bool PortablePixMap_Plain::m_findFirstNumber(const std::string &str, unsigned in
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-bool PortablePixMap_Plain::m_findSize(std::string &rPlainFile, tools::Vector2U &outSize)
+bool PortablePixMap_Plain::m_findSize(std::string &rPlainFile, tools::Vector2I &outSize)
 {
     int posOfMagicNumber = rPlainFile.find(m_magicNumber);
 
@@ -105,7 +105,7 @@ bool PortablePixMap_Plain::m_findSize(std::string &rPlainFile, tools::Vector2U &
         return false;
 
     std::string firstSizeComponentStr = rPlainFile.substr(startingPos, endingPos - startingPos + 1);
-    unsigned int firstSizeComponent = std::stoi(firstSizeComponentStr);
+    int firstSizeComponent = std::stoi(firstSizeComponentStr);
 
     //if the found number is the last one
     if (endingPos + 1 >= rPlainFile.length())
@@ -116,7 +116,7 @@ bool PortablePixMap_Plain::m_findSize(std::string &rPlainFile, tools::Vector2U &
         return false;
 
     std::string secondSizeComponentStr = rPlainFile.substr(startingPos, endingPos - startingPos + 1);
-    unsigned int secondSizeComponent = std::stoi(secondSizeComponentStr);
+    int secondSizeComponent = std::stoi(secondSizeComponentStr);
 
     //if the found number is the last one (taking into account that the image's size is non-zero)
     if (firstSizeComponent > 0 and secondSizeComponent > 0 and endingPos + 2 >= rPlainFile.length())
@@ -130,7 +130,7 @@ bool PortablePixMap_Plain::m_findSize(std::string &rPlainFile, tools::Vector2U &
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-bool PortablePixMap_Plain::m_findMaxValue(std::string &rPlainFile, unsigned int &outMaxValue)
+bool PortablePixMap_Plain::m_findMaxValue(std::string &rPlainFile, int &outMaxValue)
 {
     if (m_magicNumber == PBM_MAGIC_NUMBER)
     {
@@ -153,7 +153,7 @@ bool PortablePixMap_Plain::m_findMaxValue(std::string &rPlainFile, unsigned int 
         return false;
 
     std::string maxValueStr = rPlainFile.substr(startingPos, endingPos - startingPos + 1);
-    unsigned int maxValue = std::stoi(maxValueStr);
+    int maxValue = std::stoi(maxValueStr);
 
     outMaxValue = maxValue;
     return true;
@@ -175,16 +175,16 @@ bool PortablePixMap_Plain::m_findColorsP1Format(std::string &rPlainFile, ColorDa
     int endingPos = posNextWhiteSpace;
 
     outColorMatrix.resize(m_size);
-    for (unsigned int y = 0; y < m_size.y; ++y)
+    for (int y = 0; y < m_size.y; ++y)
     {
-        for (unsigned int x = 0; x < m_size.x; ++x)
+        for (int x = 0; x < m_size.x; ++x)
         {
             //if there wasn't any number
             if (not m_findFirstNumber(rPlainFile, endingPos + 1, startingPos, endingPos))
                 return false;
 
             std::string colorValueStr = rPlainFile.substr(startingPos, endingPos - startingPos + 1);
-            unsigned int colorValue = std::stoi(colorValueStr);
+            int colorValue = std::stoi(colorValueStr);
 
             outColorMatrix.setAt({x,y}, {m_maxValue, {colorValue, colorValue, colorValue}});
         }
@@ -208,16 +208,16 @@ bool PortablePixMap_Plain::m_findColorsP2Format(std::string &rPlainFile, ColorDa
     int endingPos = posNextWhiteSpace;
 
     outColorMatrix.resize(m_size);
-    for (unsigned int y = 0; y < m_size.y; ++y)
+    for (int y = 0; y < m_size.y; ++y)
     {
-        for (unsigned int x = 0; x < m_size.x; ++x)
+        for (int x = 0; x < m_size.x; ++x)
         {
             //if there wasn't any number
             if (not m_findFirstNumber(rPlainFile, endingPos + 1, startingPos, endingPos))
                 return false;
 
             std::string colorValueStr = rPlainFile.substr(startingPos, endingPos - startingPos + 1);
-            unsigned int colorValue = std::stoi(colorValueStr);
+            int colorValue = std::stoi(colorValueStr);
 
             outColorMatrix.setAt({x,y}, {m_maxValue, {colorValue, colorValue, colorValue}});
 
@@ -242,19 +242,19 @@ bool PortablePixMap_Plain::m_findColorsP3Format(std::string &rPlainFile, ColorDa
     int endingPos = posNextWhiteSpace;
 
     outColorMatrix.resize(m_size);
-    for (unsigned int y = 0; y < m_size.y; ++y)
+    for (int y = 0; y < m_size.y; ++y)
     {
-        for (unsigned int x = 0; x < m_size.x; ++x)
+        for (int x = 0; x < m_size.x; ++x)
         {
-            std::array<unsigned int, 3> colors;
-            for (unsigned int i = 0; i < 3; ++i)
+            std::array<int, 3> colors;
+            for (int i = 0; i < 3; ++i)
             {
                 //if there wasn't any number
                 if (not m_findFirstNumber(rPlainFile, endingPos + 1, startingPos, endingPos))
                     return false;
 
                 std::string colorValueStr = rPlainFile.substr(startingPos, endingPos - startingPos + 1);
-                unsigned int colorValue = std::stoi(colorValueStr);
+                int colorValue = std::stoi(colorValueStr);
 
                 colors[i] = colorValue;
             }
@@ -312,14 +312,14 @@ bool PortablePixMap_Plain::loadPlain(std::string plainFile, ColorData &outData)
 
 
 
-    tools::Vector2U size;
+    tools::Vector2I size;
     if (not m_findSize(plainFile, size))
         return false;
 
     m_size = size;
 
 
-    unsigned int maxValue;
+    int maxValue;
     if (not m_findMaxValue(plainFile, maxValue))
         return false;
 
@@ -347,12 +347,12 @@ bool PortablePixMap_Plain::saveToString(std::string &outPlainFile, const ColorDa
         outPlainFile += std::to_string(m_size.x) + " " + std::to_string(m_size.y) + "\t#Size width and height\n";
         outPlainFile += std::to_string(m_maxValue) + "\t#Max color value\n";
 
-        for (unsigned int y = 0; y < m_size.y; ++y)
+        for (int y = 0; y < m_size.y; ++y)
         {
             outPlainFile += "\n";
 
             int lineLength = 0;
-            for (unsigned int x = 0; x < m_size.x; ++x)
+            for (int x = 0; x < m_size.x; ++x)
             {
 
                 //PPM introduces a line length limit of 70 characters

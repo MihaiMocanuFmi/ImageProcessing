@@ -13,8 +13,8 @@ class PortablePixMap_Plain
 {
 private:
     std::string m_magicNumber;
-    tools::Vector2U m_size;
-    unsigned int m_maxValue;
+    tools::Vector2I m_size;
+    int m_maxValue;
 
 
     /*
@@ -33,16 +33,16 @@ private:
      * Given a string it finds the first number in it;
      * It returns through the out* parameters the position in str of the starting digit and the last digit (inclusive)
      */
-    bool m_findFirstNumber(const std::string &str, unsigned int startingPos, int &outStartPos, int &outEndPos);
+    bool m_findFirstNumber(const std::string &str, int startingPos, int &outStartPos, int &outEndPos);
 
     /*
      * MUST NOT CONTAIN COMMENTS
      * returns true on success, false otherwise
      * We assume that the next pair of number represents the size;
      */
-    bool m_findSize(std::string &rPlainFile, tools::Vector2U &outSize);
+    bool m_findSize(std::string &rPlainFile, tools::Vector2I &outSize);
 
-    bool m_findMaxValue(std::string &rPlainFile, unsigned int &outMaxValue);
+    bool m_findMaxValue(std::string &rPlainFile, int &outMaxValue);
 
     /*
      * Will search for colors in a string following the P1 format. The output colorMatrix will be converted into

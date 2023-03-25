@@ -10,7 +10,7 @@
 
 
 
-Image::Image(unsigned int width, unsigned int height) : m_colorData{{width, height}, 0}
+Image::Image(int width, int height) : m_colorData{{width, height}, 0}
 {
 }
 
@@ -19,7 +19,7 @@ Image::Image(const ColorData &colorData) : m_colorData{colorData}
 
 
 }
-Image::Image(tools::Vector2U size) : m_colorData{size, 0}
+Image::Image(tools::Vector2I size) : m_colorData{size, 0}
 {
 
 }
@@ -58,6 +58,15 @@ bool Image::save(std::string imagePath)
     outputFile.close();
     return true;
 }
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+void Image::release()
+{
+    m_colorData = ColorData();
+}
+
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -114,9 +123,4 @@ Image operator*(const Image &image, float scalar)
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-void Image::release()
-{
-    m_colorData = ColorData();
-}
 

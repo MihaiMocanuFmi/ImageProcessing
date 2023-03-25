@@ -7,19 +7,19 @@
 
 /////////////////////////PUBLIC////////////////////////////////////////////////////////////////////////////////////
 
-ColorData::ColorData(const tools::Vector2U &size, unsigned int maxValue)
+ColorData::ColorData(const tools::Vector2I &size, int maxValue)
         : m_size{size}, m_globalMaxValue{maxValue}
 {
     m_matrix = new tools::RgbColor[m_size.y * m_size.x];
 
 }
 
-ColorData::ColorData(const tools::Vector2U &size, const tools::RgbColor &defaultValue)
+ColorData::ColorData(const tools::Vector2I &size, const tools::RgbColor &defaultValue)
         : m_size{size}, m_globalMaxValue{defaultValue.getMaxValue()}
 {
     m_matrix = new tools::RgbColor[m_size.y * m_size.x];
-    for (unsigned int i = 0; i < m_size.y; ++i)
-        for (unsigned int j = 0; j < m_size.x; ++j)
+    for (int i = 0; i < m_size.y; ++i)
+        for (int j = 0; j < m_size.x; ++j)
             this->getAt({i, j}) = defaultValue;
 
 }
@@ -32,7 +32,7 @@ ColorData &ColorData::operator=(const ColorData &other)
         return *this;
 
     //TODO: Find why this doesnt work
-    tools::Vector2U test =  other.m_size + this->m_size;
+    tools::Vector2I test =  other.m_size + this->m_size;
     if (this->m_size != other.m_size) //if the dimension is different we can't copy directly
     {
         //we first need to free the existing memory;
@@ -44,8 +44,8 @@ ColorData &ColorData::operator=(const ColorData &other)
 
         //allocate new memory and  copy
         m_matrix = new tools::RgbColor[m_size.y * m_size.x];
-        for (unsigned int y = 0; y < m_size.y; ++y)
-            for (unsigned int x = 0; x < m_size.x; ++x)
+        for (int y = 0; y < m_size.y; ++y)
+            for (int x = 0; x < m_size.x; ++x)
                 this->setAt({x, y}, other.getAt({x, y}));
 
 
@@ -53,8 +53,8 @@ ColorData &ColorData::operator=(const ColorData &other)
     {
         this->m_globalMaxValue = other.m_globalMaxValue;
 
-        for (unsigned int i = 0; i < m_size.y; ++i)
-            for (unsigned int j = 0; j < m_size.x; ++j)
+        for (int i = 0; i < m_size.y; ++i)
+            for (int j = 0; j < m_size.x; ++j)
                 this->setAt({i, j}, other.getAt({i, j}));
     }
 
@@ -69,8 +69,8 @@ ColorData::ColorData(const ColorData &other)
 
     //TODO: Change this to a memcopy perhaps
     this->m_matrix = new tools::RgbColor[m_size.y * m_size.x];
-    for (unsigned int i = 0; i < m_size.y; ++i)
-        for (unsigned int j = 0; j < m_size.x; ++j)
+    for (int i = 0; i < m_size.y; ++i)
+        for (int j = 0; j < m_size.x; ++j)
             this->setAt({i, j}, other.getAt({i, j}));
 
 }
@@ -85,34 +85,34 @@ ColorData::~ColorData()
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void ColorData::setAt(const tools::Vector2U &position, const tools::RgbColor &color)
+void ColorData::setAt(const tools::Vector2I &position, const tools::RgbColor &color)
 {
     m_matrix[m_size.x * position.y + position.x] = color;
 }
 
-void ColorData::setAt(unsigned int x, unsigned int y, const tools::RgbColor &color)
+void ColorData::setAt(int x, int y, const tools::RgbColor &color)
 {
     return setAt({x, y}, color);
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-tools::RgbColor& ColorData::getAt(const tools::Vector2U &position)
+tools::RgbColor& ColorData::getAt(const tools::Vector2I &position)
 {
     return m_matrix[m_size.x * position.y + position.x];
 }
 
-tools::RgbColor& ColorData::getAt(unsigned int x, unsigned int y)
+tools::RgbColor& ColorData::getAt(int x, int y)
 {
     return getAt({x, y});
 }
 
-const tools::RgbColor& ColorData::getAt(const tools::Vector2U &position) const
+const tools::RgbColor& ColorData::getAt(const tools::Vector2I &position) const
 {
     return m_matrix[m_size.x * position.y + position.x];
 }
 
-const tools::RgbColor& ColorData::getAt(unsigned int x, unsigned int y) const
+const tools::RgbColor& ColorData::getAt(int x, int y) const
 {
     return getAt({x, y});
 }
@@ -120,7 +120,7 @@ const tools::RgbColor& ColorData::getAt(unsigned int x, unsigned int y) const
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-const tools::Vector2U &ColorData::getSize()
+const tools::Vector2I &ColorData::getSize()
 {
     return m_size;
 }
@@ -132,10 +132,10 @@ ColorData ColorData::operator+(const ColorData &other)
     if (this->m_size != other.m_size)
         throw std::runtime_error("The matrices aren't of same size");
 
-    unsigned int maxValue = this->m_globalMaxValue + other.m_globalMaxValue;
+    int maxValue = this->m_globalMaxValue + other.m_globalMaxValue;
     ColorData newMatrix(m_size, maxValue);
-    for (unsigned int y = 0; y < this->m_size.y; ++y)
-        for (unsigned int x = 0; x < this->m_size.x; ++x)
+    for (int y = 0; y < this->m_size.y; ++y)
+        for (int x = 0; x < this->m_size.x; ++x)
         {
             tools::RgbColor newValue = this->getAt({x,y}) + other.getAt({x,y});
             newValue.setMaxValue(maxValue);
@@ -150,10 +150,10 @@ ColorData ColorData::operator-(const ColorData &other)
     if (this->m_size != other.m_size)
         throw std::runtime_error("The matrices aren't of same size");
 
-    unsigned int maxValue = (this->m_globalMaxValue > other.m_globalMaxValue)? this->m_globalMaxValue : other.m_globalMaxValue;
+    int maxValue = (this->m_globalMaxValue > other.m_globalMaxValue)? this->m_globalMaxValue : other.m_globalMaxValue;
     ColorData newMatrix(m_size, maxValue);
-    for (unsigned int y = 0; y < this->m_size.y; ++y)
-        for (unsigned int x = 0; x < this->m_size.x; ++x)
+    for (int y = 0; y < this->m_size.y; ++y)
+        for (int x = 0; x < this->m_size.x; ++x)
         {
             tools::RgbColor newValue = this->getAt({x,y}) - other.getAt({x,y});
             newValue.setMaxValue(maxValue);
@@ -168,10 +168,10 @@ ColorData ColorData::operator*(const ColorData &other)
     if (this->m_size != other.m_size)
         throw std::runtime_error("The matrices aren't of same size");
 
-    unsigned int maxValue = this->m_globalMaxValue * other.m_globalMaxValue;
+    int maxValue = this->m_globalMaxValue * other.m_globalMaxValue;
     ColorData newMatrix(m_size, maxValue);
-    for (unsigned int y = 0; y < this->m_size.y; ++y)
-        for (unsigned int x = 0; x < this->m_size.x; ++x)
+    for (int y = 0; y < this->m_size.y; ++y)
+        for (int x = 0; x < this->m_size.x; ++x)
         {
             tools::RgbColor newValue = this->getAt({x,y}) + other.getAt({x,y});
             newValue.setMaxValue(maxValue);
@@ -185,10 +185,10 @@ ColorData ColorData::operator*(const ColorData &other)
 
 ColorData operator+(float scalar, const ColorData &colorMatrix)
 {
-    unsigned int maxValue = scalar + (float)colorMatrix.m_globalMaxValue;
+    int maxValue = scalar + (float)colorMatrix.m_globalMaxValue;
     ColorData newMatrix(colorMatrix.m_size, maxValue);
-    for (unsigned int y = 0; y < colorMatrix.m_size.y; ++y)
-        for (unsigned int x = 0; x < colorMatrix.m_size.x; ++x)
+    for (int y = 0; y < colorMatrix.m_size.y; ++y)
+        for (int x = 0; x < colorMatrix.m_size.x; ++x)
         {
             tools::RgbColor newValue = scalar + colorMatrix.getAt({x,y});
             newValue.setMaxValue(maxValue);
@@ -207,10 +207,10 @@ ColorData operator+(const ColorData &colorMatrix, float scalar)
 
 ColorData operator-(float scalar, const ColorData &colorMatrix)
 {
-    unsigned int maxValue = colorMatrix.m_globalMaxValue;
+    int maxValue = colorMatrix.m_globalMaxValue;
     ColorData newMatrix(colorMatrix.m_size, maxValue);
-    for (unsigned int y = 0; y < colorMatrix.m_size.y; ++y)
-        for (unsigned int x = 0; x < colorMatrix.m_size.x; ++x)
+    for (int y = 0; y < colorMatrix.m_size.y; ++y)
+        for (int x = 0; x < colorMatrix.m_size.x; ++x)
         {
             tools::RgbColor newValue = scalar - colorMatrix.getAt({x,y});
             newValue.setMaxValue(maxValue);
@@ -229,10 +229,10 @@ ColorData operator-(const ColorData &colorMatrix, float scalar)
 
 ColorData operator*(float scalar, const ColorData &colorMatrix)
 {
-    unsigned int maxValue = scalar * (float)colorMatrix.m_globalMaxValue;
+    int maxValue = scalar * (float)colorMatrix.m_globalMaxValue;
     ColorData newMatrix(colorMatrix.m_size, maxValue);
-    for (unsigned int y = 0; y < colorMatrix.m_size.y; ++y)
-        for (unsigned int x = 0; x < colorMatrix.m_size.x; ++x)
+    for (int y = 0; y < colorMatrix.m_size.y; ++y)
+        for (int x = 0; x < colorMatrix.m_size.x; ++x)
         {
             tools::RgbColor newValue = scalar * colorMatrix.getAt({x,y});
             newValue.setMaxValue(maxValue);
@@ -249,7 +249,7 @@ ColorData operator*(const ColorData &colorMatrix, float scalar)
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void ColorData::resize(const tools::Vector2U &newSize)
+void ColorData::resize(const tools::Vector2I &newSize)
 {
     if(m_size.x * m_size.y < newSize.x * newSize.y)
     {
@@ -264,7 +264,7 @@ void ColorData::resize(const tools::Vector2U &newSize)
     m_size = newSize;
 }
 
-void ColorData::resize(const tools::Vector2U &newSize, const tools::RgbColor &defaultValue)
+void ColorData::resize(const tools::Vector2I &newSize, const tools::RgbColor &defaultValue)
 {
     delete[] m_matrix;
     m_matrix = new tools::RgbColor[newSize.y * newSize.x];
