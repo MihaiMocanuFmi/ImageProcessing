@@ -2,7 +2,7 @@
 
 #include "Libs/Image/Image.h"
 #include "Libs/Tools/Rectangle.h"
-#include "Libs/Processing/ContrastBrightness.h"
+#include "Libs/Processing/Gamma.h"
 int main()
 {
     //TODO: operator overload
@@ -12,8 +12,8 @@ int main()
     if (image.load("input.ppm"))
     {
         Image newImage;
-        ContrastBrightness contrastBrightness(3, 0);
-        contrastBrightness.process(image, newImage);
+        Gamma Gamma(0.44);
+        Gamma.process(image, newImage);
 
         if(not newImage.save("output2.ppm"))
             std::cout << "Error on save";
