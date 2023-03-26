@@ -1,7 +1,8 @@
 #include <catch2/catch_all.hpp>
 #include <Tools/Vector2.h>
 
-TEST_CASE( "Vector2 Creation", "[Vector2]"){
+TEST_CASE( "Vector2 Creation", "[Vector2]")
+{
 
     tools::Vector2I vector0;
     REQUIRE((vector0.x == 0 and vector0.y == 0));
@@ -16,7 +17,8 @@ TEST_CASE( "Vector2 Creation", "[Vector2]"){
     REQUIRE((vector3.x == 5 and vector3.y == 6));
 }
 
-TEST_CASE( "Vector2 operations", "[Vector2]" ) {
+TEST_CASE( "Vector2 operations", "[Vector2]" )
+{
     tools::Vector2I vector1 = {1, 2};
     tools::Vector2I vector2 = {2, 3};
 

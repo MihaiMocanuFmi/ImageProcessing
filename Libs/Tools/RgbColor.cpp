@@ -41,6 +41,7 @@ namespace tools
     void RgbColor::setMaxValue(int maxValue)
     {
         m_maxValue = maxValue;
+        this->setColor(this->getColor());
     }
 
     int RgbColor::getMaxValue() const
@@ -164,19 +165,15 @@ namespace tools
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    RgbColor operator-(float scalar, const RgbColor &colorMatrix)
+    RgbColor operator-(const RgbColor &colorMatrix, float scalar)
     {
         int maxValue = colorMatrix.m_maxValue;
         RgbColor newColor(maxValue);
-        newColor.setColor(scalar - (float)colorMatrix.getColorR(), scalar - (float)colorMatrix.getColorG(),
-                          scalar - (float)colorMatrix.getColorB());
+        newColor.setColor((float)colorMatrix.getColorR() - scalar, (float)colorMatrix.getColorG() - scalar,
+                          (float)colorMatrix.getColorB() - scalar);
         return newColor;
     }
 
-    RgbColor operator-(const RgbColor &colorMatrix, float scalar)
-    {
-        return -scalar + colorMatrix;
-    }
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

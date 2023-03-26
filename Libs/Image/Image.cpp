@@ -178,11 +178,6 @@ Image operator+(const Image &image, float scalar)
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-Image operator-(float scalar, const Image &image)
-{
-    return Image(scalar - image.m_colorData);
-}
-
 Image operator-(const Image &image, float scalar)
 {
     return Image( image.m_colorData - scalar);

@@ -56,7 +56,6 @@ public:
     friend Image operator+(float scalar, const Image &image);
     friend Image operator+(const Image &image, float scalar);
 
-    friend Image operator-(float scalar, const Image &image);
     friend Image operator-(const Image &image, float scalar);
 
     friend Image operator*(float scalar, const Image &image);

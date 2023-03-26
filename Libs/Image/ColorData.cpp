@@ -280,20 +280,6 @@ ColorData operator+(const ColorData &colorMatrix, float scalar)
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-ColorData operator-(float scalar, const ColorData &colorMatrix)
-{
-    int maxValue = colorMatrix.m_globalMaxValue;
-    ColorData newMatrix(colorMatrix.m_size, maxValue);
-    for (int y = 0; y < colorMatrix.m_size.y; ++y)
-        for (int x = 0; x < colorMatrix.m_size.x; ++x)
-        {
-            tools::RgbColor newValue = scalar - colorMatrix.at({x, y});
-            newValue.setMaxValue(maxValue);
-            newMatrix.at(x,y) =  newValue;
-        }
-
-    return newMatrix;
-}
 
 ColorData operator-(const ColorData &colorMatrix, float scalar)
 {

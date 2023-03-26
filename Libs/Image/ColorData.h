@@ -53,7 +53,6 @@ public:
     friend ColorData operator+(float scalar, const ColorData &colorMatrix);
     friend ColorData operator+(const ColorData &colorMatrix, float scalar);
 
-    friend ColorData operator-(float scalar, const ColorData &colorMatrix);
     friend ColorData operator-(const ColorData &colorMatrix, float scalar);
 
     friend ColorData operator*(float scalar, const ColorData &colorMatrix);

@@ -23,7 +23,7 @@ namespace tools
 
     public:
         static constexpr int EIGHT_BIT = 255;
-        RgbColor(); // sets all values to zero
+        RgbColor(); // sets color to {0,0,0} and m_maxValue to std::numeric_limits<int>::max();
 
         RgbColor(const Color &color);
         explicit RgbColor(int maxValue);
@@ -57,7 +57,6 @@ namespace tools
         friend RgbColor operator+(float scalar, const RgbColor &colorMatrix);
         friend RgbColor operator+(const RgbColor &colorMatrix, float scalar);
 
-        friend RgbColor operator-(float scalar, const RgbColor &colorMatrix);
         friend RgbColor operator-( const RgbColor &colorMatrix, float scalar);
 
         friend RgbColor operator*(float scalar, const RgbColor &colorMatrix);
