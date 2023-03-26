@@ -2,7 +2,7 @@
 This app is an image processing application that can process plain ppm, pgm or pbm file formats.
 
 ## Abilities
-* Brightness and contrast adjustment. (soon)
+* Brightness and contrast adjustment. 
 * Gamma correction. (soon)
 * Image convolutions. (soon)
 * Cropping.
