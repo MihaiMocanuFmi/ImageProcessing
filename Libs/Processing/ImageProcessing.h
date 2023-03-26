@@ -8,6 +8,8 @@ class ImageProcessing
 private:
 
 public:
+    ImageProcessing() = default;
+
     virtual void process(const Image& src, Image& dst) = 0;
 
     virtual ~ImageProcessing() = default;

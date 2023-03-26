@@ -20,7 +20,12 @@ Image::Image(const ColorData &colorData) : m_colorData{colorData}
 
 
 }
-Image::Image(tools::Vector2I size) : m_colorData{size, 0}
+Image::Image(tools::Vector2I size) : m_colorData{size, std::numeric_limits<int>::max()}
+{
+
+}
+
+Image::Image(tools::Vector2I size, int globalMaxValue) : m_colorData{size, globalMaxValue}
 {
 
 }
@@ -96,6 +101,11 @@ bool Image::isEmpty() const
 const tools::Vector2I &Image::size() const
 {
     return m_colorData.size();
+}
+
+int Image::globalMaxValue() const
+{
+    return m_colorData.globalMaxValue();
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -199,6 +209,7 @@ tools::RgbColor *Image::row(int y)
 {
     return m_colorData.row(y);
 }
+
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
