@@ -2,11 +2,11 @@
 This app is an image processing application that can process plain ppm, pgm or pbm file formats.
 
 ## Abilities
-* Brightness and contrast adjustment.
-* Gamma correction.
-* Image convolution.
+* Brightness and contrast adjustment. (soon)
+* Gamma correction. (soon)
+* Image convolutions. (soon)
 * Cropping.
-* Basic drawing.
+* Basic drawing. (soon)
 
 ## Dependencies
 * CMake
