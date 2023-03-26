@@ -5,14 +5,15 @@
 
 namespace tools
 {
+    //TODO: change to template;
 
     class Rectangle
     {
     public:
-        Vector2I upperLeftCorner;
-        Vector2I size;
+        Vector2I upperLeftCorner = {0, 0};
+        Vector2I size = {0, 0};
 
-        Rectangle();
+        Rectangle() = default;
         Rectangle(Vector2I aUpperLeftCorner,  Vector2I aSize);
         Rectangle(int x, int y, int width, int height);
 

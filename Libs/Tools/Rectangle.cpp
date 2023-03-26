@@ -6,10 +6,6 @@
 
 namespace tools
 {
-    Rectangle::Rectangle() : upperLeftCorner{-1, -1}, size{0, 0}
-    {
-
-    }
 
     Rectangle::Rectangle(Vector2I aUpperLeftCorner, Vector2I aSize) : upperLeftCorner{aUpperLeftCorner}, size{aSize}
     {

@@ -11,8 +11,8 @@ namespace tools
     class Vector2
     {
     public:
-        T x;
-        T y;
+        T x = 0;
+        T y = 0;
 
         constexpr Vector2() = default;
 

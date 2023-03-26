@@ -6,7 +6,13 @@ add_executable(tests test.cpp
         Processing/test_ContrastBrightness.cpp Processing/test_Convolution.cpp Processing/test_Gamma.cpp Processing/test_ImageProcessing.cpp
         Tools/test_Rectangle.cpp Tools/test_RgbColor.cpp Tools/test_Vector2.cpp)
 
-target_link_libraries(tests PRIVATE Catch2::Catch2WithMain)
+
+
+include_directories(../Libs)
+
+
+target_link_libraries(tests PRIVATE Libs Catch2::Catch2WithMain)
+
 
 # These tests need their own main
 #add_executable(custom-main-tests test.cpp test-main.cpp)
