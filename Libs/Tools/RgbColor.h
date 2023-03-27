@@ -11,6 +11,7 @@ namespace tools
     {
     private:
         int m_maxValue;
+        int m_minValue;
 
         struct Color
         {
@@ -26,9 +27,9 @@ namespace tools
         RgbColor(); // sets color to {0,0,0} and m_maxValue to std::numeric_limits<int>::max();
 
         RgbColor(const Color &color);
-        explicit RgbColor(int maxValue);
-        RgbColor(int maxValue, int R, int G, int B);
-        RgbColor(int maxValue, const Color &color);
+        RgbColor(int maxValue, int minValue = 0);
+        RgbColor(int maxValue, int R, int G, int B, int minValue = 0);
+        RgbColor(int maxValue, const Color &color, int minValue = 0);
 
         void setMaxValue(int maxValue);
         int getMaxValue() const;
