@@ -9,14 +9,15 @@
 class ColorData
 {
 private:
-    int m_globalMaxValue = 0;
+    int m_globalMaxValue = 0; //for now these are useless
+    int m_globalMinValue = 0; //for now these are useless
 
     tools::RgbColor *m_matrix = nullptr;
     tools::Vector2I m_size = {0, 0};
 
 public:
     ColorData() = default;
-    ColorData(const tools::Vector2I &size, int maxValue);
+    ColorData(const tools::Vector2I &size, int maxValue, int minValue = 0);
     ColorData(const tools::Vector2I &size, const tools::RgbColor &defaultValue);
 
     ColorData(const ColorData &other);
@@ -29,10 +30,6 @@ public:
     bool getROI(ColorData &roiColorData, tools::Rectangle roiRect);
 
     //TODO: redefine it through an [][] operator overload
-    /*
-    void setAt(const Tools::Vector2I &position, const Tools::RgbColor &color);
-    void setAt(int x, int y, const Tools::RgbColor &color);
-    */
     tools::RgbColor& at(const tools::Vector2I &position);
     tools::RgbColor& at(int x, int y);
 
@@ -43,6 +40,7 @@ public:
 
     const tools::Vector2I& size() const;
     int globalMaxValue() const;
+    int globalMinValue() const;
 
     friend std::ostream& operator<<(std::ostream& os, const ColorData& dt);
 
