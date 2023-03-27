@@ -9,7 +9,7 @@
 /////////////////////////PUBLIC////////////////////////////////////////////////////////////////////////////////////
 
 ColorData::ColorData(const tools::Vector2I &size)
-: m_globalMaxValue{std::numeric_limits<int>::max()}, m_globalMinValue{std::numeric_limits<int>::min()}
+:m_globalMaxValue{std::numeric_limits<int>::max()}, m_globalMinValue{std::numeric_limits<int>::min()}, m_size{size}
 {
     m_matrix = new tools::RgbColor[m_size.y * m_size.x];
 }

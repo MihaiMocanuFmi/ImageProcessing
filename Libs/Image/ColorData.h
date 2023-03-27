@@ -12,8 +12,9 @@ private:
     int m_globalMaxValue = 0; //for now these are useless
     int m_globalMinValue = 0; //for now these are useless
 
-    tools::RgbColor *m_matrix = nullptr;
     tools::Vector2I m_size = {0, 0};
+    tools::RgbColor *m_matrix = nullptr;
+
 
 public:
     ColorData() = default;
