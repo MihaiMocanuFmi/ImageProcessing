@@ -17,6 +17,7 @@ private:
 
 public:
     ColorData() = default;
+    ColorData(const tools::Vector2I &size);
     ColorData(const tools::Vector2I &size, int maxValue, int minValue = 0);
     ColorData(const tools::Vector2I &size, const tools::RgbColor &defaultValue);
 

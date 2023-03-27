@@ -59,13 +59,13 @@ namespace tools
         RgbColor operator*(const RgbColor &other);
 
 
-        friend RgbColor operator+(float scalar, const RgbColor &colorMatrix);
-        friend RgbColor operator+(const RgbColor &colorMatrix, float scalar);
+        friend RgbColor operator+(float scalar, const RgbColor &color);
+        friend RgbColor operator+(const RgbColor &color, float scalar);
 
-        friend RgbColor operator-( const RgbColor &colorMatrix, float scalar);
+        friend RgbColor operator-(const RgbColor &color, float scalar);
 
-        friend RgbColor operator*(float scalar, const RgbColor &colorMatrix);
-        friend RgbColor operator*(const RgbColor &colorMatrix, float scalar);
+        friend RgbColor operator*(float scalar, const RgbColor &color);
+        friend RgbColor operator*(const RgbColor &color, float scalar);
     };
 
 } // Tools

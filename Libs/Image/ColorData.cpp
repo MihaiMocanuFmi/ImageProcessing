@@ -2,10 +2,17 @@
 
 #include <stdexcept>
 #include <iomanip>
+#include <limits>
 
 /////////////////////////PRIVATE///////////////////////////////////////////////////////////////////////////////////
 
 /////////////////////////PUBLIC////////////////////////////////////////////////////////////////////////////////////
+
+ColorData::ColorData(const tools::Vector2I &size)
+: m_globalMaxValue{std::numeric_limits<int>::max()}, m_globalMinValue{std::numeric_limits<int>::min()}
+{
+    m_matrix = new tools::RgbColor[m_size.y * m_size.x];
+}
 
 ColorData::ColorData(const tools::Vector2I &size, int maxValue, int minValue)
         : m_globalMaxValue{maxValue}, m_globalMinValue{minValue}, m_size{size}
@@ -310,6 +317,7 @@ ColorData operator*(const ColorData &colorMatrix, float scalar)
 {
     return scalar * colorMatrix;
 }
+
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
