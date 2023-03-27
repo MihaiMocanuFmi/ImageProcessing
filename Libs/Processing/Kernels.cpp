@@ -115,6 +115,8 @@ void VerticalSobelKernel::scalingMethod(ColorData &outColorData)
     {
         for (int x = 0; x < outColorData.size().x; ++x)
         {
+            /*
+            //Considering just for this example that outColorData.globalMaxValue() = 255;
             //making the range [-255, 255]
             outColorData.at(x, y) = (1.0f / 4) * outColorData.at(x, y);
 
