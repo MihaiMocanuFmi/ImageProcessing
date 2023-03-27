@@ -34,6 +34,10 @@ namespace tools
         void setMaxValue(int maxValue);
         int getMaxValue() const;
 
+        void setMinValue(int minValue);
+        int getMinValue() const;
+
+
         void setColor(int R, int G, int B);
 
         void setColor(const Color &color);
