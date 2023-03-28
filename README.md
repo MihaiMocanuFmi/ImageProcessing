@@ -4,7 +4,7 @@ This app is an image processing application that can process plain ppm, pgm or p
 ## Abilities
 * Brightness and contrast adjustment. 
 * Gamma correction. 
-* Image convolutions. (soon)
+* Image convolutions. 
 * Cropping.
 * Basic drawing. (soon)
 
