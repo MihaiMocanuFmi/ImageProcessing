@@ -23,11 +23,13 @@ namespace tools
 
     public:
         static constexpr int EIGHT_BIT = 255;
+        bool overrideClamping = false;
+
         RgbColor(); // sets color to {0,0,0} and m_maxValue to std::numeric_limits<int>::max();
 
         RgbColor(int maxValue);
         RgbColor(int maxValue, int R, int G, int B);
-        RgbColor(int R, int G, int B);
+        RgbColor(int R, int G, int B, bool overrideClamp = false);
         RgbColor(int maxValue, const Color &color);
 
 

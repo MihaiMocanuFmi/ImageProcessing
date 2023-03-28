@@ -10,16 +10,24 @@ int main()
 
     if (image.load("input.ppm"))
     {
-        Image newImage;
-        Convolution convolution(Kernels::GaussianBlur3x3Kernel().kernel,Kernels::GaussianBlur3x3Kernel::scalingMethod);
-        convolution.process(image, newImage);
+        Image verticalImage;
+        Convolution convolutionVert(Kernels::VerticalSobelKernel().kernel, Kernels::VerticalSobelKernel::scalingMethod);
+        convolutionVert.process(image, verticalImage);
 
-        if(not newImage.save("output2.ppm"))
+        if(not verticalImage.save("vertical.ppm"))
             std::cout << "Error on save";
 
+        Image horizontal;
+        Convolution convolutionHoriz(Kernels::HorizontalSobelKernel().kernel, Kernels::HorizontalSobelKernel::scalingMethod);
+        convolutionHoriz.process(image, horizontal);
 
-        if(not image.save("output.ppm"))
+        if(not horizontal.save("horizontal.ppm"))
             std::cout << "Error on save";
+
+        Image composition = verticalImage + horizontal;
+        if(not composition.save("composition.ppm"))
+            std::cout << "Error on save";
+
     }
     else
         std::cout << "Error on load";

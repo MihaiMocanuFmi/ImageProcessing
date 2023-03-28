@@ -67,14 +67,15 @@ namespace Kernels
     HorizontalSobelKernel::HorizontalSobelKernel()
     {
         tools::Vector2I size(3, 3);
+
         kernel = ColorData(size);
-        kernel.at(0, 0) = kernel.at(2, 0) = 1;
-        kernel.at(1, 0) = 2;
+        kernel.at(0, 0) = kernel.at(2, 0) = tools::RgbColor(1,1,1, true);
+        kernel.at(1, 0) = tools::RgbColor(2,2,2, true);
 
-        kernel.at(0, 1) = kernel.at(1, 1) = kernel.at(2, 1) = 0;
+        kernel.at(0, 1) = kernel.at(1, 1) = kernel.at(2, 1) = tools::RgbColor(0,0,0, true);
 
-        kernel.at(0, 2) = kernel.at(2, 2) = -1;
-        kernel.at(1, 2) = -2;
+        kernel.at(0, 2) = kernel.at(2, 2) = tools::RgbColor(-1,-1,-1, true);
+        kernel.at(1, 2) = tools::RgbColor(-2,-2,-2, true);
 
     }
 
@@ -109,14 +110,15 @@ namespace Kernels
     VerticalSobelKernel::VerticalSobelKernel()
     {
         tools::Vector2I size(3, 3);
+
         kernel = ColorData(size);
-        kernel.at(2, 0) = kernel.at(2, 2) = 1;
-        kernel.at(2, 1) = 2;
+        kernel.at(0, 0) = kernel.at(0, 2) = tools::RgbColor(-1,-1,-1, true);
+        kernel.at(0, 1) = tools::RgbColor(-2,-2,-2, true);
 
-        kernel.at(1, 0) = kernel.at(1, 1) = kernel.at(1, 2) = 0;
+        kernel.at(1, 0) = kernel.at(1, 1) = kernel.at(1, 2) = tools::RgbColor(0,0,0, true);
 
-        kernel.at(0, 0) = kernel.at(0, 2) = -1;
-        kernel.at(0, 1) = -2;
+        kernel.at(2, 0) = kernel.at(2, 2) = tools::RgbColor(1,1,1, true);
+        kernel.at(2, 1) = tools::RgbColor(2,2,2, true);
     }
 
     void VerticalSobelKernel::scalingMethod(ColorData &outColorData)

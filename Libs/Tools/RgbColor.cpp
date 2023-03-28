@@ -26,6 +26,14 @@ namespace tools
         setColor(R,G,B);
     }
 
+    RgbColor::RgbColor(int R, int G, int B, bool overrideClamp)
+    : m_maxValue{std::numeric_limits<int>::max()}, overrideClamping(overrideClamp)
+    {
+        setColor(R, G, B);
+    }
+
+
+
     RgbColor::RgbColor(int maxValue, const RgbColor::Color &color)
     : m_maxValue{maxValue}
     {
@@ -71,7 +79,10 @@ namespace tools
 
     void RgbColor::setColorR(int R)
     {
-        m_color.R = std::clamp<int>(R, 0, m_maxValue);
+        if (not overrideClamping)
+            m_color.R = std::clamp<int>(R, 0, m_maxValue);
+        else
+            m_color.R = R;
     }
     int RgbColor::getColorR() const
     {
@@ -82,7 +93,10 @@ namespace tools
 
     void RgbColor::setColorG(int G)
     {
-        m_color.G = std::clamp<int>(G, 0, m_maxValue);
+        if (not overrideClamping)
+            m_color.G = std::clamp<int>(G, 0, m_maxValue);
+        else
+            m_color.G = G;
     }
 
     int RgbColor::getColorG() const
@@ -94,7 +108,10 @@ namespace tools
 
     void RgbColor::setColorB(int B)
     {
-        m_color.B = std::clamp<int>(B, 0, m_maxValue);
+        if (not overrideClamping)
+            m_color.B = std::clamp<int>(B, 0, m_maxValue);
+        else
+            m_color.B = B;
     }
 
     int RgbColor::getColorB() const
@@ -115,8 +132,11 @@ namespace tools
     RgbColor RgbColor::operator+(const RgbColor &other) const
     {
         int maxValue = std::max(this->m_maxValue, other.m_maxValue);
-
         RgbColor newColor(maxValue);
+
+        bool override = this->overrideClamping or other.overrideClamping;
+        newColor.overrideClamping = override;
+
         newColor.setColor(this->getColorR() + other.getColorR(), this->getColorG() + other.getColorG(),
                           this->getColorB() + other.getColorB());
         return newColor;
@@ -128,6 +148,10 @@ namespace tools
     {
         int maxValue = this->m_maxValue;
         RgbColor newColor(maxValue);
+
+        bool override = this->overrideClamping or other.overrideClamping;
+        newColor.overrideClamping = override;
+
         newColor.setColor(this->getColorR() - other.getColorR(), this->getColorG() - other.getColorG(),
                           this->getColorB() - other.getColorB());
         return newColor;
@@ -139,6 +163,10 @@ namespace tools
     {
         int maxValue = std::max(this->m_maxValue, other.m_maxValue);
         RgbColor newColor(maxValue);
+
+        bool override = this->overrideClamping or other.overrideClamping;
+        newColor.overrideClamping = override;
+
         newColor.setColor(this->getColorR() * other.getColorR(), this->getColorG() * other.getColorG(),
                           this->getColorB() * other.getColorB());
         return newColor;
@@ -150,6 +178,9 @@ namespace tools
     {
         int maxValue = colorMatrix.m_maxValue;
         RgbColor newColor(maxValue);
+
+        newColor.overrideClamping =  colorMatrix.overrideClamping;
+
         newColor.setColor(scalar + (float)colorMatrix.getColorR(), scalar + (float)colorMatrix.getColorG(),
                           scalar + (float)colorMatrix.getColorB());
         return newColor;
@@ -166,6 +197,9 @@ namespace tools
     {
         int maxValue = colorMatrix.m_maxValue;
         RgbColor newColor(maxValue);
+
+        newColor.overrideClamping =  colorMatrix.overrideClamping;
+
         newColor.setColor((float)colorMatrix.getColorR() - scalar, (float)colorMatrix.getColorG() - scalar,
                           (float)colorMatrix.getColorB() - scalar);
         return newColor;
@@ -178,6 +212,9 @@ namespace tools
     {
         int maxValue = colorMatrix.m_maxValue;
         RgbColor newColor(maxValue);
+
+        newColor.overrideClamping =  colorMatrix.overrideClamping;
+
         newColor.setColor(scalar * (float)colorMatrix.getColorR(), scalar * (float)colorMatrix.getColorG(),
                           scalar * (float)colorMatrix.getColorB());
         return newColor;
@@ -186,11 +223,6 @@ namespace tools
     RgbColor operator*(const RgbColor &colorMatrix, float scalar)
     {
         return scalar * colorMatrix;
-    }
-
-    RgbColor::RgbColor(int R, int G, int B) : m_maxValue{std::numeric_limits<int>::max()}
-    {
-        setColor(R, G, B);
     }
 
 
