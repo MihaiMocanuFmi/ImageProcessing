@@ -10,7 +10,6 @@ class ColorData
 {
 private:
     int m_globalMaxValue = 0; //for now these are useless
-    int m_globalMinValue = 0; //for now these are useless
 
     tools::Vector2I m_size = {0, 0};
     tools::RgbColor *m_matrix = nullptr;
@@ -19,7 +18,7 @@ private:
 public:
     ColorData() = default;
     ColorData(const tools::Vector2I &size);
-    ColorData(const tools::Vector2I &size, int maxValue, int minValue = 0);
+    ColorData(const tools::Vector2I &size, int maxValue);
     ColorData(const tools::Vector2I &size, const tools::RgbColor &defaultValue);
 
     ColorData(const ColorData &other);
@@ -42,7 +41,7 @@ public:
 
     const tools::Vector2I& size() const;
     int globalMaxValue() const;
-    int globalMinValue() const;
+
 
     friend std::ostream& operator<<(std::ostream& os, const ColorData& dt);
 

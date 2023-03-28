@@ -3,17 +3,16 @@
 #include "Libs/Image/Image.h"
 #include "Libs/Tools/Rectangle.h"
 #include "Libs/Processing/Gamma.h"
+#include "Libs/Processing/Convolution.h"
 int main()
 {
-    //TODO: operator overload
-    //TODO: matrix [][]?
     Image image;
 
     if (image.load("input.ppm"))
     {
         Image newImage;
-        Gamma Gamma(0.44);
-        Gamma.process(image, newImage);
+        Convolution convolution(Kernels::GaussianBlur3x3Kernel().kernel,Kernels::GaussianBlur3x3Kernel::scalingMethod);
+        convolution.process(image, newImage);
 
         if(not newImage.save("output2.ppm"))
             std::cout << "Error on save";

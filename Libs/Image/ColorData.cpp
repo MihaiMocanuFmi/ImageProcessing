@@ -9,13 +9,13 @@
 /////////////////////////PUBLIC////////////////////////////////////////////////////////////////////////////////////
 
 ColorData::ColorData(const tools::Vector2I &size)
-:m_globalMaxValue{std::numeric_limits<int>::max()}, m_globalMinValue{std::numeric_limits<int>::min()}, m_size{size}
+:m_globalMaxValue{std::numeric_limits<int>::max()}, m_size{size}
 {
     m_matrix = new tools::RgbColor[m_size.y * m_size.x];
 }
 
-ColorData::ColorData(const tools::Vector2I &size, int maxValue, int minValue)
-        : m_globalMaxValue{maxValue}, m_globalMinValue{minValue}, m_size{size}
+ColorData::ColorData(const tools::Vector2I &size, int maxValue)
+        : m_globalMaxValue{maxValue}, m_size{size}
 {
     m_matrix = new tools::RgbColor[m_size.y * m_size.x];
 
@@ -185,10 +185,7 @@ int ColorData::globalMaxValue() const
 {
     return m_globalMaxValue;
 }
-int ColorData::globalMinValue() const
-{
-    return m_globalMinValue;
-}
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 std::ostream &operator<<(std::ostream &os, const ColorData &dt)

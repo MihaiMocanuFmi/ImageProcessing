@@ -16,11 +16,6 @@ namespace tools
         setColor(0,0,0);
     }
 
-    RgbColor::RgbColor(const Color &color) : m_maxValue{std::numeric_limits<int>::max()}, m_color{color}
-    {
-
-    }
-
     RgbColor::RgbColor(int maxValue) : m_maxValue{maxValue}
     {
         setColor(0,0,0);
@@ -191,6 +186,11 @@ namespace tools
     RgbColor operator*(const RgbColor &colorMatrix, float scalar)
     {
         return scalar * colorMatrix;
+    }
+
+    RgbColor::RgbColor(int R, int G, int B) : m_maxValue{std::numeric_limits<int>::max()}
+    {
+        setColor(R, G, B);
     }
 
 

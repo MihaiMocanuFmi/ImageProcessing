@@ -7,6 +7,7 @@ tools::RgbColor Convolution::m_multiplyWithKernel(const ColorData &colorData, to
     tools::RgbColor result;
     //we don't want any boundaries for pixel values
     result.setColor(0, 0, 0);
+
     for (int y = 0; y < m_kernel.size().y; ++y)
     {
         for (int x = 0; x < m_kernel.size().x; ++x)
@@ -26,7 +27,10 @@ tools::RgbColor Convolution::m_multiplyWithKernel(const ColorData &colorData, to
 
             result = result + m_kernel.at(x, y) * colorData.at(indexInColorData);
         }
+
     }
+
+    return result;
 }
 
 /////////////////////////PRIVATE///////////////////////////////////////////////////////////////////////////////////
@@ -49,10 +53,18 @@ void Convolution::process(const Image &src, Image &dst)
     //dst = Image(src.size(), src.globalMaxValue());
 
     //we dont want any bounds for now;
-    ColorData tempColorData(src.size());
+
+    ColorData buffer(src.size(), src.globalMaxValue());
+
     for (int y = 0; y < src.size().y; ++y)
         for (int x = 0; x < src.size().x; ++x)
-            tempColorData.at(x, y) = m_multiplyWithKernel(tempColorData, {x, y});
+        {
+            tools::RgbColor result = m_multiplyWithKernel( src.data(), {x, y});
+            buffer.at(x, y) = result;
+        }
+
+    m_scaling(buffer);
+    dst = Image(buffer);
 }
 
 ColorData &Convolution::getKernel()

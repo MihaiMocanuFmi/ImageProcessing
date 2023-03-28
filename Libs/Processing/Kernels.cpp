@@ -17,7 +17,7 @@ namespace Kernels
     IdentityKernel::IdentityKernel()
     {
         tools::Vector2I size(3, 3);
-        tools::RgbColor color({0, 0, 0});
+        tools::RgbColor color(0, 0, 0);
         kernel = ColorData(size, color);
         kernel.at(1, 1).setColor(1, 1, 1);
 
@@ -33,7 +33,7 @@ namespace Kernels
     MeanBlurKernel::MeanBlurKernel()
     {
         tools::Vector2I size(3, 3);
-        tools::RgbColor color({0, 0, 0});
+        tools::RgbColor color(1, 1, 1);
         kernel = ColorData(size, color);
     }
 
@@ -50,9 +50,9 @@ namespace Kernels
     {
         tools::Vector2I size(3, 3);
         kernel = ColorData(size);
-        kernel.at(0, 0) = kernel.at(2, 2) = kernel.at(0, 2) = kernel.at(2, 2) = 1;
-        kernel.at(1, 0) = kernel.at(0, 1) = kernel.at(2, 1) = kernel.at(1, 2) = 2;
-        kernel.at(1, 1) = 4;
+        kernel.at(0, 0) = kernel.at(2, 0) = kernel.at(0, 2) = kernel.at(2, 2) = tools::RgbColor(1,1,1);
+        kernel.at(1, 0) = kernel.at(0, 1) = kernel.at(2, 1) = kernel.at(1, 2) = tools::RgbColor(2,2,2);
+        kernel.at(1, 1) = tools::RgbColor(4,4,4);
     }
 
     void GaussianBlur3x3Kernel::scalingMethod(ColorData &outColorData)

@@ -25,10 +25,11 @@ namespace tools
         static constexpr int EIGHT_BIT = 255;
         RgbColor(); // sets color to {0,0,0} and m_maxValue to std::numeric_limits<int>::max();
 
-        RgbColor(const Color &color);
         RgbColor(int maxValue);
         RgbColor(int maxValue, int R, int G, int B);
+        RgbColor(int R, int G, int B);
         RgbColor(int maxValue, const Color &color);
+
 
         void setMaxValue(int maxValue);
         int getMaxValue() const;

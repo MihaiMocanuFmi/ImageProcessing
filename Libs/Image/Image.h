@@ -35,6 +35,7 @@ public:
     void release();
     bool isEmpty() const;
 
+    const ColorData &data() const;
     const tools::Vector2I &size() const;
     int globalMaxValue() const;
 
