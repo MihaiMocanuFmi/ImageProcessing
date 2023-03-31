@@ -6,6 +6,7 @@
 #include "Libs/Processing/Convolution.h"
 int main()
 {
+
     Image image;
 
     if (image.load("input.ppm"))

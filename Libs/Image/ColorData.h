@@ -14,7 +14,7 @@ private:
     tools::Vector2I m_size = {0, 0};
     tools::RgbColor *m_matrix = nullptr;
 
-
+    tools::RgbColor  m_rescaleColorValue(const tools::RgbColor &color, int wantedMaxValue);
 public:
     ColorData() = default;
     ColorData(const tools::Vector2I &size);

@@ -98,8 +98,11 @@ namespace Kernels
                 outColorData.at(x, y) = (1.0f / 2) * outColorData.at(x, y);
                 */
                 //One line to decrease float approximation errors caused by casts back to int
-                outColorData.at(x, y) =
-                        (1.0f / 2) * ((1.0f / 4) * outColorData.at(x, y) + outColorData.globalMaxValue());
+                float R = (1.0f / 2) * ((1.0f / 4) * outColorData.at(x, y).getColorR() + outColorData.globalMaxValue());
+                float G = (1.0f / 2) * ((1.0f / 4) * outColorData.at(x, y).getColorR() + outColorData.globalMaxValue());
+                float B = (1.0f / 2) * ((1.0f / 4) * outColorData.at(x, y).getColorR() + outColorData.globalMaxValue());
+                outColorData.at(x, y) = tools::RgbColor(outColorData.globalMaxValue(), R, G, (int)B);
+
             }
         }
     }
@@ -129,7 +132,7 @@ namespace Kernels
             {
                 /*
                 //Considering just for this example that outColorData.globalMaxValue() = 255;
-                //making the range [-255, 255]
+                //making the range from [-4 * 255, 4 * 255] into [-255, 255]
                 outColorData.at(x, y) = (1.0f / 4) * outColorData.at(x, y);
 
                 //making the range [0, 2 * 255]
@@ -139,8 +142,10 @@ namespace Kernels
                 outColorData.at(x, y) = (1.0f / 2) * outColorData.at(x, y);
                 */
                 //One line to decrease float approximation errors caused by casts back to int
-                outColorData.at(x, y) =
-                        (1.0f / 2) * ((1.0f / 4) * outColorData.at(x, y) + outColorData.globalMaxValue());
+                float R = (1.0f / 2) * ((1.0f / 4) * outColorData.at(x, y).getColorR() + outColorData.globalMaxValue());
+                float G = (1.0f / 2) * ((1.0f / 4) * outColorData.at(x, y).getColorR() + outColorData.globalMaxValue());
+                float B = (1.0f / 2) * ((1.0f / 4) * outColorData.at(x, y).getColorR() + outColorData.globalMaxValue());
+                outColorData.at(x, y) = tools::RgbColor(outColorData.globalMaxValue(), R, G, (int)B);
             }
         }
     }

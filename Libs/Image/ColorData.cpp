@@ -4,6 +4,20 @@
 #include <iomanip>
 #include <limits>
 
+
+tools::RgbColor ColorData::m_rescaleColorValue(const tools::RgbColor &color, int wantedMaxValue)
+{
+    int actualMaxValue = color.getMaxValue();
+    tools::RgbColor scaledColor(wantedMaxValue);
+    float R =  ((float)color.getColorR() / actualMaxValue) * wantedMaxValue;
+    float G =  ((float)color.getColorG() / actualMaxValue) * wantedMaxValue;
+    float B =  ((float)color.getColorB() / actualMaxValue) * wantedMaxValue;
+    scaledColor.setColor(R, G, B);
+    scaledColor.setMaxValue(wantedMaxValue);
+    return scaledColor;
+}
+
+
 /////////////////////////PRIVATE///////////////////////////////////////////////////////////////////////////////////
 
 /////////////////////////PUBLIC////////////////////////////////////////////////////////////////////////////////////
@@ -211,17 +225,26 @@ std::ostream &operator<<(std::ostream &os, const ColorData &dt)
 
 ColorData ColorData::operator+(const ColorData &other)
 {
+    //this doesnt just add the values together, it allows the values to overflow over the max value and thed
+    //convert it back to the range [0, maxValue]
     if (this->m_size != other.m_size)
         throw std::runtime_error("The matrices aren't of same size");
 
-    int maxValue = this->m_globalMaxValue + other.m_globalMaxValue;
+    int maxValue = std::max(this->m_globalMaxValue, other.m_globalMaxValue);
+    int combinedMaxValue = this->m_globalMaxValue + other.m_globalMaxValue;
     ColorData newMatrix(m_size, maxValue);
     for (int y = 0; y < this->m_size.y; ++y)
         for (int x = 0; x < this->m_size.x; ++x)
         {
-            tools::RgbColor newValue = this->at({x, y}) + other.at({x, y});
-            newValue.setMaxValue(maxValue);
-            newMatrix.at(x,y) =  newValue;
+            tools::RgbColor color1 = this->at({x, y});
+            color1.setMaxValue(combinedMaxValue);
+
+            tools::RgbColor color2 = this->at({x, y});
+            color2.setMaxValue(combinedMaxValue);
+
+            tools::RgbColor newColor = color1 + color2;
+            newColor.setMaxValue(combinedMaxValue);
+            newMatrix.at(x,y) = m_rescaleColorValue(newColor, maxValue);
         }
 
     return newMatrix;
@@ -232,7 +255,7 @@ ColorData ColorData::operator-(const ColorData &other)
     if (this->m_size != other.m_size)
         throw std::runtime_error("The matrices aren't of same size");
 
-    int maxValue = (this->m_globalMaxValue > other.m_globalMaxValue)? this->m_globalMaxValue : other.m_globalMaxValue;
+    int maxValue = std::max(this->m_globalMaxValue, other.m_globalMaxValue);
     ColorData newMatrix(m_size, maxValue);
     for (int y = 0; y < this->m_size.y; ++y)
         for (int x = 0; x < this->m_size.x; ++x)
@@ -250,7 +273,7 @@ ColorData ColorData::operator*(const ColorData &other)
     if (this->m_size != other.m_size)
         throw std::runtime_error("The matrices aren't of same size");
 
-    int maxValue = this->m_globalMaxValue * other.m_globalMaxValue;
+    int maxValue = std::max(this->m_globalMaxValue, other.m_globalMaxValue);
     ColorData newMatrix(m_size, maxValue);
     for (int y = 0; y < this->m_size.y; ++y)
         for (int x = 0; x < this->m_size.x; ++x)
@@ -267,7 +290,7 @@ ColorData ColorData::operator*(const ColorData &other)
 
 ColorData operator+(float scalar, const ColorData &colorMatrix)
 {
-    int maxValue = scalar + (float)colorMatrix.m_globalMaxValue;
+    int maxValue = colorMatrix.m_globalMaxValue;
     ColorData newMatrix(colorMatrix.m_size, maxValue);
     for (int y = 0; y < colorMatrix.m_size.y; ++y)
         for (int x = 0; x < colorMatrix.m_size.x; ++x)
@@ -297,14 +320,14 @@ ColorData operator-(const ColorData &colorMatrix, float scalar)
 
 ColorData operator*(float scalar, const ColorData &colorMatrix)
 {
-    int maxValue = scalar * (float)colorMatrix.m_globalMaxValue;
+    int maxValue = colorMatrix.m_globalMaxValue;
     ColorData newMatrix(colorMatrix.m_size, maxValue);
     for (int y = 0; y < colorMatrix.m_size.y; ++y)
         for (int x = 0; x < colorMatrix.m_size.x; ++x)
         {
             tools::RgbColor newValue = scalar * colorMatrix.at({x, y});
             newValue.setMaxValue(maxValue);
-            newMatrix.at(x,y) =  newValue;
+            newMatrix.at(x,y) = newValue;
         }
 
     return newMatrix;
@@ -314,6 +337,7 @@ ColorData operator*(const ColorData &colorMatrix, float scalar)
 {
     return scalar * colorMatrix;
 }
+
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////

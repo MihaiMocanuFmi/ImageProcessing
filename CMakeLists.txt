@@ -11,5 +11,5 @@ set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -fsanitize=address")
 add_subdirectory(Libs)
 add_subdirectory(Tests)
 
-add_executable(ImageProcessing main.cpp)
+add_executable(ImageProcessing main.cpp main.cpp)
 target_link_libraries(ImageProcessing Libs)
