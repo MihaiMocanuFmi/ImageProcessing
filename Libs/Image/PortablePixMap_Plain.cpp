@@ -185,6 +185,8 @@ bool PortablePixMap_Plain::m_findColorsP1Format(std::string &rPlainFile, ColorDa
 
             std::string colorValueStr = rPlainFile.substr(startingPos, endingPos - startingPos + 1);
             int colorValue = std::stoi(colorValueStr);
+            //scaling it to[0, tools::RgbColor::MAX_VALUE]
+            colorValue = ((float)colorValue / m_maxValue) * tools::RgbColor::MAX_VALUE;
 
             outColorMatrix.at(x,y) = tools::RgbColor(m_maxValue, colorValue, colorValue, colorValue);
         }
@@ -218,6 +220,8 @@ bool PortablePixMap_Plain::m_findColorsP2Format(std::string &rPlainFile, ColorDa
 
             std::string colorValueStr = rPlainFile.substr(startingPos, endingPos - startingPos + 1);
             int colorValue = std::stoi(colorValueStr);
+            //scaling it to [0, tools::RgbColor::MAX_VALUE]
+            colorValue = ((float)colorValue / m_maxValue) * tools::RgbColor::MAX_VALUE;
 
             outColorMatrix.at(x,y) = tools::RgbColor(m_maxValue, colorValue, colorValue, colorValue);
 
@@ -256,6 +260,8 @@ bool PortablePixMap_Plain::m_findColorsP3Format(std::string &rPlainFile, ColorDa
 
                 std::string colorValueStr = rPlainFile.substr(startingPos, endingPos - startingPos + 1);
                 int colorValue = std::stoi(colorValueStr);
+                //scaling it to[0, tools::RgbColor::MAX_VALUE]
+                colorValue = ((float)colorValue / m_maxValue) * tools::RgbColor::MAX_VALUE;
 
                 colors[i] = colorValue;
             }
