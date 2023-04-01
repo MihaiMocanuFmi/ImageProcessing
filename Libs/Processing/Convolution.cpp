@@ -54,14 +54,12 @@ void Convolution::process(const Image &src, Image &dst)
 
     //we dont want any bounds for now;
 
-    ColorData buffer(src.size(), src.globalMaxValue());
+    ColorData buffer(src.size());
 
     for (int y = 0; y < src.size().y; ++y)
         for (int x = 0; x < src.size().x; ++x)
-        {
-            tools::RgbColor result = m_multiplyWithKernel( src.data(), {x, y});
-            buffer.at(x, y) = result;
-        }
+            buffer.at(x, y) =  m_multiplyWithKernel(src.data(), {x, y});;
+
 
     m_scaling(buffer);
     dst = Image(buffer);

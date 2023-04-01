@@ -11,7 +11,7 @@
 
 
 
-Image::Image(int width, int height) : m_colorData{{width, height}, std::numeric_limits<int>::max()}
+Image::Image(int width, int height) : m_colorData{{width, height}}
 {
 }
 
@@ -20,12 +20,7 @@ Image::Image(const ColorData &colorData) : m_colorData{colorData}
 
 
 }
-Image::Image(tools::Vector2I size) : m_colorData{size, std::numeric_limits<int>::max()}
-{
-
-}
-
-Image::Image(tools::Vector2I size, int globalMaxValue) : m_colorData{size, globalMaxValue}
+Image::Image(tools::Vector2I size) : m_colorData{size}
 {
 
 }
@@ -103,10 +98,6 @@ const tools::Vector2I &Image::size() const
     return m_colorData.size();
 }
 
-int Image::globalMaxValue() const
-{
-    return m_colorData.globalMaxValue();
-}
 
 const ColorData &Image::data() const
 {

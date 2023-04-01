@@ -98,11 +98,8 @@ namespace Kernels
                 outColorData.at(x, y) = (1.0f / 2) * outColorData.at(x, y);
                 */
                 //One line to decrease float approximation errors caused by casts back to int
-                float R = (1.0f / 2) * ((1.0f / 4) * outColorData.at(x, y).getColorR() + outColorData.globalMaxValue());
-                float G = (1.0f / 2) * ((1.0f / 4) * outColorData.at(x, y).getColorR() + outColorData.globalMaxValue());
-                float B = (1.0f / 2) * ((1.0f / 4) * outColorData.at(x, y).getColorR() + outColorData.globalMaxValue());
-                outColorData.at(x, y) = tools::RgbColor(outColorData.globalMaxValue(), R, G, (int)B);
-
+                tools::RgbColor color = (1.0f / 2) * ((1.0f / 4) * outColorData.at(x, y) + outColorData.MAX_VALUE);
+                outColorData.at(x, y) = color;
             }
         }
     }
@@ -142,10 +139,8 @@ namespace Kernels
                 outColorData.at(x, y) = (1.0f / 2) * outColorData.at(x, y);
                 */
                 //One line to decrease float approximation errors caused by casts back to int
-                float R = (1.0f / 2) * ((1.0f / 4) * outColorData.at(x, y).getColorR() + outColorData.globalMaxValue());
-                float G = (1.0f / 2) * ((1.0f / 4) * outColorData.at(x, y).getColorR() + outColorData.globalMaxValue());
-                float B = (1.0f / 2) * ((1.0f / 4) * outColorData.at(x, y).getColorR() + outColorData.globalMaxValue());
-                outColorData.at(x, y) = tools::RgbColor(outColorData.globalMaxValue(), R, G, (int)B);
+                tools::RgbColor color = (1.0f / 2) * ((1.0f / 4) * outColorData.at(x, y) + outColorData.MAX_VALUE);
+                outColorData.at(x, y) = color;
             }
         }
     }

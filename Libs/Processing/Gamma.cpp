@@ -20,12 +20,10 @@ void Gamma::process(const Image &src, Image &dst)
      * B = pow(b', Gamma)
      * where R, G, B are in the interval [0, 1], therefore r' = r/maxValue;
      */
-    dst = Image(src.size(), src.globalMaxValue());
+    dst = Image(src.size());
     for (int y = 0; y < src.size().y; ++y)
         for (int x = 0; x < src.size().x; ++x)
         {
-
-            tools::RgbColor newColor(src.globalMaxValue());
             double r = src.at(x, y).getColorR();
             double g = src.at(x, y).getColorG();
             double b = src.at(x, y).getColorB();
@@ -45,9 +43,7 @@ void Gamma::process(const Image &src, Image &dst)
             G *= src.globalMaxValue();
             B *= src.globalMaxValue();
 
-            newColor.setColor(R, G, B);
-
-            dst.at(x, y) = newColor;
+            dst.at(x, y) = tools::RgbColor(R, G, B);
 
         }
 }

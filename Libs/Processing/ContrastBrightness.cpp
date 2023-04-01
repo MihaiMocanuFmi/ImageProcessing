@@ -17,7 +17,7 @@ void ContrastBrightness::process(const Image &src, Image &dst)
     //Let I(x,y) be a R^3 vector, where R, G, B represents the vector basis.
     //Therefore we can consider I(x, y) to have the following representation (r, g, b);
     //It follows that (r', g', b') = (a*r + β, a*g + β, a*b + β);
-    dst = Image(src.size(), src.globalMaxValue());
+    dst = Image(src.size());
     for (int y = 0; y < src.size().y; ++y)
         for (int x = 0; x < src.size().x; ++x)
             dst.at(x, y) = m_alpha * src.at(x, y) + m_beta;

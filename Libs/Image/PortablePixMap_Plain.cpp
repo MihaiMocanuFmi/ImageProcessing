@@ -174,7 +174,7 @@ bool PortablePixMap_Plain::m_findColorsP1Format(std::string &rPlainFile, ColorDa
     std::size_t startingPos;
     std::size_t endingPos = posNextWhiteSpace;
 
-    outColorMatrix = ColorData(m_size, m_maxValue);
+    outColorMatrix = ColorData(m_size);
     for (int y = 0; y < m_size.y; ++y)
     {
         for (int x = 0; x < m_size.x; ++x)
@@ -207,7 +207,7 @@ bool PortablePixMap_Plain::m_findColorsP2Format(std::string &rPlainFile, ColorDa
     std::size_t startingPos;
     std::size_t endingPos = posNextWhiteSpace;
 
-    outColorMatrix = ColorData(m_size, m_maxValue);
+    outColorMatrix = ColorData(m_size);
     for (int y = 0; y < m_size.y; ++y)
     {
         for (int x = 0; x < m_size.x; ++x)
@@ -242,7 +242,7 @@ bool PortablePixMap_Plain::m_findColorsP3Format(std::string &rPlainFile, ColorDa
     std::size_t endingPos = posNextWhiteSpace;
 
 
-    outColorMatrix = ColorData(m_size, m_maxValue);
+    outColorMatrix = ColorData(m_size);
     for (int y = 0; y < m_size.y; ++y)
     {
         for (int x = 0; x < m_size.x; ++x)
@@ -289,7 +289,7 @@ void PortablePixMap_Plain::cacheDataParameters(const ColorData &data)
     //We assume it's a PPM, (it has color after all)
     m_magicNumber = PPM_MAGIC_NUMBER;
     m_size = data.size();
-    m_maxValue = data.globalMaxValue();
+    m_maxValue = data.MAX_VALUE;
 }
 
 /*

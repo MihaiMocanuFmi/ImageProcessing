@@ -23,7 +23,6 @@ public:
     Image(int width, int height);
     Image(const ColorData &colorData);
     explicit Image(tools::Vector2I size);
-    Image(tools::Vector2I size, int globalMaxValue);
 
     bool load(std::string imagePath);
     bool save(std::string imagePath);

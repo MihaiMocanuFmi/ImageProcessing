@@ -10,48 +10,18 @@ namespace tools
 
     /////////////////////////PUBLIC////////////////////////////////////////////////////////////////////////////////////
 
-    RgbColor::RgbColor() : m_maxValue{std::numeric_limits<int>::max()}
+    RgbColor::RgbColor()
     {
 
         setColor(0,0,0);
-    }
-
-    RgbColor::RgbColor(int maxValue) : m_maxValue{maxValue}
-    {
-        setColor(0,0,0);
-    }
-
-    RgbColor::RgbColor(int maxValue, int R, int G, int B) : m_maxValue{maxValue}
-    {
-        setColor(R,G,B);
     }
 
     RgbColor::RgbColor(int R, int G, int B, bool overrideClamp)
-    : m_maxValue{std::numeric_limits<int>::max()}, overrideClamping(overrideClamp)
+    :overrideClamping(overrideClamp)
     {
         setColor(R, G, B);
     }
 
-
-
-    RgbColor::RgbColor(int maxValue, const RgbColor::Color &color)
-    : m_maxValue{maxValue}
-    {
-        setColor(color);
-    }
-
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    void RgbColor::setMaxValue(int maxValue)
-    {
-        m_maxValue = maxValue;
-        this->setColor(this->getColor());
-    }
-
-    int RgbColor::getMaxValue() const
-    {
-        return m_maxValue;
-    }
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -80,7 +50,7 @@ namespace tools
     void RgbColor::setColorR(int R)
     {
         if (not overrideClamping)
-            m_color.R = std::clamp<int>(R, 0, m_maxValue);
+            m_color.R = std::clamp<int>(R, 0, MAX_VALUE);
         else
             m_color.R = R;
     }
@@ -94,7 +64,7 @@ namespace tools
     void RgbColor::setColorG(int G)
     {
         if (not overrideClamping)
-            m_color.G = std::clamp<int>(G, 0, m_maxValue);
+            m_color.G = std::clamp<int>(G, 0, MAX_VALUE);
         else
             m_color.G = G;
     }
@@ -109,7 +79,7 @@ namespace tools
     void RgbColor::setColorB(int B)
     {
         if (not overrideClamping)
-            m_color.B = std::clamp<int>(B, 0, m_maxValue);
+            m_color.B = std::clamp<int>(B, 0, MAX_VALUE);
         else
             m_color.B = B;
     }
@@ -131,8 +101,7 @@ namespace tools
 
     RgbColor RgbColor::operator+(const RgbColor &other) const
     {
-        int maxValue = std::max(this->m_maxValue, other.m_maxValue);
-        RgbColor newColor(maxValue);
+        RgbColor newColor;
 
         bool override = this->overrideClamping or other.overrideClamping;
         newColor.overrideClamping = override;
@@ -146,8 +115,7 @@ namespace tools
 
     RgbColor RgbColor::operator-(const RgbColor &other) const
     {
-        int maxValue = this->m_maxValue;
-        RgbColor newColor(maxValue);
+        RgbColor newColor;
 
         bool override = this->overrideClamping or other.overrideClamping;
         newColor.overrideClamping = override;
@@ -161,8 +129,7 @@ namespace tools
 
     RgbColor RgbColor::operator*(const RgbColor &other)
     {
-        int maxValue = std::max(this->m_maxValue, other.m_maxValue);
-        RgbColor newColor(maxValue);
+        RgbColor newColor;
 
         bool override = this->overrideClamping or other.overrideClamping;
         newColor.overrideClamping = override;
@@ -176,8 +143,7 @@ namespace tools
 
     RgbColor operator+(float scalar, const RgbColor &colorMatrix)
     {
-        int maxValue = colorMatrix.m_maxValue;
-        RgbColor newColor(maxValue);
+        RgbColor newColor;
 
         newColor.overrideClamping =  colorMatrix.overrideClamping;
 
@@ -195,8 +161,7 @@ namespace tools
 
     RgbColor operator-(const RgbColor &colorMatrix, float scalar)
     {
-        int maxValue = colorMatrix.m_maxValue;
-        RgbColor newColor(maxValue);
+        RgbColor newColor;
 
         newColor.overrideClamping =  colorMatrix.overrideClamping;
 
@@ -210,8 +175,7 @@ namespace tools
 
     RgbColor operator*(float scalar, const RgbColor &colorMatrix)
     {
-        int maxValue = colorMatrix.m_maxValue;
-        RgbColor newColor(maxValue);
+        RgbColor newColor;
 
         newColor.overrideClamping =  colorMatrix.overrideClamping;
 

@@ -10,7 +10,7 @@ namespace tools
     class RgbColor
     {
     private:
-        int m_maxValue;
+
 
         struct Color
         {
@@ -22,19 +22,11 @@ namespace tools
         }m_color;
 
     public:
-        static constexpr int EIGHT_BIT = 255;
+        static constexpr int MAX_VALUE = 255;
         bool overrideClamping = false;
 
         RgbColor(); // sets color to {0,0,0} and m_maxValue to std::numeric_limits<int>::max();
-
-        RgbColor(int maxValue);
-        RgbColor(int maxValue, int R, int G, int B);
         RgbColor(int R, int G, int B, bool overrideClamp = false);
-        RgbColor(int maxValue, const Color &color);
-
-
-        void setMaxValue(int maxValue);
-        int getMaxValue() const;
 
 
         void setColor(int R, int G, int B);
