@@ -132,7 +132,7 @@ const tools::RgbColor &Image::at(int x, int y) const
 Image Image::zeros(int width, int height)
 {
     tools::Vector2I size = {width, height};
-    tools::RgbColor defaultColor = {0, 0, 0, 0};
+    tools::RgbColor defaultColor = {0, 0, 0};
     ColorData colorMatrix(size, defaultColor);
     return Image(colorMatrix);
 }
@@ -140,7 +140,7 @@ Image Image::zeros(int width, int height)
 Image Image::ones(int width, int height)
 {
     tools::Vector2I size = {width, height};
-    tools::RgbColor defaultColor = {1, 1, 1, 1};
+    tools::RgbColor defaultColor = {1, 1, 1};
     ColorData colorMatrix(size, defaultColor);
     return Image(colorMatrix);
 }

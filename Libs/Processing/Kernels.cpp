@@ -88,18 +88,15 @@ namespace Kernels
             {
                 /*
                 //Considering just for this example that outColorData.globalMaxValue() = 255;
-                //making the range [-255, 255]
-                outColorData.at(x, y) = (1.0f / 4) * outColorData.at(x, y);
-
-                //making the range [0, 2 * 255]
-                outColorData.at(x, y) = outColorData.globalMaxValue() + outColorData.at(x, y);
-
-                //making the range [0, 255]
-                outColorData.at(x, y) = (1.0f / 2) * outColorData.at(x, y);
+                //making the range from [-4 * 255, 4 * 255] into [-255, 255]
+                //then we make the range [0, 2 * 255]
+                //followed by making the range [0, 255]
                 */
                 //One line to decrease float approximation errors caused by casts back to int
-                tools::RgbColor color = (1.0f / 2) * ((1.0f / 4) * outColorData.at(x, y) + outColorData.MAX_VALUE);
-                outColorData.at(x, y) = color;
+                float R = (1.0f / 2) * ((1.0f / 4) * outColorData.at(x, y).getColorR() + outColorData.MAX_VALUE);
+                float G = (1.0f / 2) * ((1.0f / 4) * outColorData.at(x, y).getColorG() + outColorData.MAX_VALUE);
+                float B = (1.0f / 2) * ((1.0f / 4) * outColorData.at(x, y).getColorB() + outColorData.MAX_VALUE);
+                outColorData.at(x, y) = tools::RgbColor(R, G, B);
             }
         }
     }
@@ -130,17 +127,14 @@ namespace Kernels
                 /*
                 //Considering just for this example that outColorData.globalMaxValue() = 255;
                 //making the range from [-4 * 255, 4 * 255] into [-255, 255]
-                outColorData.at(x, y) = (1.0f / 4) * outColorData.at(x, y);
-
-                //making the range [0, 2 * 255]
-                outColorData.at(x, y) = outColorData.globalMaxValue() + outColorData.at(x, y);
-
-                //making the range [0, 255]
-                outColorData.at(x, y) = (1.0f / 2) * outColorData.at(x, y);
+                //then we make the range [0, 2 * 255]
+                //followed by making the range [0, 255]
                 */
                 //One line to decrease float approximation errors caused by casts back to int
-                tools::RgbColor color = (1.0f / 2) * ((1.0f / 4) * outColorData.at(x, y) + outColorData.MAX_VALUE);
-                outColorData.at(x, y) = color;
+                float R = (1.0f / 2) * ((1.0f / 4) * outColorData.at(x, y).getColorR() + outColorData.MAX_VALUE);
+                float G = (1.0f / 2) * ((1.0f / 4) * outColorData.at(x, y).getColorG() + outColorData.MAX_VALUE);
+                float B = (1.0f / 2) * ((1.0f / 4) * outColorData.at(x, y).getColorB() + outColorData.MAX_VALUE);
+                outColorData.at(x, y) = tools::RgbColor(R, G, B);
             }
         }
     }

@@ -188,7 +188,7 @@ bool PortablePixMap_Plain::m_findColorsP1Format(std::string &rPlainFile, ColorDa
             //scaling it to[0, tools::RgbColor::MAX_VALUE]
             colorValue = ((float)colorValue / m_maxValue) * tools::RgbColor::MAX_VALUE;
 
-            outColorMatrix.at(x,y) = tools::RgbColor(m_maxValue, colorValue, colorValue, colorValue);
+            outColorMatrix.at(x,y) = tools::RgbColor(colorValue, colorValue, colorValue);
         }
     }
 
@@ -223,7 +223,7 @@ bool PortablePixMap_Plain::m_findColorsP2Format(std::string &rPlainFile, ColorDa
             //scaling it to [0, tools::RgbColor::MAX_VALUE]
             colorValue = ((float)colorValue / m_maxValue) * tools::RgbColor::MAX_VALUE;
 
-            outColorMatrix.at(x,y) = tools::RgbColor(m_maxValue, colorValue, colorValue, colorValue);
+            outColorMatrix.at(x,y) = tools::RgbColor(colorValue, colorValue, colorValue);
 
         }
     }
@@ -267,7 +267,7 @@ bool PortablePixMap_Plain::m_findColorsP3Format(std::string &rPlainFile, ColorDa
             }
 
 
-            outColorMatrix.at(x, y) = tools::RgbColor(m_maxValue, colors[0] , colors[1] , colors[2]);
+            outColorMatrix.at(x, y) = tools::RgbColor(colors[0] , colors[1] , colors[2]);
         }
     }
 

@@ -25,7 +25,10 @@ tools::RgbColor Convolution::m_multiplyWithKernel(const ColorData &colorData, to
             else if(indexInColorData.y >= colorData.size().y)
                 indexInColorData.y = colorData.size().y - 1;
 
-            result = result + m_kernel.at(x, y) * colorData.at(indexInColorData);
+            float R = result.getColorR() + m_kernel.at(x, y).getColorR() * colorData.at(indexInColorData).getColorR();
+            float G = result.getColorG() + m_kernel.at(x, y).getColorG() * colorData.at(indexInColorData).getColorG();
+            float B = result.getColorB() + m_kernel.at(x, y).getColorB() * colorData.at(indexInColorData).getColorB();
+            result = tools::RgbColor(R, G, B, true);
         }
 
     }

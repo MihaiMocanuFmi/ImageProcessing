@@ -10,31 +10,24 @@ namespace tools
 
     /////////////////////////PUBLIC////////////////////////////////////////////////////////////////////////////////////
 
-    RgbColor::RgbColor()
+    RgbColor::RgbColor(int R, int G, int B, bool override)
     {
-
-        setColor(0,0,0);
-    }
-
-    RgbColor::RgbColor(int R, int G, int B, bool overrideClamp)
-    :overrideClamping(overrideClamp)
-    {
-        setColor(R, G, B);
+        setColor(R, G, B, override);
     }
 
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    void RgbColor::setColor(int R, int G, int B)
+    void RgbColor::setColor(int R, int G, int B, bool override)
     {
-        setColorR(R);
-        setColorG(G);
-        setColorB(B);
+        setColorR(R, override);
+        setColorG(G, override);
+        setColorB(B, override);
     }
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    void RgbColor::setColor(const RgbColor::Color &color)
+    void RgbColor::setColor(const RgbColor::Color &color, bool override)
     {
         setColorR(color.R);
         setColorG(color.G);
@@ -47,9 +40,9 @@ namespace tools
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    void RgbColor::setColorR(int R)
+    void RgbColor::setColorR(int R, bool override)
     {
-        if (not overrideClamping)
+        if (not override)
             m_color.R = std::clamp<int>(R, 0, MAX_VALUE);
         else
             m_color.R = R;
@@ -61,9 +54,9 @@ namespace tools
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    void RgbColor::setColorG(int G)
+    void RgbColor::setColorG(int G, bool override)
     {
-        if (not overrideClamping)
+        if (not override)
             m_color.G = std::clamp<int>(G, 0, MAX_VALUE);
         else
             m_color.G = G;
@@ -76,9 +69,9 @@ namespace tools
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    void RgbColor::setColorB(int B)
+    void RgbColor::setColorB(int B, bool override)
     {
-        if (not overrideClamping)
+        if (not override)
             m_color.B = std::clamp<int>(B, 0, MAX_VALUE);
         else
             m_color.B = B;
@@ -99,98 +92,78 @@ namespace tools
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    RgbColor RgbColor::operator+(const RgbColor &other) const
+    RgbColor RgbColor::add(const RgbColor &other, bool overrideClamp) const
     {
         RgbColor newColor;
 
-        bool override = this->overrideClamping or other.overrideClamping;
-        newColor.overrideClamping = override;
-
         newColor.setColor(this->getColorR() + other.getColorR(), this->getColorG() + other.getColorG(),
-                          this->getColorB() + other.getColorB());
+                          this->getColorB() + other.getColorB(), overrideClamp);
+        return newColor;
+    }
+
+    RgbColor RgbColor::subtract(const RgbColor &other, bool overrideClamp) const
+    {
+        RgbColor newColor;
+
+        newColor.setColor(this->getColorR() - other.getColorR(), this->getColorG() - other.getColorG(),
+                          this->getColorB() - other.getColorB(), overrideClamp);
+        return newColor;
+    }
+
+    RgbColor RgbColor::multiply(const RgbColor &other, bool overrideClamp) const
+    {
+        RgbColor newColor;
+
+        newColor.setColor(this->getColorR() * other.getColorR(), this->getColorG() * other.getColorG(),
+                          this->getColorB() * other.getColorB(), overrideClamp);
         return newColor;
     }
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+    RgbColor RgbColor::operator+(const RgbColor &other) const
+    {
+        return add(other);
+    }
 
     RgbColor RgbColor::operator-(const RgbColor &other) const
     {
-        RgbColor newColor;
-
-        bool override = this->overrideClamping or other.overrideClamping;
-        newColor.overrideClamping = override;
-
-        newColor.setColor(this->getColorR() - other.getColorR(), this->getColorG() - other.getColorG(),
-                          this->getColorB() - other.getColorB());
-        return newColor;
+        return subtract(other);
     }
 
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    RgbColor RgbColor::operator*(const RgbColor &other)
+    RgbColor RgbColor::operator*(const RgbColor &other) const
     {
-        RgbColor newColor;
-
-        bool override = this->overrideClamping or other.overrideClamping;
-        newColor.overrideClamping = override;
-
-        newColor.setColor(this->getColorR() * other.getColorR(), this->getColorG() * other.getColorG(),
-                          this->getColorB() * other.getColorB());
-        return newColor;
-    }
-
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    RgbColor operator+(float scalar, const RgbColor &colorMatrix)
-    {
-        RgbColor newColor;
-
-        newColor.overrideClamping =  colorMatrix.overrideClamping;
-
-        newColor.setColor(scalar + (float)colorMatrix.getColorR(), scalar + (float)colorMatrix.getColorG(),
-                          scalar + (float)colorMatrix.getColorB());
-        return newColor;
-    }
-
-    RgbColor operator+(const RgbColor &colorMatrix, float scalar)
-    {
-        return scalar + colorMatrix;
-    }
-
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    RgbColor operator-(const RgbColor &colorMatrix, float scalar)
-    {
-        RgbColor newColor;
-
-        newColor.overrideClamping =  colorMatrix.overrideClamping;
-
-        newColor.setColor((float)colorMatrix.getColorR() - scalar, (float)colorMatrix.getColorG() - scalar,
-                          (float)colorMatrix.getColorB() - scalar);
-        return newColor;
+        return multiply(other);
     }
 
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    RgbColor operator*(float scalar, const RgbColor &colorMatrix)
+    RgbColor operator+(float scalar, const RgbColor &color)
     {
-        RgbColor newColor;
-
-        newColor.overrideClamping =  colorMatrix.overrideClamping;
-
-        newColor.setColor(scalar * (float)colorMatrix.getColorR(), scalar * (float)colorMatrix.getColorG(),
-                          scalar * (float)colorMatrix.getColorB());
-        return newColor;
+        return add(scalar, color);
     }
 
-    RgbColor operator*(const RgbColor &colorMatrix, float scalar)
+    RgbColor operator+(const RgbColor &color, float scalar)
     {
-        return scalar * colorMatrix;
+        return add(scalar, color);
     }
 
+    RgbColor operator-(const RgbColor &color, float scalar)
+    {
+        return subtract(color, scalar);
+    }
 
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    RgbColor operator*(float scalar, const RgbColor &color)
+    {
+        return multiply(scalar, color);
+    }
+
+    RgbColor operator*(const RgbColor &color, float scalar)
+    {
+        return multiply(scalar, color);
+    }
 
 
 } // Tools
