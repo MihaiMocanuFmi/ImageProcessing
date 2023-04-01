@@ -1,6 +1,9 @@
 #ifndef VECTOR2_H
 #define VECTOR2_H
 
+#include <ostream>
+#include <istream>
+
 //Designed after the structure of SFML's Vector2
 //https://github.com/SFML/SFML
 
@@ -27,6 +30,20 @@ namespace tools
 
 
     };
+
+    template <typename T>
+    std::ostream &operator<<(std::ostream &left, const Vector2<T>& right)
+    {
+        left << '(' << right.x << ", " << right.y << ')';
+        return left;
+    }
+
+    template <typename T>
+    std::istream &operator>>(std::istream &left, Vector2<T>& right)
+    {
+        left >> right.x >> right.y;
+        return left;
+    }
 
 
     template <typename T>
