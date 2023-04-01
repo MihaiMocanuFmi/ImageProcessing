@@ -29,9 +29,9 @@ namespace tools
 
     void RgbColor::setColor(const RgbColor::Color &color, bool override)
     {
-        setColorR(color.R);
-        setColorG(color.G);
-        setColorB(color.B);
+        setColorR(color.R, override);
+        setColorG(color.G, override);
+        setColorB(color.B, override);
     }
     const RgbColor::Color &RgbColor::getColor() const
     {

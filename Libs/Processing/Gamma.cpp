@@ -29,9 +29,9 @@ void Gamma::process(const Image &src, Image &dst)
             double b = src.at(x, y).getColorB();
 
             //we convert r so that it is in the interval [0, 1]
-            r = r / src.globalMaxValue();
-            g = g / src.globalMaxValue();
-            b = b / src.globalMaxValue();
+            r = r / src.data().MAX_VALUE;
+            g = g / src.data().MAX_VALUE;
+            b = b / src.data().MAX_VALUE;
 
             //we raise every component to the power of gamma (they are still in [0, 1])
             double R = std::pow(r, 1/m_gamma);
@@ -39,9 +39,9 @@ void Gamma::process(const Image &src, Image &dst)
             double B = std::pow(b, 1/m_gamma);
 
             //we convert it back to the original range of [0, src.globalMaxValue()];
-            R *= src.globalMaxValue();
-            G *= src.globalMaxValue();
-            B *= src.globalMaxValue();
+            R *= src.data().MAX_VALUE;
+            G *= src.data().MAX_VALUE;
+            B *= src.data().MAX_VALUE;
 
             dst.at(x, y) = tools::RgbColor(R, G, B);
 
