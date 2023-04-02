@@ -114,6 +114,8 @@ TEST_CASE( "Rectangle", "[Rectangle]")
             Rectangle rectangleLocal2(5, 5, 10, 10);
             result = rectangleLocal1 & rectangleLocal2;
             REQUIRE(result == Rectangle(5, 5, 5, 5));
+            REQUIRE(result == (rectangleLocal2 & rectangleLocal1));
+
 
             Rectangle rectangleLocal3(5, 5, 10, 10);
             Rectangle rectangleLocal4(10, 10, 10, 10);
@@ -136,6 +138,45 @@ TEST_CASE( "Rectangle", "[Rectangle]")
             Rectangle rectangleLocal10(0, 4, 5, 5);
             result = rectangleLocal9 & rectangleLocal10;
             REQUIRE(result == Rectangle(0, 4, 5, 1));
+        }
+
+        SECTION("Union")
+        {
+            Rectangle result = rectangle1 | rectangle2;
+            REQUIRE(result == rectangle1);
+
+            Rectangle rectangleLocal1(0, 0, 10, 10);
+            Rectangle rectangleLocal2(5, 5, 10, 10);
+            result = rectangleLocal1 | rectangleLocal2;
+            REQUIRE(result == Rectangle(0, 0, 15, 15));
+            REQUIRE(result == (rectangleLocal2 | rectangleLocal1));
+
+            Rectangle rectangleLocal3(5, 5, 10, 10);
+            Rectangle rectangleLocal4(10, 10, 10, 10);
+            result = rectangleLocal3 | rectangleLocal4;
+            REQUIRE(result == Rectangle(5, 5, 15, 15));
+
+
+            Rectangle rectangleLocal5(5, 5, 10, 10);
+            Rectangle rectangleLocal6(10, 10, 100, 100);
+            result = rectangleLocal5 | rectangleLocal6;
+            REQUIRE(result == Rectangle(5, 5, 105, 105));
+
+
+            Rectangle rectangleLocal7(5, 5, 4, 4);
+            Rectangle rectangleLocal8(10, 10, 100, 100);
+            result = rectangleLocal7 | rectangleLocal8;
+            REQUIRE(result == Rectangle(5, 5, 105, 105));
+
+            Rectangle rectangleLocal9(0, 0, 5, 5);
+            Rectangle rectangleLocal10(0, 4, 5, 5);
+            result = rectangleLocal9 | rectangleLocal10;
+            REQUIRE(result == Rectangle(0, 0, 5, 9));
+
+            Rectangle rectangleLocal11(0, 0, 0, 0);
+            Rectangle rectangleLocal12(100, 100, 0, 0);
+            result = rectangleLocal11 | rectangleLocal12;
+            REQUIRE(result == Rectangle(0, 0, 100, 100));
         }
 
     }

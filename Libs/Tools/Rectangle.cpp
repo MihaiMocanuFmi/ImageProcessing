@@ -132,7 +132,7 @@ namespace tools
     Rectangle Rectangle::operator|(const Rectangle &right) const
     {
         Vector2I coords[4] = {this->upperLeftCorner, this->findLowerRight(),right.upperLeftCorner,
-                              this->findLowerRight()};
+                              right.findLowerRight()};
         std::sort(coords, coords + 4, m_sortPointsComparisonX);
 
         Vector2I upperLeftCorner;
