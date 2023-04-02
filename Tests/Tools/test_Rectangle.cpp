@@ -125,6 +125,17 @@ TEST_CASE( "Rectangle", "[Rectangle]")
             Rectangle rectangleLocal6(10, 10, 100, 100);
             result = rectangleLocal5 & rectangleLocal6;
             REQUIRE(result == Rectangle(10, 10, 5, 5));
+
+
+            Rectangle rectangleLocal7(5, 5, 4, 4);
+            Rectangle rectangleLocal8(10, 10, 100, 100);
+            result = rectangleLocal7 & rectangleLocal8;
+            REQUIRE(result == Rectangle(-1, -1, -1, -1));
+
+            Rectangle rectangleLocal9(0, 0, 5, 5);
+            Rectangle rectangleLocal10(0, 4, 5, 5);
+            result = rectangleLocal9 & rectangleLocal10;
+            REQUIRE(result == Rectangle(0, 4, 5, 1));
         }
 
     }

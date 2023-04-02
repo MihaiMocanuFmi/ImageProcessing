@@ -115,35 +115,18 @@ namespace tools
 
     Rectangle Rectangle::operator&(const Rectangle &right) const
     {
-        Vector2F centerLeft = Vector2F(this->upperLeftCorner) + Vector2F(this->size)/2.0f;
-        Vector2F centerRight =  Vector2F(right.upperLeftCorner) +  Vector2F(right.size)/2.0f;
-        Vector2F centerCombined = (centerLeft + centerRight)/2.0f;
-
         Vector2I coords[4] = {this->upperLeftCorner, this->findLowerRight(),right.upperLeftCorner,
                                right.findLowerRight()};
         std::sort(coords, coords + 4, m_sortPointsComparisonX);
 
-        //After sorting, the intersection point will be given by a point that doesn't represent a boundary
-        //for the other points. In other words, a point inside the boundary
-        //we take the point [1], but we could also take [2]
-        Vector2I intersectionPoint(coords[1]);
 
-        if (isContainedInside(intersectionPoint, right))
-        {
-            Vector2F halfDistance = Vector2F(intersectionPoint) - centerCombined;
-            //absolute value
-            if (halfDistance.x < 0)
-                halfDistance.x *= -1;
-            if (halfDistance.y < 0)
-                halfDistance.y *= -1;
+        Vector2I intersection1(coords[1]);
+        Vector2I intersection2(coords[2]);
 
-            Vector2I size = Vector2I(halfDistance * 2.0f);
-            Vector2I upperLeft = Vector2I(centerCombined - halfDistance);
-            return Rectangle(upperLeft, size);
-        }
-        else
-            return Rectangle(Vector2I(centerCombined), {-1, -1});
-
+       if (isContainedInside(intersection1, *this) and isContainedInside(intersection1, right))
+           return Rectangle(Point(intersection1), Point(intersection2));
+       else
+           return Rectangle(-1, -1, -1, -1);
     }
 
     Rectangle Rectangle::operator|(const Rectangle &right) const
