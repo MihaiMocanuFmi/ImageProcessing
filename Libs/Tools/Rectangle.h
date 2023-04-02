@@ -2,6 +2,7 @@
 #define RECTANGLE_H
 
 #include "Vector2.h"
+#include "Point.h"
 
 namespace tools
 {
@@ -21,7 +22,7 @@ namespace tools
 
         Rectangle() = default;
         Rectangle(const Vector2I &aUpperLeftCorner, const Vector2I &aSize);
-        //Rectangle(const Vector2I &aUpperLeftCorner,  const Vector2I &aLowerRightCorner);
+        Rectangle(const Point &aUpperLeftCorner,  const Point &aLowerRightCorner);
 
         Rectangle(int x, int y, int width, int height);
 

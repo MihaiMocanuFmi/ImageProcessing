@@ -17,13 +17,13 @@ namespace tools
     {
 
     }
-    /*
-    Rectangle::Rectangle(const Vector2I &aUpperLeftCorner, const Vector2I &aLowerRightCorner)
+
+    Rectangle::Rectangle(const Point &aUpperLeftCorner, const Point &aLowerRightCorner)
         : upperLeftCorner{aUpperLeftCorner}, size{findSize(aUpperLeftCorner, aLowerRightCorner)}
     {
 
     }
-    */
+
     Rectangle::Rectangle(int x, int y, int width, int height)
         : upperLeftCorner{x, y}, size{width, height}
     {
