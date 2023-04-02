@@ -307,12 +307,6 @@ void PortablePixMap_Plain::cacheDataParameters(const ColorData &data)
 ///*****************************************PUBLIC**********************************************************************
 ///*********************************************************************************************************************
 
-
-
-PortablePixMap_Plain::PortablePixMap_Plain() : m_size{0,0}, m_maxValue{0}
-{
-}
-
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 bool PortablePixMap_Plain::loadPlain(std::string plainFile, ColorData &outData)

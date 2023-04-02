@@ -41,10 +41,12 @@ public:
     tools::RgbColor* row(int y);
 
     const tools::Vector2I& size() const;
-    int globalMaxValue() const;
 
 
     friend std::ostream& operator<<(std::ostream& os, const ColorData& dt);
+
+    bool operator==(const ColorData& other) const;
+    bool operator!=(const ColorData& other) const;
 
     ColorData operator+(const ColorData &other);
     ColorData operator-(const ColorData &other);

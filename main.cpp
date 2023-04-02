@@ -32,7 +32,7 @@ int main()
             std::cout << "Error on save";
 
 
-        Image composition = (1/ 1.0f) * verticalImage + (1/ 2.0f) * horizontal;
+        Image composition = (1/ 2.0f) * verticalImage + (1/ 2.0f) * horizontal;
         if(not composition.save("02_composition.ppm"))
             std::cout << "Error on save";
 

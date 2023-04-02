@@ -2,21 +2,6 @@
 
 #include <stdexcept>
 #include <iomanip>
-#include <limits>
-
-/*
-tools::RgbColor ColorData::m_rescaleColorValue(const tools::RgbColor &color, int wantedMaxValue)
-{
-    int actualMaxValue = color.getMaxValue();
-    tools::RgbColor scaledColor(wantedMaxValue);
-    float R =  ((float)color.getColorR() / actualMaxValue) * wantedMaxValue;
-    float G =  ((float)color.getColorG() / actualMaxValue) * wantedMaxValue;
-    float B =  ((float)color.getColorB() / actualMaxValue) * wantedMaxValue;
-    scaledColor.setColor(R, G, B);
-    scaledColor.setMaxValue(wantedMaxValue);
-    return scaledColor;
-}
-*/
 
 /////////////////////////PRIVATE///////////////////////////////////////////////////////////////////////////////////
 
@@ -95,14 +80,14 @@ void ColorData::resize(const tools::Vector2I &newSize)
     if(m_size.x * m_size.y < newSize.x * newSize.y)
     {
         tools::RgbColor *newMatrix = new tools::RgbColor[newSize.y * newSize.x];
-        for (int i = 0; i < m_size.x * m_size.y; ++i)
-            newMatrix[i] = m_matrix[i];
+        for (int y = 0; y < m_size.y; ++y)
+            for (int x = 0; x < m_size.x; ++x)
+                newMatrix[newSize.x * y + x] = m_matrix[m_size.x * y + x];
 
         delete[] m_matrix;
+        m_size = newSize;
         m_matrix = newMatrix;
     }
-
-    m_size = newSize;
 }
 
 void ColorData::resize(const tools::Vector2I &newSize, const tools::RgbColor &defaultValue)
@@ -120,8 +105,7 @@ void ColorData::resize(const tools::Vector2I &newSize, const tools::RgbColor &de
 
 bool ColorData::getROI(ColorData &roiColorData, tools::Rectangle roiRect)
 {
-    if (not tools::Rectangle::isContainedInside(roiRect,tools::Rectangle({0, 0},
-                                                                                    m_size)))
+    if (not tools::Rectangle::isContainedInside(roiRect,tools::Rectangle({0, 0},m_size)))
         return false;
 
     roiColorData = ColorData(roiRect.size);
@@ -197,6 +181,25 @@ std::ostream &operator<<(std::ostream &os, const ColorData &dt)
         os << '\n';
     }
     return os;
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+bool ColorData::operator==(const ColorData &other) const
+{
+    if (this->m_size != other.m_size)
+        return false;
+
+    for (int y = 0; y < other.m_size.y; ++y)
+        for (int x = 0; x < other.m_size.x; ++x)
+            if (this->at(x, y) != other.at(x, y))
+                return false;
+    return true;
+}
+
+bool ColorData::operator!=(const ColorData &other) const
+{
+    return not (*this == other);
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////

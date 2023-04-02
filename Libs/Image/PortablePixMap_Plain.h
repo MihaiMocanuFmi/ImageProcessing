@@ -12,9 +12,9 @@
 class PortablePixMap_Plain
 {
 private:
-    std::string m_magicNumber;
-    tools::Vector2I m_size;
-    int m_maxValue;
+    std::string m_magicNumber = "";
+    tools::Vector2I m_size = {0, 0};
+    int m_maxValue = 0;
 
 
     /*
@@ -74,7 +74,7 @@ public:
     static constexpr char PBM_MAGIC_NUMBER[] = "P1";
 
 
-    PortablePixMap_Plain();
+    PortablePixMap_Plain() = default;
 
     /* It's backwards compatible with PGM and PBM files,
      * We make the following assumptions after ignoring all comments:
