@@ -7,24 +7,27 @@
 namespace tools
 {
 
+    class Color
+    {
+    public:
+        int R = 0;
+        int G = 0;
+        int B = 0;
+        Color() = default;
+        Color(int r, int g, int b);
+
+        bool operator==(const Color &other) const;
+        bool operator!=(const Color &other) const;
+    };
     class RgbColor
     {
     private:
-
-
-        struct Color
-        {
-            //They cannot be unsigned because:
-            //{10,10,10} - {20, 20, 20} should be {0,0,0}, not maxValue^3 after clamping
-            int R = 0;
-            int G = 0;
-            int B = 0;
-        }m_color;
-
+         Color m_color;
     public:
         static constexpr int MAX_VALUE = 255;
 
         RgbColor() = default; // sets color to {0,0,0} and m_maxValue to std::numeric_limits<int>::max();
+        RgbColor(Color color, bool override = false);
         RgbColor(int R, int G, int B, bool override = false);
 
 
@@ -43,6 +46,9 @@ namespace tools
         int getColorB() const;
 
         friend std::ostream& operator<<(std::ostream& os, const RgbColor& dt);
+
+        bool operator==(const RgbColor &other) const;
+        bool operator!=(const RgbColor &other) const;
 
         RgbColor add(const RgbColor &other, bool overrideClamp = false) const;
         RgbColor subtract(const RgbColor &other, bool overrideClamp = false) const;

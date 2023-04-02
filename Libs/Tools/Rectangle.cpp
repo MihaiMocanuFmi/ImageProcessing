@@ -9,7 +9,7 @@ namespace tools
 {
     Vector2I Rectangle::findSize(const Vector2I &upperLeftCorner, const Vector2I &lowerRightCorner)
     {
-        return upperLeftCorner - lowerRightCorner;
+        return lowerRightCorner - upperLeftCorner;
     }
 
     Rectangle::Rectangle(const Vector2I &aUpperLeftCorner, const Vector2I &aSize)
@@ -64,6 +64,16 @@ namespace tools
         return result;
     }
 
+    bool Rectangle::operator==(const Rectangle &right) const
+    {
+        return this->upperLeftCorner == right.upperLeftCorner and this->size == right.size;
+    }
+
+    bool Rectangle::operator!=(const Rectangle &right) const
+    {
+        return not(*this == right);
+    }
+
     std::ostream &operator<<(std::ostream &left, const Rectangle &right)
     {
         left << '(' << right.upperLeftCorner << ", " << right.size << ')';
@@ -92,29 +102,25 @@ namespace tools
     }
 
 
-    int m_sortPointsComparisonX(const Vector2I &a, const Vector2I &b)
+    bool m_sortPointsComparisonX(const Vector2I &a, const Vector2I &b)
     {
-        if (a.x <  b.x) return -1;
-        if ( a.x == b.x ) return 0;
-        if ( a.x >  b.x ) return 1;
-        return 0;
+        return (a.x <  b.x);
+
     }
-    int m_sortPointsComparisonY(const Vector2I &a, const Vector2I &b)
+    bool m_sortPointsComparisonY(const Vector2I &a, const Vector2I &b)
     {
-        if (a.y <  b.y) return -1;
-        if ( a.y == b.y ) return 0;
-        if ( a.y >  b.y ) return 1;
-        return 0;
+        return (a.y <  b.y);
     }
 
-    Rectangle Rectangle::operator&(const Rectangle &right)
+
+    Rectangle Rectangle::operator&(const Rectangle &right) const
     {
-        Vector2I centerLeft = this->upperLeftCorner + this->size/2;
-        Vector2I centerRight = right.upperLeftCorner + right.size/2;
-        Vector2I centerCombined = (centerLeft + centerRight)/2;
+        Vector2F centerLeft = Vector2F(this->upperLeftCorner) + Vector2F(this->size)/2.0f;
+        Vector2F centerRight =  Vector2F(right.upperLeftCorner) +  Vector2F(right.size)/2.0f;
+        Vector2F centerCombined = (centerLeft + centerRight)/2.0f;
 
         Vector2I coords[4] = {this->upperLeftCorner, this->findLowerRight(),right.upperLeftCorner,
-                               this->findLowerRight()};
+                               right.findLowerRight()};
         std::sort(coords, coords + 4, m_sortPointsComparisonX);
 
         //After sorting, the intersection point will be given by a point that doesn't represent a boundary
@@ -124,23 +130,23 @@ namespace tools
 
         if (isContainedInside(intersectionPoint, right))
         {
-            Vector2I halfDistance = intersectionPoint - centerCombined;
+            Vector2F halfDistance = Vector2F(intersectionPoint) - centerCombined;
             //absolute value
             if (halfDistance.x < 0)
                 halfDistance.x *= -1;
             if (halfDistance.y < 0)
                 halfDistance.y *= -1;
 
-            Vector2I size = halfDistance * 2;
-
-            return Rectangle(centerCombined - halfDistance, size);
+            Vector2I size = Vector2I(halfDistance * 2.0f);
+            Vector2I upperLeft = Vector2I(centerCombined - halfDistance);
+            return Rectangle(upperLeft, size);
         }
         else
-            return Rectangle(centerCombined, {-1, -1});
+            return Rectangle(Vector2I(centerCombined), {-1, -1});
 
     }
 
-    Rectangle Rectangle::operator|(const Rectangle &right)
+    Rectangle Rectangle::operator|(const Rectangle &right) const
     {
         Vector2I coords[4] = {this->upperLeftCorner, this->findLowerRight(),right.upperLeftCorner,
                               this->findLowerRight()};
@@ -157,6 +163,7 @@ namespace tools
 
         return Rectangle(upperLeftCorner, size);
     }
+
 
 
 } // Tools

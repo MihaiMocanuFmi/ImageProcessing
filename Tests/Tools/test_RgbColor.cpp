@@ -2,190 +2,229 @@
 
 #include "../Libs/Tools/RgbColor.h"
 
-using namespace tools;
 
-TEST_CASE( "RgbColor Creation", "[RgbColor]")
+
+TEST_CASE( "Color", "[Color]")
 {
-    RgbColor color0;
-    REQUIRE((color0.getColorR() == 0 and color0.getColorG() == 0 and color0.getColorB() == 0));
-    REQUIRE(color0.getMaxValue() == std::numeric_limits<int>::max());
-
-    RgbColor color1({255, 127, 63});
-    REQUIRE((color1.getColorR() == 255 and color1.getColorG() == 127 and color1.getColorB() == 63));
-    REQUIRE(color1.getMaxValue() == std::numeric_limits<int>::max());
-
-    RgbColor color2(255);
-    REQUIRE((color2.getColorR() == 0 and color2.getColorG() == 0 and color2.getColorB() == 0));
-    REQUIRE(color2.getMaxValue() == 255);
-
-    RgbColor color3(255, {255, 127, 63});
-    REQUIRE((color3.getColorR() == 255 and color3.getColorG() == 127 and color3.getColorB() == 63));
-    REQUIRE(color3.getMaxValue() == 255);
-
-    RgbColor color4(255, 255, 127, 63);
-    REQUIRE((color4.getColorR() == 255 and color4.getColorG() == 127 and color4.getColorB() == 63));
-    REQUIRE(color4.getMaxValue() == 255);
-
-    RgbColor implicitConversion(color1);
-    REQUIRE((implicitConversion.getColorR() == 255 and implicitConversion.getColorG() == 127
-            and implicitConversion.getColorB() == 63));
-    REQUIRE(implicitConversion.getMaxValue() == std::numeric_limits<int>::max());
-
-}
-
-TEST_CASE( "RgbColor Setters", "[RgbColor]")
-{
-    RgbColor color0;
-    color0.setMaxValue(125);
-    REQUIRE(color0.getMaxValue() == 125);
-
-    color0.setColor({100, 50, 25});
-    REQUIRE((color0.getColorR() == 100 and color0.getColorG() == 50 and color0.getColorB() == 25));
-
-    color0.setColor({125, 125, 125});
-    REQUIRE((color0.getColorR() == 125 and color0.getColorG() == 125 and color0.getColorB() == 125));
-
-    //checking clamping when smaller
-    color0.setColor({-126, -126, -126});
-    REQUIRE((color0.getColorR() == 0 and color0.getColorG() == 0 and color0.getColorB() == 0));
-
-    //checking clamping when bigger
-    color0.setColor({126, 126, 126});
-    REQUIRE((color0.getColorR() == 125 and color0.getColorG() == 125 and color0.getColorB() == 125));
-
-    //setting maxValue to a smaller value should reclamp color values
-    color0.setMaxValue(50);
-    REQUIRE((color0.getColorR() == 50 and color0.getColorG() == 50 and color0.getColorB() == 50));
-
-
-    //checking the component overload of setColor
-    color0.setColor(40, 40, 40);
-    REQUIRE((color0.getColorR() == 40 and color0.getColorG() == 40 and color0.getColorB() == 40));
-}
-
-TEST_CASE( "RgbColor Operators", "[RgbColor]")
-{
-    RgbColor color1(255, {200, 202, 204});
-    RgbColor color2(127, {100, 101, 102});
-    RgbColor color3(127, {0, 1, 2});
-
-    SECTION( "Addition")
+    using namespace tools;
+    SECTION("Creation")
     {
-        RgbColor temp = color1 + color2;
-        REQUIRE(temp.getMaxValue() == 255);
-        REQUIRE((temp.getColorR() == 255 and temp.getColorG() == 255 and temp.getColorB() == 255));
+        Color color;
+        REQUIRE((color.R == 0 and color.G == 0 and color.B == 0));
 
-        temp = color2 + color3;
-        REQUIRE(temp.getMaxValue() == 127);
-        REQUIRE((temp.getColorR() == 100 and temp.getColorG() == 102 and temp.getColorB() == 104));
+        color = Color(100, 500, -100);
+        REQUIRE((color.R == 100 and color.G == 500 and color.B == -100));
     }
 
-    SECTION( "Scalar addition")
+    SECTION("Operators")
     {
-        RgbColor temp = color1 + 25;
-        REQUIRE(temp.getMaxValue() == 255);
-        REQUIRE((temp.getColorR() == 225 and temp.getColorG() == 227 and temp.getColorB() == 229));
+        Color color1(100, 200, 300);
+        Color color2(100, 200, 300);
+        Color color3(1, 2, 3);
 
-        //checking commutativity;
-        temp = 25 + color1;
-        REQUIRE(temp.getMaxValue() == 255);
-        REQUIRE((temp.getColorR() == 225 and temp.getColorG() == 227 and temp.getColorB() == 229));
+        REQUIRE((color1 == color2));
+        REQUIRE((color1 != color3));
+    }
+}
+
+TEST_CASE("RgbColor", "[Color]")
+{
+    using namespace tools;
+    SECTION("Creation")
+    {
+        RgbColor color0;
+        REQUIRE((color0.getColorR() == 0 and color0.getColorG() == 0 and color0.getColorB() == 0));
+        REQUIRE(color0.MAX_VALUE == 255);
+
+        RgbColor color1(255, 127, 63);
+        REQUIRE((color1.getColorR() == 255 and color1.getColorG() == 127 and color1.getColorB() == 63));
+
+        RgbColor color2(400, 500, -100);
+        REQUIRE((color2.getColorR() == 255 and color2.getColorG() == 255 and color2.getColorB() == 0));
+
+        RgbColor color3(400, 500, -100, true);
+        REQUIRE((color3.getColorR() == 400 and color3.getColorG() == 500 and color3.getColorB() == -100));
+
+        REQUIRE(color3.getColor() == Color(400, 500, -100));
+
+        RgbColor color4(Color(400, 500, -100), true);
+        REQUIRE((color4.getColorR() == 400 and color4.getColorG() == 500 and color4.getColorB() == -100));
+
+        RgbColor color5(Color(255, 127, 63));
+        REQUIRE((color5.getColorR() == 255 and color5.getColorG() == 127 and color5.getColorB() == 63));
+
+    }
+
+    SECTION("Setters")
+    {
+        RgbColor color0;
+
+        color0.setColor(100, 50, 25);
+        REQUIRE((color0.getColorR() == 100 and color0.getColorG() == 50 and color0.getColorB() == 25));
+
+        color0.setColor({125, 125, 125});
+        REQUIRE((color0.getColorR() == 125 and color0.getColorG() == 125 and color0.getColorB() == 125));
 
         //checking clamping
-        temp = color1 + 100;
-        REQUIRE(temp.getMaxValue() == 255);
-        REQUIRE((temp.getColorR() == 255 and temp.getColorG() == 255 and temp.getColorB() == 255));
+        color0.setColor(400, 500, -100);
+        REQUIRE((color0.getColorR() == 255 and color0.getColorG() == 255 and color0.getColorB() == 0));
 
-        //checking commutativity;
-        temp = 100 + color1;
-        REQUIRE(temp.getMaxValue() == 255);
-        REQUIRE((temp.getColorR() == 255 and temp.getColorG() == 255 and temp.getColorB() == 255));
+        //checking clamping override
+        color0.setColor(400, 500, -100, true);
+        REQUIRE((color0.getColorR() == 400 and color0.getColorG() == 500 and color0.getColorB() == -100));
 
-        //checking float behaviour;
-        temp = color1 + 25.9;
-        REQUIRE(temp.getMaxValue() == 255);
-        REQUIRE((temp.getColorR() == 225 and temp.getColorG() == 227 and temp.getColorB() == 229));
+
     }
 
-    SECTION( "Subtract")
+    SECTION("Operators")
     {
-        RgbColor temp = color1 - color2;
-        REQUIRE(temp.getMaxValue() == 255);
-        REQUIRE((temp.getColorR() == 100 and temp.getColorG() == 101 and temp.getColorB() == 102));
+        RgbColor color1(200, 202, 204);
+        RgbColor color2(100, 101, 102);
+        RgbColor color3(0, 1, 2);
+        RgbColor color4(-100, -101, -402, true);
 
-        temp = color2 - color3;
-        REQUIRE(temp.getMaxValue() == 127);
-        REQUIRE((temp.getColorR() == 100 and temp.getColorG() == 100 and temp.getColorB() == 100));
+        SECTION("Comparison")
+        {
+            RgbColor colorTemp(100, 101, 102);
+            REQUIRE((color2 == colorTemp));
 
-        temp = color3 - color2;
-        REQUIRE(temp.getMaxValue() == 127);
-        REQUIRE((temp.getColorR() == 0 and temp.getColorG() == 0 and temp.getColorB() == 0));
-    }
+            REQUIRE((color1 == color1));
 
-    SECTION( "Scalar Subtract")
-    {
-        RgbColor temp = color1 - 25;
-        REQUIRE(temp.getMaxValue() == 255);
-        REQUIRE((temp.getColorR() == 200 - 25 and temp.getColorG() == 202 - 25 and temp.getColorB() == 204 - 25));
+            REQUIRE((color1 != color2));
 
-        //checking clamping
-        temp = color1 - 201;
-        REQUIRE(temp.getMaxValue() == 255);
-        REQUIRE((temp.getColorR() == 0 and temp.getColorG() == 1 and temp.getColorB() == 3));
+        }
 
-        //checking float behaviour;
-        temp = color1 - 0.5;
-        REQUIRE(temp.getMaxValue() == 255);
-        REQUIRE((temp.getColorR() == 199 and temp.getColorG() == 201 and temp.getColorB() == 203));
-    }
+        SECTION("Addition")
+        {
+            RgbColor result = color1 + color2;
+            REQUIRE(result.getColor() == Color(255, 255, 255));
+            result = color2 + color1;
+            REQUIRE(result.getColor() == Color(255, 255, 255));
 
-    SECTION( "Multiply")
-    {
-        RgbColor temp = color1 * color2;
-        REQUIRE(temp.getMaxValue() == 255);
-        REQUIRE((temp.getColorR() == 255 and temp.getColorG() == 255 and temp.getColorB() == 255));
+            result = color1.add(color2, true);
+            REQUIRE(result.getColor() == Color(300, 303, 306));
 
-        temp = color1 * color3;
-        REQUIRE(temp.getMaxValue() == 255);
-        REQUIRE((temp.getColorR() == 0 and temp.getColorG() == 202 and temp.getColorB() == 255));
+            result = color2.add(color1, true);
+            REQUIRE(result.getColor() == Color(300, 303, 306));
 
-        temp = color2 * color3;
-        REQUIRE(temp.getMaxValue() == 127);
-        REQUIRE((temp.getColorR() == 0 and temp.getColorG() == 101 and temp.getColorB() == 127));
-    }
+            result = color1 + color3;
+            REQUIRE(result.getColor() == Color(200, 203, 206));
 
-    SECTION( "Scalar multiplication")
-    {
-        RgbColor temp = color1 * 0.5;
-        REQUIRE(temp.getMaxValue() == 255);
-        REQUIRE((temp.getColorR() == 100 and temp.getColorG() == 101 and temp.getColorB() == 102));
+            result = color1 + color4;
+            REQUIRE(result.getColor() == Color(100, 101, 0));
 
-        //checking commutativity;
-        temp = 0.5 * color1;
-        REQUIRE(temp.getMaxValue() == 255);
-        REQUIRE((temp.getColorR() == 100 and temp.getColorG() == 101 and temp.getColorB() == 102));
+            result = color3 + color4;
+            REQUIRE(result.getColor() == Color(0, 0, 0));
+        }
 
-        //checking upper clamping
-        temp = color1 * 100;
-        REQUIRE(temp.getMaxValue() == 255);
-        REQUIRE((temp.getColorR() == 255 and temp.getColorG() == 255 and temp.getColorB() == 255));
+        SECTION("Scalar addition")
+        {
+            float scalar = 40;
+            RgbColor result = color1 + scalar;
+            REQUIRE(result == RgbColor(240, 242, 244));
+            REQUIRE((color1 + scalar == scalar + color1));
 
-        //checking commutativity;
-        temp = 100 * color1;
-        REQUIRE(temp.getMaxValue() == 255);
-        REQUIRE((temp.getColorR() == 255 and temp.getColorG() == 255 and temp.getColorB() == 255));
+            scalar = 100;
+            result = color1 + scalar;
+            REQUIRE(result == RgbColor(255, 255, 255));
+            REQUIRE((color1 + scalar == scalar + color1));
 
-        //checking lower clamping behaviour;
-        temp = color1 * -1;
-        REQUIRE(temp.getMaxValue() == 255);
-        REQUIRE((temp.getColorR() == 0 and temp.getColorG() == 0 and temp.getColorB() == 0));
-    }
+            result = add(scalar, color1, true);
+            REQUIRE(result == RgbColor(300, 302, 304, true));
 
-    SECTION("ostream")
-    {
-        std::stringstream strStream;
-        strStream << color1;
-        REQUIRE( strStream.str() == "(200, 202, 204)");
+            scalar = -100;
+            result = color1 + scalar;
+            REQUIRE(result == RgbColor(100, 102, 104));
+            REQUIRE((color1 + scalar == scalar + color1));
+
+            scalar = -300;
+            result = color1 + scalar;
+            REQUIRE(result == RgbColor(0, 0, 0));
+            REQUIRE((color1 + scalar == scalar + color1));
+        }
+
+        SECTION("Subtract")
+        {
+            RgbColor result = color1 - color2;
+            REQUIRE((result == RgbColor(100, 101, 102)));
+
+
+            result = color2 - color1;
+            REQUIRE((result == RgbColor(0, 0, 0)));
+
+            result = color2.subtract(color1, true);
+            REQUIRE((result == RgbColor(-100, -101, -102, true)));
+        }
+
+        SECTION("Scalar Subtract")
+        {
+            float scalar = 100;
+            RgbColor result = color1 - scalar;
+            REQUIRE(result == RgbColor(100, 102, 104));
+
+            scalar = 300;
+            result = color1 - scalar;
+            REQUIRE(result == RgbColor(0, 0, 0));
+
+            result = subtract(color1, scalar, true);
+            REQUIRE(result == RgbColor(-100, -98, -96, true));
+
+            scalar = -100;
+            result = color1 - scalar;
+            REQUIRE(result == RgbColor(255, 255, 255));
+
+            scalar = -40;
+            result = color1 - scalar;
+            REQUIRE(result == RgbColor(240, 242, 244));
+        }
+
+        SECTION("Multiply")
+        {
+            RgbColor result = color1 * color3;
+            REQUIRE(result == RgbColor(0, 202, 255));
+            result = color3 * color1;
+            REQUIRE(result == RgbColor(0, 202, 255));
+
+            result = color1 * color4;
+            REQUIRE(result == RgbColor(0, 0, 0));
+
+            result = color1.multiply(color4, true);
+            REQUIRE(result == RgbColor(200 * (-100), 202 * -(101), 204 * (-402), true));
+        }
+
+        SECTION("Scalar multiplication")
+        {
+            float scalar = 1.0f / 2;
+            RgbColor result = color1 * scalar;
+            REQUIRE(result == RgbColor(100, 101, 102));
+            REQUIRE((color1 * scalar == scalar * color1));
+
+            scalar = 100;
+            result = color1 * scalar;
+            REQUIRE(result == RgbColor(255, 255, 255));
+            REQUIRE((color1 * scalar == scalar + color1));
+
+            result = multiply(scalar, color1, true);
+            REQUIRE(result == RgbColor(20000, 20200, 20400, true));
+
+            scalar = -100;
+            result = color1 * scalar;
+            REQUIRE(result == RgbColor(0, 0, 0));
+            REQUIRE((color1 * scalar == scalar * color1));
+
+            scalar = 2;
+            result = color3 * scalar;
+            REQUIRE(result == RgbColor(0, 2, 4));
+            REQUIRE((color3 * scalar == scalar * color3));
+
+        }
+
+        SECTION("Stream insertion")
+        {
+            std::stringstream strStream;
+            strStream << color1;
+            REQUIRE(strStream.str() == "(200, 202, 204)");
+        }
+
     }
 }
-

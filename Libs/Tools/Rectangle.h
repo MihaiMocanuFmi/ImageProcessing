@@ -6,9 +6,6 @@
 
 namespace tools
 {
-
-    int m_sortPointsComparisonX(const Vector2I &a, const Vector2I &b);
-    int m_sortPointsComparisonY(const Vector2I &a, const Vector2I &b);
     //TODO: change to template;
     class Rectangle
     {
@@ -34,6 +31,9 @@ namespace tools
         static bool isContainedInside(const Vector2I &dot, const Rectangle &rectangle);
         static bool isContainedInside(const Rectangle &inner, const Rectangle &outer);
 
+        bool operator==(const Rectangle &right) const;
+        bool operator!=(const Rectangle &right) const;
+
         friend std::ostream &operator<<(std::ostream &left, const Rectangle &right);
         friend std::istream &operator>>(std::istream &left, Rectangle &right);
 
@@ -44,10 +44,10 @@ namespace tools
 
 
         //intersection between 2 rectangles, gives a rectangle of size < 0 if intersection would be empty set
-        Rectangle operator&(const Rectangle &right);
+        Rectangle operator&(const Rectangle &right) const;
 
         //computes union between 2 rectangles, It actually finds the smallest rectangle which covers both
-        Rectangle operator|(const Rectangle &right);
+        Rectangle operator|(const Rectangle &right) const;
 
     };
 
