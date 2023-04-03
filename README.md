@@ -10,11 +10,12 @@ This app is an image processing application that can process plain ppm, pgm or p
   * Horizontal Sobel
   * Vertical Sobel
 * Cropping.
-* Basic drawing. (soon)
+* Basic drawing.
 
 ## Dependencies
 * CMake
 * Catch2v3 (for tests)
+* AddressSanitizer (Debugging)
 * C++20 (recommended)
 
 ## Notes
