@@ -38,7 +38,7 @@ void PortablePixMap_Plain::m_preProcessPPM(std::string &rPlainFile)
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-bool PortablePixMap_Plain::m_findMagicNumber(std::string &rPlainFile, std::string &outMagicNumber)
+bool PortablePixMap_Plain::m_findMagicNumber(const std::string &rPlainFile, std::string &outMagicNumber)
 {
     std::size_t positionOfP = rPlainFile.find('P');
 
@@ -91,7 +91,7 @@ bool PortablePixMap_Plain::m_findFirstNumber(const std::string &str, std::size_t
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-bool PortablePixMap_Plain::m_findSize(std::string &rPlainFile, tools::Vector2I &outSize)
+bool PortablePixMap_Plain::m_findSize(const std::string &rPlainFile, tools::Vector2I &outSize)
 {
     std::size_t posOfMagicNumber = rPlainFile.find(m_magicNumber);
 
@@ -130,7 +130,7 @@ bool PortablePixMap_Plain::m_findSize(std::string &rPlainFile, tools::Vector2I &
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-bool PortablePixMap_Plain::m_findMaxValue(std::string &rPlainFile, int &outMaxValue)
+bool PortablePixMap_Plain::m_findMaxValue(const std::string &rPlainFile, int &outMaxValue)
 {
     if (m_magicNumber == PBM_MAGIC_NUMBER)
     {
@@ -161,7 +161,7 @@ bool PortablePixMap_Plain::m_findMaxValue(std::string &rPlainFile, int &outMaxVa
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-bool PortablePixMap_Plain::m_findColorsP1Format(std::string &rPlainFile, ColorData &outColorMatrix)
+bool PortablePixMap_Plain::m_findColorsP1Format(const std::string &rPlainFile, ColorData &outColorMatrix)
 {
     //TODO: Maybe add checking for these searches, even though if the rest of the methods were called, these calls will
     // also be valid
@@ -196,7 +196,7 @@ bool PortablePixMap_Plain::m_findColorsP1Format(std::string &rPlainFile, ColorDa
     return true;
 }
 
-bool PortablePixMap_Plain::m_findColorsP2Format(std::string &rPlainFile, ColorData &outColorMatrix)
+bool PortablePixMap_Plain::m_findColorsP2Format(const std::string &rPlainFile, ColorData &outColorMatrix)
 {
     //TODO: Maybe add checking for these searches, even though if the rest of the methods were called, these calls will
     // also be valid
@@ -232,7 +232,7 @@ bool PortablePixMap_Plain::m_findColorsP2Format(std::string &rPlainFile, ColorDa
     return true;
 }
 
-bool PortablePixMap_Plain::m_findColorsP3Format(std::string &rPlainFile, ColorData &outColorMatrix)
+bool PortablePixMap_Plain::m_findColorsP3Format(const std::string &rPlainFile, ColorData &outColorMatrix)
 {
     //TODO: Maybe add checking for these searches, even though if the rest of the methods were called, these calls will
     // also be valid
@@ -277,7 +277,7 @@ bool PortablePixMap_Plain::m_findColorsP3Format(std::string &rPlainFile, ColorDa
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-bool PortablePixMap_Plain::m_findColors(std::string &rPlainFile, ColorData &outColorMatrix)
+bool PortablePixMap_Plain::m_findColors(const std::string &rPlainFile, ColorData &outColorMatrix)
 {
     if (m_magicNumber == PBM_MAGIC_NUMBER)
         return m_findColorsP1Format(rPlainFile, outColorMatrix);

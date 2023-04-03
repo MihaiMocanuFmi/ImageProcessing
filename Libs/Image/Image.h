@@ -24,8 +24,8 @@ public:
     Image(const ColorData &colorData);
     explicit Image(tools::Vector2I size);
 
-    bool load(std::string imagePath);
-    bool save(std::string imagePath);
+    bool load(const std::string &imagePath);
+    bool save(const std::string &imagePath);
 
 
     bool getROI(Image &roiImg, tools::Rectangle roiRect);
@@ -36,7 +36,6 @@ public:
 
     const ColorData &data() const;
     const tools::Vector2I &size() const;
-    int globalMaxValue() const;
 
     tools::RgbColor& at(const tools::Vector2I &position);
     tools::RgbColor& at(int x, int y);
@@ -48,6 +47,9 @@ public:
 
     static Image zeros(int width, int height);
     static Image ones(int width, int height);
+
+    bool operator==(const Image &other) const;
+    bool operator!=(const Image &other) const;
 
     friend std::ostream& operator<<(std::ostream& os, const Image& dt);
 

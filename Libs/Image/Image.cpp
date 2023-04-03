@@ -2,7 +2,6 @@
 
 #include <fstream>
 #include <sstream>
-#include <limits>
 
 
 ///*********************************************************************************************************************
@@ -27,7 +26,7 @@ Image::Image(tools::Vector2I size) : m_colorData{size}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-bool Image::load(std::string imagePath)
+bool Image::load(const std::string &imagePath)
 {
     std::ifstream inputFile(imagePath);
     std::stringstream buffer;
@@ -45,7 +44,7 @@ bool Image::load(std::string imagePath)
     return true;
 }
 
-bool Image::save(std::string imagePath)
+bool Image::save(const std::string &imagePath)
 {
     std::string imageStr;
 
@@ -88,7 +87,7 @@ void Image::release()
 
 bool Image::isEmpty() const
 {
-    return m_colorData.size().x > 0 and m_colorData.size().y > 0;
+    return m_colorData.size().x <= 0 or m_colorData.size().y <= 0;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -107,22 +106,22 @@ const ColorData &Image::data() const
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-tools::RgbColor &Image::at(const tools::Vector2I &position)
+tools::RgbColor& Image::at(const tools::Vector2I &position)
 {
     return m_colorData.at(position);
 }
 
-tools::RgbColor &Image::at(int x, int y)
+tools::RgbColor& Image::at(int x, int y)
 {
     return m_colorData.at(x, y);
 }
 
-const tools::RgbColor &Image::at(const tools::Vector2I &position) const
+const tools::RgbColor& Image::at(const tools::Vector2I &position) const
 {
     return m_colorData.at(position);
 }
 
-const tools::RgbColor &Image::at(int x, int y) const
+const tools::RgbColor& Image::at(int x, int y) const
 {
     return m_colorData.at(x, y);
 }
@@ -205,6 +204,16 @@ Image operator*(const Image &image, float scalar)
 tools::RgbColor *Image::row(int y)
 {
     return m_colorData.row(y);
+}
+
+bool Image::operator==(const Image &other) const
+{
+    return this->m_colorData == other.m_colorData;
+}
+
+bool Image::operator!=(const Image &other) const
+{
+    return not (*this == other);
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////

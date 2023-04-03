@@ -19,7 +19,7 @@ public:
     static constexpr int MAX_VALUE = tools::RgbColor::MAX_VALUE;
 
     ColorData() = default;
-    ColorData(const tools::Vector2I &size);
+    explicit ColorData(const tools::Vector2I &size);
     ColorData(const tools::Vector2I &size, const tools::RgbColor &defaultValue);
 
     ColorData(const ColorData &other);

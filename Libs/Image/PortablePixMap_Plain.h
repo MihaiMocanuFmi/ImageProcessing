@@ -27,7 +27,7 @@ private:
      * MUST NOT CONTAIN COMMENTS
      * returns true on success, false otherwise
      */
-    bool m_findMagicNumber(std::string &rPlainFile, std::string &outMagicNumber);
+    bool m_findMagicNumber(const std::string &rPlainFile, std::string &outMagicNumber);
 
     /*
      * Given a string it finds the first number in it;
@@ -40,32 +40,32 @@ private:
      * returns true on success, false otherwise
      * We assume that the next pair of number represents the size;
      */
-    bool m_findSize(std::string &rPlainFile, tools::Vector2I &outSize);
+    bool m_findSize(const std::string &rPlainFile, tools::Vector2I &outSize);
 
-    bool m_findMaxValue(std::string &rPlainFile, int &outMaxValue);
+    bool m_findMaxValue(const std::string &rPlainFile, int &outMaxValue);
 
     /*
      * Will search for colors in a string following the P1 format. The output colorMatrix will be converted into
      * P3 format
      */
-    bool m_findColorsP1Format(std::string &rPlainFile, ColorData &outColorMatrix);
+    bool m_findColorsP1Format(const std::string &rPlainFile, ColorData &outColorMatrix);
 
     /*
      * Will search for colors in a string following the P2format. The output colorMatrix will be converted into
      * P3 format
      */
-    bool m_findColorsP2Format(std::string &rPlainFile, ColorData &outColorMatrix);
+    bool m_findColorsP2Format(const std::string &rPlainFile, ColorData &outColorMatrix);
 
     /*
      * Will search for colors in a string following the P3 format. The output colorMatrix will be converted into
      * P3 format
      */
-    bool m_findColorsP3Format(std::string &rPlainFile, ColorData &outColorMatrix);
+    bool m_findColorsP3Format(const std::string &rPlainFile, ColorData &outColorMatrix);
 
     /*
      * Will find the color matrix in the given string file
      */
-    bool m_findColors(std::string &rPlainFile, ColorData &outColorMatrix);
+    bool m_findColors(const std::string &rPlainFile, ColorData &outColorMatrix);
 
     void cacheDataParameters(const ColorData &data);
 public:
