@@ -1,6 +1,6 @@
 #include <catch2/catch_all.hpp>
 
-#include "../Libs/Processing/Kernels.h"
+#include "Processing/Kernels.h"
 
 TEST_CASE("Kernels", "[Kernels]")
 {

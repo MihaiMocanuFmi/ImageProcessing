@@ -1,6 +1,6 @@
 #include <catch2/catch_all.hpp>
 
-#include "../Libs/Tools/RgbColor.h"
+#include "Tools/RgbColor.h"
 
 
 

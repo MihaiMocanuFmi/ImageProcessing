@@ -1,6 +1,6 @@
 #include <catch2/catch_all.hpp>
 
-#include "../Libs/Processing/Convolution.h"
+#include "Processing/Convolution.h"
 
 namespace tests
 {

@@ -242,6 +242,7 @@ ColorData ColorData::operator*(const ColorData &other)
 
     return newMatrix;
 }
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 ColorData operator+(float scalar, const ColorData &colorMatrix)

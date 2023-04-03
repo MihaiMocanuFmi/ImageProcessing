@@ -7,9 +7,9 @@ Gamma::Gamma() : m_gamma(1)
 
 }
 
-Gamma::Gamma(float gamma) : m_gamma(gamma)
+Gamma::Gamma(float gamma)
 {
-
+    setGamma(gamma);
 }
 
 void Gamma::process(const Image &src, Image &dst)

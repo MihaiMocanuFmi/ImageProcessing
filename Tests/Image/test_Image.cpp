@@ -30,7 +30,8 @@ TEST_CASE( "Image", "[Image]")
     SECTION("accessing elements")
     {
         Image image1(100, 100);
-
+        Image image2(ColorData({100, 100}, tools::RgbColor(5, 5, 5)));
+        const Image &image3 = image2;
         for (int y = 0; y < 100; ++y)
         {
             for (int x = 0; x < 100; ++x)
@@ -40,14 +41,16 @@ TEST_CASE( "Image", "[Image]")
                 REQUIRE(image1.at({x, y}) == tools::RgbColor(x, y, (x + y) / 2));
 
 
-                //TODO Force const reference getter????
-                const tools::RgbColor &color = image1.at(x, y);
-                REQUIRE(color.getColorG() == y);
+                //forcing const reference getter
+                image1.at({x, y}) = (2.0f) * image3.at({x, y}) + 4.0f;
+                CHECK(image1.at(x, y) == tools::RgbColor(2 * 5 + 4, 2 * 5 + 4, 2 * 5 + 4));
             }
 
             tools::RgbColor* row = image1.row(y);
             REQUIRE(row == &image1.at(0, y));
         }
+
+
     }
 
     SECTION("load save")
@@ -57,10 +60,10 @@ TEST_CASE( "Image", "[Image]")
         REQUIRE_FALSE(result);
 
         image0 = Image(tools::Vector2I{0,0});
-        result = image0.save("Test");
+        result = image0.save("Test.ppm");
         REQUIRE(result);
 
-        result = image0.load("Test");
+        result = image0.load("Test.ppm");
         REQUIRE(result);
     }
 
