@@ -8,7 +8,7 @@
 #include "../Tools/Rectangle.h"
 #include "ColorData.h"
 
-///\brief Class representing an Image. It manages the colorData and also loading/saving
+///\brief Class representing an Image. It manages the ColorData and also loading/saving
 class Image
 {
 private:
