@@ -80,6 +80,7 @@ bool Image::getROI(Image &roiImg, int x, int y, int width, int height)
 
 void Image::release()
 {
+    ppm = PortablePixMap_Plain();
     m_colorData = ColorData();
 }
 

@@ -59,7 +59,7 @@ public:
     void resize(const tools::Vector2I &newSize, const tools::RgbColor &defaultValue);
 
     /// \brief Copies the elements inside the given ROI (Region of Interest)
-    /// \param roiColorData Output parameter, it returns the copied region.
+    /// \param roiColorData Output parameter, it returns the copied elements inside the region.
     /// \param roiRect The bounds of the Region of Interest inside the original ColorData
     /// \note roiRect has to be contained inside the ColorData perimeter in order for the function to succeed
     /// \return True if it was successfully able to copy and false otherwise.
