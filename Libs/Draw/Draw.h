@@ -6,6 +6,7 @@
 #include "../Tools/RgbColor.h"
 #include "../Image/Image.h"
 
+/// \brief Module responsible for drawing basic shapes on Images
 namespace Draw
 {
     /// \brief It draws a Circle on the given image

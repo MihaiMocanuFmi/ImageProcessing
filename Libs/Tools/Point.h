@@ -6,6 +6,7 @@
 namespace tools
 {
 
+    /// \brief Class representing a 2D point
     class Point : public Vector2I
     {
     private:

@@ -2,7 +2,8 @@
 
 #include "Image/Image.h"
 
-
+/// \brief
+/// \test
 TEST_CASE( "Image", "[Image]")
 {
     SECTION("Creation")

@@ -3,6 +3,7 @@
 
 #include "../Image/ColorData.h"
 
+/// \brief Module containing all used Kernels
 namespace Kernels
 {
     class KernelType

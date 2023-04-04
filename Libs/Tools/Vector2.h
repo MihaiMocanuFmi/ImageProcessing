@@ -7,9 +7,11 @@
 //Designed after the structure of SFML's Vector2
 //https://github.com/SFML/SFML
 
+/// \brief Contains frequently used Classes/Modules
 namespace tools
 {
-
+    /// \brief Template class representing a Vector in 2 dimensions
+    /// \tparam T The type of the components
     template<typename T>
     class Vector2
     {
