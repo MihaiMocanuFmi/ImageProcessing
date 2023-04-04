@@ -6,7 +6,7 @@
 #include "../Tools/Vector2.h"
 #include "../Tools/Rectangle.h"
 
-/// \brief Class representing the color data of a matrix. It manages a matrix of colors.
+/// \brief Class representing the color data of an Image. It manages a matrix of colors.
 class ColorData
 {
 private:
@@ -19,7 +19,7 @@ private:
 
     //tools::RgbColor  m_rescaleColorValue(const tools::RgbColor &color, int wantedMaxValue);
 public:
-    /// \brief The maximum value that a color element can have
+    /// \brief The maximum value that an RgbColor element can have
     static constexpr int MAX_VALUE = tools::RgbColor::MAX_VALUE;
 
     /// \brief The default constructor, it initialises all values to their zero or null value
@@ -47,20 +47,21 @@ public:
     ~ColorData();
 
     /// \brief If the newSize is greater than the old size, then it will increase the size of the data and copy the old
-    ///     elements. Remark, this method overload won't be able to decrease the size.
+    ///     elements.
+    /// \note Remark, this method overload won't be able to decrease the size.
     /// \param newSize The wanted newSize, it should be greater than the old one
     void resize(const tools::Vector2I &newSize);
 
     /// \brief It will modify the size and change all elements inside to have the value of the given \c default value.
-    ///         <br>Remark, this method overload will be able to decrease the size.
+    /// \note Remark, this method overload will be able to decrease the size.
     /// \param newSize The wanted newSize
     /// \param defaultValue The value which all elements inside the ColorData will have
     void resize(const tools::Vector2I &newSize, const tools::RgbColor &defaultValue);
 
     /// \brief Copies the elements inside the given ROI (Region of Interest)
     /// \param roiColorData Output parameter, it returns the copied region.
-    /// \param roiRect The Region of Interest bounds which has to be contained inside the ColorData perimeter in order
-    ///     for the function to succeed
+    /// \param roiRect The bounds of the Region of Interest inside the original ColorData
+    /// \note roiRect has to be contained inside the ColorData perimeter in order for the function to succeed
     /// \return True if it was successfully able to copy and false otherwise.
     bool getROI(ColorData &roiColorData, tools::Rectangle roiRect);
 
