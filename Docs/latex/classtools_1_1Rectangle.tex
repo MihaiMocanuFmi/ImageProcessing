@@ -1,0 +1,80 @@
+\hypertarget{classtools_1_1Rectangle}{}\doxysection{tools\+::Rectangle Class Reference}
+\label{classtools_1_1Rectangle}\index{tools::Rectangle@{tools::Rectangle}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classtools_1_1Rectangle_ac4bad26bce2680905e9408ffce682d06}\label{classtools_1_1Rectangle_ac4bad26bce2680905e9408ffce682d06}} 
+{\bfseries Rectangle} (const \mbox{\hyperlink{classtools_1_1Vector2}{Vector2I}} \&a\+Upper\+Left\+Corner, const \mbox{\hyperlink{classtools_1_1Vector2}{Vector2I}} \&a\+Size)
+\item 
+\mbox{\Hypertarget{classtools_1_1Rectangle_ad6579cd5edb182b2ff8cd0a5d0dbc35e}\label{classtools_1_1Rectangle_ad6579cd5edb182b2ff8cd0a5d0dbc35e}} 
+{\bfseries Rectangle} (const \mbox{\hyperlink{classtools_1_1Point}{Point}} \&a\+Upper\+Left\+Corner, const \mbox{\hyperlink{classtools_1_1Point}{Point}} \&a\+Lower\+Right\+Corner)
+\item 
+\mbox{\Hypertarget{classtools_1_1Rectangle_a1188147ec1e566b49cdb29ec42af9f7e}\label{classtools_1_1Rectangle_a1188147ec1e566b49cdb29ec42af9f7e}} 
+{\bfseries Rectangle} (int x, int y, int width, int height)
+\item 
+\mbox{\Hypertarget{classtools_1_1Rectangle_a86d89cadbeb076bf6459da66ed6847ec}\label{classtools_1_1Rectangle_a86d89cadbeb076bf6459da66ed6847ec}} 
+\mbox{\hyperlink{classtools_1_1Vector2}{Vector2I}} {\bfseries find\+Upper\+Right} () const
+\item 
+\mbox{\Hypertarget{classtools_1_1Rectangle_aa3eba8c55aeba1c410d98f0380712f4e}\label{classtools_1_1Rectangle_aa3eba8c55aeba1c410d98f0380712f4e}} 
+\mbox{\hyperlink{classtools_1_1Vector2}{Vector2I}} {\bfseries find\+Lower\+Left} () const
+\item 
+\mbox{\Hypertarget{classtools_1_1Rectangle_a47a466cdbc5308c423e1d84c6b61087b}\label{classtools_1_1Rectangle_a47a466cdbc5308c423e1d84c6b61087b}} 
+\mbox{\hyperlink{classtools_1_1Vector2}{Vector2I}} {\bfseries find\+Lower\+Right} () const
+\item 
+\mbox{\Hypertarget{classtools_1_1Rectangle_a4e98ffabf350b4c94347ba56420e8507}\label{classtools_1_1Rectangle_a4e98ffabf350b4c94347ba56420e8507}} 
+bool {\bfseries operator==} (const \mbox{\hyperlink{classtools_1_1Rectangle}{Rectangle}} \&right) const
+\item 
+\mbox{\Hypertarget{classtools_1_1Rectangle_aacdd88af0e5b5e3b0a43151aebb21f95}\label{classtools_1_1Rectangle_aacdd88af0e5b5e3b0a43151aebb21f95}} 
+bool {\bfseries operator!=} (const \mbox{\hyperlink{classtools_1_1Rectangle}{Rectangle}} \&right) const
+\item 
+\mbox{\Hypertarget{classtools_1_1Rectangle_a640ad440439850c4ace92fa4cb14c83a}\label{classtools_1_1Rectangle_a640ad440439850c4ace92fa4cb14c83a}} 
+\mbox{\hyperlink{classtools_1_1Rectangle}{Rectangle}} {\bfseries operator\&} (const \mbox{\hyperlink{classtools_1_1Rectangle}{Rectangle}} \&right) const
+\item 
+\mbox{\Hypertarget{classtools_1_1Rectangle_af7ea21452f7d4f98a19a998e22d69a8f}\label{classtools_1_1Rectangle_af7ea21452f7d4f98a19a998e22d69a8f}} 
+\mbox{\hyperlink{classtools_1_1Rectangle}{Rectangle}} {\bfseries operator$\vert$} (const \mbox{\hyperlink{classtools_1_1Rectangle}{Rectangle}} \&right) const
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classtools_1_1Rectangle_ab5a93aa2befa52feb69dce2e9f1b92e6}\label{classtools_1_1Rectangle_ab5a93aa2befa52feb69dce2e9f1b92e6}} 
+static \mbox{\hyperlink{classtools_1_1Vector2}{Vector2I}} {\bfseries find\+Size} (const \mbox{\hyperlink{classtools_1_1Vector2}{Vector2I}} \&upper\+Left\+Corner, const \mbox{\hyperlink{classtools_1_1Vector2}{Vector2I}} \&lower\+Right\+Corner)
+\item 
+\mbox{\Hypertarget{classtools_1_1Rectangle_afd11a22b1cdaf89b71bb67e701befc3f}\label{classtools_1_1Rectangle_afd11a22b1cdaf89b71bb67e701befc3f}} 
+static bool {\bfseries is\+Contained\+Inside} (const \mbox{\hyperlink{classtools_1_1Vector2}{Vector2I}} \&dot, const \mbox{\hyperlink{classtools_1_1Rectangle}{Rectangle}} \&rectangle)
+\item 
+\mbox{\Hypertarget{classtools_1_1Rectangle_a4182cc89f8924c9dc406bb4da7fd6b19}\label{classtools_1_1Rectangle_a4182cc89f8924c9dc406bb4da7fd6b19}} 
+static bool {\bfseries is\+Contained\+Inside} (const \mbox{\hyperlink{classtools_1_1Rectangle}{Rectangle}} \&inner, const \mbox{\hyperlink{classtools_1_1Rectangle}{Rectangle}} \&outer)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classtools_1_1Rectangle_a67de28c74794064c8a9e4924ce347924}\label{classtools_1_1Rectangle_a67de28c74794064c8a9e4924ce347924}} 
+\mbox{\hyperlink{classtools_1_1Vector2}{Vector2I}} {\bfseries upper\+Left\+Corner} = \{0, 0\}
+\item 
+\mbox{\Hypertarget{classtools_1_1Rectangle_affd5baf6bd1f85cd31e7c54ae76f1f36}\label{classtools_1_1Rectangle_affd5baf6bd1f85cd31e7c54ae76f1f36}} 
+\mbox{\hyperlink{classtools_1_1Vector2}{Vector2I}} {\bfseries size} = \{0, 0\}
+\end{DoxyCompactItemize}
+\doxysubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classtools_1_1Rectangle_aa10507558f24d1ee3f354e5fe2ce07b9}\label{classtools_1_1Rectangle_aa10507558f24d1ee3f354e5fe2ce07b9}} 
+std\+::ostream \& {\bfseries operator$<$$<$} (std\+::ostream \&left, const \mbox{\hyperlink{classtools_1_1Rectangle}{Rectangle}} \&right)
+\item 
+\mbox{\Hypertarget{classtools_1_1Rectangle_af06ffc023bd1dd7c03348e8a4ac19f93}\label{classtools_1_1Rectangle_af06ffc023bd1dd7c03348e8a4ac19f93}} 
+std\+::istream \& {\bfseries operator$>$$>$} (std\+::istream \&left, \mbox{\hyperlink{classtools_1_1Rectangle}{Rectangle}} \&right)
+\item 
+\mbox{\Hypertarget{classtools_1_1Rectangle_a89393d6472dc057067a2ca8679140c05}\label{classtools_1_1Rectangle_a89393d6472dc057067a2ca8679140c05}} 
+\mbox{\hyperlink{classtools_1_1Rectangle}{Rectangle}} {\bfseries operator+} (const \mbox{\hyperlink{classtools_1_1Vector2}{Vector2I}} \&left, const \mbox{\hyperlink{classtools_1_1Rectangle}{Rectangle}} \&right)
+\item 
+\mbox{\Hypertarget{classtools_1_1Rectangle_aec714f872ee95e107461d29d95b35201}\label{classtools_1_1Rectangle_aec714f872ee95e107461d29d95b35201}} 
+\mbox{\hyperlink{classtools_1_1Rectangle}{Rectangle}} {\bfseries operator+} (const \mbox{\hyperlink{classtools_1_1Rectangle}{Rectangle}} \&left, const \mbox{\hyperlink{classtools_1_1Vector2}{Vector2I}} \&right)
+\item 
+\mbox{\Hypertarget{classtools_1_1Rectangle_a6b19ccf684204bff73ebc9512ac460c5}\label{classtools_1_1Rectangle_a6b19ccf684204bff73ebc9512ac460c5}} 
+\mbox{\hyperlink{classtools_1_1Rectangle}{Rectangle}} {\bfseries operator-\/} (const \mbox{\hyperlink{classtools_1_1Rectangle}{Rectangle}} \&left, const \mbox{\hyperlink{classtools_1_1Vector2}{Vector2I}} \&right)
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Libs/\+Tools/Rectangle.\+h\item 
+Libs/\+Tools/Rectangle.\+cpp\end{DoxyCompactItemize}

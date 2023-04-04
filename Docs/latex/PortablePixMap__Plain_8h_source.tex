@@ -1,0 +1,101 @@
+\hypertarget{PortablePixMap__Plain_8h_source}{}\doxysection{Portable\+Pix\+Map\+\_\+\+Plain.\+h}
+\label{PortablePixMap__Plain_8h_source}\index{Libs/Image/PortablePixMap\_Plain.h@{Libs/Image/PortablePixMap\_Plain.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ PPM\_RAW\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ PPM\_RAW\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}../Tools/Vector2.h"{}}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}../Tools/RgbColor.h"{}}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}ColorData.h"{}}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classPortablePixMap__Plain}{PortablePixMap\_Plain}}}
+\DoxyCodeLine{00013\ \{}
+\DoxyCodeLine{00014\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00015\ \ \ \ \ std::string\ m\_magicNumber\ =\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{00016\ \ \ \ \ \mbox{\hyperlink{classtools_1_1Vector2}{tools::Vector2I}}\ m\_size\ =\ \{0,\ 0\};}
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keywordtype}{int}\ m\_maxValue\ =\ 0;}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00021\ \textcolor{comment}{\ \ \ \ \ *\ Will\ remove\ all\ comments,\ keeps\ newlines\ and\ spaces\ before\ the\ comment}}
+\DoxyCodeLine{00022\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keywordtype}{void}\ m\_removeComments(std::string\ \&rPlainFile);}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keywordtype}{void}\ m\_preProcessPPM(std::string\ \&rPlainFile);}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00027\ \textcolor{comment}{\ \ \ \ \ *\ MUST\ NOT\ CONTAIN\ COMMENTS}}
+\DoxyCodeLine{00028\ \textcolor{comment}{\ \ \ \ \ *\ returns\ true\ on\ success,\ false\ otherwise}}
+\DoxyCodeLine{00029\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keywordtype}{bool}\ m\_findMagicNumber(\textcolor{keyword}{const}\ std::string\ \&rPlainFile,\ std::string\ \&outMagicNumber);}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00033\ \textcolor{comment}{\ \ \ \ \ *\ Given\ a\ string\ it\ finds\ the\ first\ number\ in\ it;}}
+\DoxyCodeLine{00034\ \textcolor{comment}{\ \ \ \ \ *\ It\ returns\ through\ the\ out*\ parameters\ the\ position\ in\ str\ of\ the\ starting\ digit\ and\ the\ last\ digit\ (inclusive)}}
+\DoxyCodeLine{00035\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keywordtype}{bool}\ m\_findFirstNumber(\textcolor{keyword}{const}\ std::string\ \&str,\ std::size\_t\ startingPos,\ std::size\_t\ \&outStartPos,\ std::size\_t\ \&outEndPos);}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00039\ \textcolor{comment}{\ \ \ \ \ *\ MUST\ NOT\ CONTAIN\ COMMENTS}}
+\DoxyCodeLine{00040\ \textcolor{comment}{\ \ \ \ \ *\ returns\ true\ on\ success,\ false\ otherwise}}
+\DoxyCodeLine{00041\ \textcolor{comment}{\ \ \ \ \ *\ We\ assume\ that\ the\ next\ pair\ of\ number\ represents\ the\ size;}}
+\DoxyCodeLine{00042\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keywordtype}{bool}\ m\_findSize(\textcolor{keyword}{const}\ std::string\ \&rPlainFile,\ \mbox{\hyperlink{classtools_1_1Vector2}{tools::Vector2I}}\ \&outSize);}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keywordtype}{bool}\ m\_findMaxValue(\textcolor{keyword}{const}\ std::string\ \&rPlainFile,\ \textcolor{keywordtype}{int}\ \&outMaxValue);}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00048\ \textcolor{comment}{\ \ \ \ \ *\ Will\ search\ for\ colors\ in\ a\ string\ following\ the\ P1\ format.\ The\ output\ colorMatrix\ will\ be\ converted\ into}}
+\DoxyCodeLine{00049\ \textcolor{comment}{\ \ \ \ \ *\ P3\ format}}
+\DoxyCodeLine{00050\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keywordtype}{bool}\ m\_findColorsP1Format(\textcolor{keyword}{const}\ std::string\ \&rPlainFile,\ \mbox{\hyperlink{classColorData}{ColorData}}\ \&outColorMatrix);}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00054\ \textcolor{comment}{\ \ \ \ \ *\ Will\ search\ for\ colors\ in\ a\ string\ following\ the\ P2format.\ The\ output\ colorMatrix\ will\ be\ converted\ into}}
+\DoxyCodeLine{00055\ \textcolor{comment}{\ \ \ \ \ *\ P3\ format}}
+\DoxyCodeLine{00056\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{keywordtype}{bool}\ m\_findColorsP2Format(\textcolor{keyword}{const}\ std::string\ \&rPlainFile,\ \mbox{\hyperlink{classColorData}{ColorData}}\ \&outColorMatrix);}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00060\ \textcolor{comment}{\ \ \ \ \ *\ Will\ search\ for\ colors\ in\ a\ string\ following\ the\ P3\ format.\ The\ output\ colorMatrix\ will\ be\ converted\ into}}
+\DoxyCodeLine{00061\ \textcolor{comment}{\ \ \ \ \ *\ P3\ format}}
+\DoxyCodeLine{00062\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keywordtype}{bool}\ m\_findColorsP3Format(\textcolor{keyword}{const}\ std::string\ \&rPlainFile,\ \mbox{\hyperlink{classColorData}{ColorData}}\ \&outColorMatrix);}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00066\ \textcolor{comment}{\ \ \ \ \ *\ Will\ find\ the\ color\ matrix\ in\ the\ given\ string\ file}}
+\DoxyCodeLine{00067\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{00068\ \ \ \ \ \textcolor{keywordtype}{bool}\ m\_findColors(\textcolor{keyword}{const}\ std::string\ \&rPlainFile,\ \mbox{\hyperlink{classColorData}{ColorData}}\ \&outColorMatrix);}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00070\ \ \ \ \ \textcolor{keywordtype}{void}\ cacheDataParameters(\textcolor{keyword}{const}\ \mbox{\hyperlink{classColorData}{ColorData}}\ \&data);}
+\DoxyCodeLine{00071\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00072\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{char}\ PPM\_MAGIC\_NUMBER[]\ =\ \textcolor{stringliteral}{"{}P3"{}};}
+\DoxyCodeLine{00073\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{char}\ PGM\_MAGIC\_NUMBER[]\ =\ \textcolor{stringliteral}{"{}P2"{}};}
+\DoxyCodeLine{00074\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{char}\ PBM\_MAGIC\_NUMBER[]\ =\ \textcolor{stringliteral}{"{}P1"{}};}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00077\ \ \ \ \ \mbox{\hyperlink{classPortablePixMap__Plain}{PortablePixMap\_Plain}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00079\ \ \ \ \ \textcolor{comment}{/*\ It's\ backwards\ compatible\ with\ PGM\ and\ PBM\ files,}}
+\DoxyCodeLine{00080\ \textcolor{comment}{\ \ \ \ \ *\ We\ make\ the\ following\ assumptions\ after\ ignoring\ all\ comments:}}
+\DoxyCodeLine{00081\ \textcolor{comment}{\ \ \ \ \ *\ 1)\ The\ first\ line\ that\ contains\ a\ letter\ will\ be\ the\ letter\ P\ followed\ by\ one\ the\ numbers:}}
+\DoxyCodeLine{00082\ \textcolor{comment}{\ \ \ \ \ *\ \ \ \ \ \ 1,\ 2\ or\ 3.}}
+\DoxyCodeLine{00083\ \textcolor{comment}{\ \ \ \ \ *\ 2)\ The\ next\ pair\ of\ two\ numbers\ after\ that\ will\ represent\ the\ size}}
+\DoxyCodeLine{00084\ \textcolor{comment}{\ \ \ \ \ *}}
+\DoxyCodeLine{00085\ \textcolor{comment}{\ \ \ \ \ *\ returns\ true\ on\ success,\ false\ otherwise}}
+\DoxyCodeLine{00086\ \textcolor{comment}{\ \ \ \ \ *}}
+\DoxyCodeLine{00087\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{00088\ \ \ \ \ \textcolor{keywordtype}{bool}\ loadPlain(std::string\ plainFile,\ \mbox{\hyperlink{classColorData}{ColorData}}\ \&outData);}
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00090\ \ \ \ \ \textcolor{keywordtype}{bool}\ saveToString(std::string\ \&outPlainFile,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classColorData}{ColorData}}\ \&data);}
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00092\ \};}
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00095\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//PPM\_RAW\_H}}
+
+\end{DoxyCode}

@@ -10,6 +10,8 @@
 #include "Libs/Draw/Draw.h"
 
 
+/// Main function, contains an example for all abilities
+/// \return
 int main()
 {
 

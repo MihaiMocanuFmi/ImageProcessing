@@ -1,0 +1,67 @@
+\hypertarget{Rectangle_8h_source}{}\doxysection{Rectangle.\+h}
+\label{Rectangle_8h_source}\index{Libs/Tools/Rectangle.h@{Libs/Tools/Rectangle.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ RECTANGLE\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ RECTANGLE\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}Vector2.h"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}Point.h"{}}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{keyword}{namespace\ }tools}
+\DoxyCodeLine{00008\ \{}
+\DoxyCodeLine{00009\ \ \ \ \ \textcolor{comment}{//TODO:\ change\ to\ template;}}
+\DoxyCodeLine{00010\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classtools_1_1Rectangle}{Rectangle}}}
+\DoxyCodeLine{00011\ \ \ \ \ \{}
+\DoxyCodeLine{00012\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00015\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classtools_1_1Vector2}{Vector2I}}\ findSize(\textcolor{keyword}{const}\ \mbox{\hyperlink{classtools_1_1Vector2}{Vector2I}}\ \&upperLeftCorner,\ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classtools_1_1Vector2}{Vector2I}}\ \&lowerRightCorner);}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classtools_1_1Vector2}{Vector2I}}\ upperLeftCorner\ =\ \{0,\ 0\};}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classtools_1_1Vector2}{Vector2I}}\ size\ =\ \{0,\ 0\};}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classtools_1_1Rectangle}{Rectangle}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classtools_1_1Rectangle}{Rectangle}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classtools_1_1Vector2}{Vector2I}}\ \&aUpperLeftCorner,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classtools_1_1Vector2}{Vector2I}}\ \&aSize);}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classtools_1_1Rectangle}{Rectangle}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classtools_1_1Point}{Point}}\ \&aUpperLeftCorner,\ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classtools_1_1Point}{Point}}\ \&aLowerRightCorner);}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classtools_1_1Rectangle}{Rectangle}}(\textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{int}\ y,\ \textcolor{keywordtype}{int}\ width,\ \textcolor{keywordtype}{int}\ height);}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classtools_1_1Vector2}{Vector2I}}\ findUpperRight()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classtools_1_1Vector2}{Vector2I}}\ findLowerLeft()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classtools_1_1Vector2}{Vector2I}}\ findLowerRight()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ isContainedInside(\textcolor{keyword}{const}\ \mbox{\hyperlink{classtools_1_1Vector2}{Vector2I}}\ \&dot,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classtools_1_1Rectangle}{Rectangle}}\ \&rectangle);}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ isContainedInside(\textcolor{keyword}{const}\ \mbox{\hyperlink{classtools_1_1Rectangle}{Rectangle}}\ \&inner,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classtools_1_1Rectangle}{Rectangle}}\ \&outer);}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ operator==(\textcolor{keyword}{const}\ \mbox{\hyperlink{classtools_1_1Rectangle}{Rectangle}}\ \&right)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ operator!=(\textcolor{keyword}{const}\ \mbox{\hyperlink{classtools_1_1Rectangle}{Rectangle}}\ \&right)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \textcolor{keyword}{friend}\ std::ostream\ \&operator<<(std::ostream\ \&left,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classtools_1_1Rectangle}{Rectangle}}\ \&right);}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \textcolor{keyword}{friend}\ std::istream\ \&operator>>(std::istream\ \&left,\ \mbox{\hyperlink{classtools_1_1Rectangle}{Rectangle}}\ \&right);}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \textcolor{keyword}{friend}\ \mbox{\hyperlink{classtools_1_1Rectangle}{Rectangle}}\ operator+(\textcolor{keyword}{const}\ \mbox{\hyperlink{classtools_1_1Vector2}{Vector2I}}\ \&left,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classtools_1_1Rectangle}{Rectangle}}\ \&right);}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \textcolor{keyword}{friend}\ \mbox{\hyperlink{classtools_1_1Rectangle}{Rectangle}}\ operator+(\textcolor{keyword}{const}\ \mbox{\hyperlink{classtools_1_1Rectangle}{Rectangle}}\ \&left,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classtools_1_1Vector2}{Vector2I}}\ \&right);}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \textcolor{keyword}{friend}\ \mbox{\hyperlink{classtools_1_1Rectangle}{Rectangle}}\ operator-\/(\textcolor{keyword}{const}\ \mbox{\hyperlink{classtools_1_1Rectangle}{Rectangle}}\ \&left,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classtools_1_1Vector2}{Vector2I}}\ \&right);}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \textcolor{comment}{//intersection\ between\ 2\ rectangles,\ gives\ a\ rectangle\ of\ size\ <\ 0\ if\ intersection\ would\ be\ empty\ set}}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classtools_1_1Rectangle}{Rectangle}}\ operator\&(\textcolor{keyword}{const}\ \mbox{\hyperlink{classtools_1_1Rectangle}{Rectangle}}\ \&right)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \textcolor{comment}{//computes\ union\ between\ 2\ rectangles,\ It\ actually\ finds\ the\ smallest\ rectangle\ which\ covers\ both}}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classtools_1_1Rectangle}{Rectangle}}\ operator|(\textcolor{keyword}{const}\ \mbox{\hyperlink{classtools_1_1Rectangle}{Rectangle}}\ \&right)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ \ \ \ \ \};}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ \}\ \textcolor{comment}{//\ Tools}}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//RECTANGLE\_H}}
+
+\end{DoxyCode}

@@ -1,0 +1,113 @@
+\hypertarget{RgbColor_8h_source}{}\doxysection{Rgb\+Color.\+h}
+\label{RgbColor_8h_source}\index{Libs/Tools/RgbColor.h@{Libs/Tools/RgbColor.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ RGB\_COLOR\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ RGB\_COLOR\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <ostream>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{keyword}{namespace\ }tools}
+\DoxyCodeLine{00008\ \{}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classtools_1_1Color}{Color}}}
+\DoxyCodeLine{00011\ \ \ \ \ \{}
+\DoxyCodeLine{00012\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00013\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ R\ =\ 0;}
+\DoxyCodeLine{00014\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ G\ =\ 0;}
+\DoxyCodeLine{00015\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ B\ =\ 0;}
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classtools_1_1Color}{Color}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classtools_1_1Color}{Color}}(\textcolor{keywordtype}{int}\ r,\ \textcolor{keywordtype}{int}\ g,\ \textcolor{keywordtype}{int}\ b);}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ operator==(\textcolor{keyword}{const}\ \mbox{\hyperlink{classtools_1_1Color}{Color}}\ \&other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ operator!=(\textcolor{keyword}{const}\ \mbox{\hyperlink{classtools_1_1Color}{Color}}\ \&other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00021\ \ \ \ \ \};}
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classtools_1_1RgbColor}{RgbColor}}}
+\DoxyCodeLine{00023\ \ \ \ \ \{}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classtools_1_1Color}{Color}}\ m\_color;}
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{int}\ MAX\_VALUE\ =\ 255;}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classtools_1_1RgbColor}{RgbColor}}()\ =\ \textcolor{keywordflow}{default};\ \textcolor{comment}{//\ sets\ color\ to\ \{0,0,0\}\ and\ m\_maxValue\ to\ std::numeric\_limits<int>::max();}}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classtools_1_1RgbColor}{RgbColor}}(\mbox{\hyperlink{classtools_1_1Color}{Color}}\ color,\ \textcolor{keywordtype}{bool}\ \textcolor{keyword}{override}\ =\ \textcolor{keyword}{false});}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classtools_1_1RgbColor}{RgbColor}}(\textcolor{keywordtype}{int}\ R,\ \textcolor{keywordtype}{int}\ G,\ \textcolor{keywordtype}{int}\ B,\ \textcolor{keywordtype}{bool}\ \textcolor{keyword}{override}\ =\ \textcolor{keyword}{false});}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ setColor(\textcolor{keywordtype}{int}\ R,\ \textcolor{keywordtype}{int}\ G,\ \textcolor{keywordtype}{int}\ B,\ \textcolor{keywordtype}{bool}\ \textcolor{keyword}{override}\ =\ \textcolor{keyword}{false});}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ setColor(\textcolor{keyword}{const}\ \mbox{\hyperlink{classtools_1_1Color}{Color}}\ \&color,\ \textcolor{keywordtype}{bool}\ \textcolor{keyword}{override}\ =\ \textcolor{keyword}{false});}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classtools_1_1Color}{Color}}\ \&getColor()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ setColorR(\textcolor{keywordtype}{int}\ R,\ \textcolor{keywordtype}{bool}\ \textcolor{keyword}{override}\ =\ \textcolor{keyword}{false});}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ getColorR()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ setColorG(\textcolor{keywordtype}{int}\ G,\ \textcolor{keywordtype}{bool}\ \textcolor{keyword}{override}\ =\ \textcolor{keyword}{false});}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ getColorG()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ setColorB(\textcolor{keywordtype}{int}\ B,\ \textcolor{keywordtype}{bool}\ \textcolor{keyword}{override}\ =\ \textcolor{keyword}{false});}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ getColorB()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \textcolor{keyword}{friend}\ std::ostream\&\ operator<<(std::ostream\&\ os,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classtools_1_1RgbColor}{RgbColor}}\&\ dt);}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ operator==(\textcolor{keyword}{const}\ \mbox{\hyperlink{classtools_1_1RgbColor}{RgbColor}}\ \&other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ operator!=(\textcolor{keyword}{const}\ \mbox{\hyperlink{classtools_1_1RgbColor}{RgbColor}}\ \&other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classtools_1_1RgbColor}{RgbColor}}\ add(\textcolor{keyword}{const}\ \mbox{\hyperlink{classtools_1_1RgbColor}{RgbColor}}\ \&other,\ \textcolor{keywordtype}{bool}\ overrideClamp\ =\ \textcolor{keyword}{false})\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classtools_1_1RgbColor}{RgbColor}}\ subtract(\textcolor{keyword}{const}\ \mbox{\hyperlink{classtools_1_1RgbColor}{RgbColor}}\ \&other,\ \textcolor{keywordtype}{bool}\ overrideClamp\ =\ \textcolor{keyword}{false})\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classtools_1_1RgbColor}{RgbColor}}\ multiply(\textcolor{keyword}{const}\ \mbox{\hyperlink{classtools_1_1RgbColor}{RgbColor}}\ \&other,\ \textcolor{keywordtype}{bool}\ overrideClamp\ =\ \textcolor{keyword}{false})\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classtools_1_1RgbColor}{RgbColor}}\ operator+(\textcolor{keyword}{const}\ \mbox{\hyperlink{classtools_1_1RgbColor}{RgbColor}}\ \&other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classtools_1_1RgbColor}{RgbColor}}\ operator-\/(\textcolor{keyword}{const}\ \mbox{\hyperlink{classtools_1_1RgbColor}{RgbColor}}\ \&other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classtools_1_1RgbColor}{RgbColor}}\ operator*(\textcolor{keyword}{const}\ \mbox{\hyperlink{classtools_1_1RgbColor}{RgbColor}}\ \&other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \textcolor{keyword}{friend}\ \mbox{\hyperlink{classtools_1_1RgbColor}{RgbColor}}\ add(\textcolor{keywordtype}{float}\ scalar,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classtools_1_1RgbColor}{RgbColor}}\ \&color,\ \textcolor{keywordtype}{bool}\ overrideClamp\ =\ \textcolor{keyword}{false})}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//declared\ inside\ header\ because}}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//Friend\ declaration\ specifying\ a\ default\ argument\ must\ be\ a\ definition}}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classtools_1_1RgbColor}{RgbColor}}\ newColor;}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \ \ \ \ newColor.setColor(scalar\ +\ (\textcolor{keywordtype}{float})color.getColorR(),\ scalar\ +\ (\textcolor{keywordtype}{float})color.getColorG(),}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ scalar\ +\ (\textcolor{keywordtype}{float})color.getColorB(),\ overrideClamp);}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ newColor;}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \textcolor{keyword}{friend}\ \mbox{\hyperlink{classtools_1_1RgbColor}{RgbColor}}\ subtract(\textcolor{keyword}{const}\ \mbox{\hyperlink{classtools_1_1RgbColor}{RgbColor}}\ \&color,\ \textcolor{keywordtype}{float}\ scalar,\ \textcolor{keywordtype}{bool}\ overrideClamp\ =\ \textcolor{keyword}{false})}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//declared\ inside\ header\ because}}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//Friend\ declaration\ specifying\ a\ default\ argument\ must\ be\ a\ definition}}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classtools_1_1RgbColor}{RgbColor}}\ newColor;}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \ \ \ \ newColor.setColor((\textcolor{keywordtype}{float})color.getColorR()\ -\/\ scalar,\ (\textcolor{keywordtype}{float})color.getColorG()\ -\/\ scalar\ ,}
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\textcolor{keywordtype}{float})color.getColorB()\ -\/\ scalar\ ,\ overrideClamp);}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ newColor;}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \textcolor{keyword}{friend}\ \mbox{\hyperlink{classtools_1_1RgbColor}{RgbColor}}\ multiply(\textcolor{keywordtype}{float}\ scalar,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classtools_1_1RgbColor}{RgbColor}}\ \&color,\ \textcolor{keywordtype}{bool}\ overrideClamp\ =\ \textcolor{keyword}{false})}
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//declared\ inside\ header\ because}}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//Friend\ declaration\ specifying\ a\ default\ argument\ must\ be\ a\ definition}}
+\DoxyCodeLine{00088\ }
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classtools_1_1RgbColor}{RgbColor}}\ newColor;}
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \ \ \ \ newColor.setColor(scalar\ *\ (\textcolor{keywordtype}{float})color.getColorR(),\ scalar\ *\ (\textcolor{keywordtype}{float})color.getColorG(),}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ scalar\ *\ (\textcolor{keywordtype}{float})color.getColorB(),\ overrideClamp);}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ newColor;}
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \textcolor{keyword}{friend}\ \mbox{\hyperlink{classtools_1_1RgbColor}{RgbColor}}\ operator+(\textcolor{keywordtype}{float}\ scalar,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classtools_1_1RgbColor}{RgbColor}}\ \&color);}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \textcolor{keyword}{friend}\ \mbox{\hyperlink{classtools_1_1RgbColor}{RgbColor}}\ operator+(\textcolor{keyword}{const}\ \mbox{\hyperlink{classtools_1_1RgbColor}{RgbColor}}\ \&color,\ \textcolor{keywordtype}{float}\ scalar);}
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ \textcolor{keyword}{friend}\ \mbox{\hyperlink{classtools_1_1RgbColor}{RgbColor}}\ operator-\/(\textcolor{keyword}{const}\ \mbox{\hyperlink{classtools_1_1RgbColor}{RgbColor}}\ \&color,\ \textcolor{keywordtype}{float}\ scalar);}
+\DoxyCodeLine{00100\ }
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ \textcolor{keyword}{friend}\ \mbox{\hyperlink{classtools_1_1RgbColor}{RgbColor}}\ operator*(\textcolor{keywordtype}{float}\ scalar,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classtools_1_1RgbColor}{RgbColor}}\ \&color);}
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ \textcolor{keyword}{friend}\ \mbox{\hyperlink{classtools_1_1RgbColor}{RgbColor}}\ operator*(\textcolor{keyword}{const}\ \mbox{\hyperlink{classtools_1_1RgbColor}{RgbColor}}\ \&color,\ \textcolor{keywordtype}{float}\ scalar);}
+\DoxyCodeLine{00103\ \ \ \ \ \};}
+\DoxyCodeLine{00104\ }
+\DoxyCodeLine{00105\ \}\ \textcolor{comment}{//\ Tools}}
+\DoxyCodeLine{00106\ }
+\DoxyCodeLine{00107\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//RGB\_COLOR\_H}}
+
+\end{DoxyCode}

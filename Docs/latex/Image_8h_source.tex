@@ -1,0 +1,78 @@
+\hypertarget{Image_8h_source}{}\doxysection{Image.\+h}
+\label{Image_8h_source}\index{Libs/Image/Image.h@{Libs/Image/Image.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ IMAGE\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ IMAGE\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}PortablePixMap\_Plain.h"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}../Tools/Vector2.h"{}}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}../Tools/Rectangle.h"{}}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}ColorData.h"{}}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{comment}{//this\ class\ is\ more\ like\ an\ ImageManager,\ I'm\ keeping\ the\ name\ Image\ to\ coincide\ with\ the\ given\ example}}
+\DoxyCodeLine{00012\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classImage}{Image}}}
+\DoxyCodeLine{00013\ \{}
+\DoxyCodeLine{00014\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{comment}{//Tools::Vector2I\ m\_size\ =\ \{\};}}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \ \ \ \ \mbox{\hyperlink{classPortablePixMap__Plain}{PortablePixMap\_Plain}}\ ppm\ =\ \{\};}
+\DoxyCodeLine{00018\ \ \ \ \ \mbox{\hyperlink{classColorData}{ColorData}}\ m\_colorData\ =\ \{\};}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00021\ \ \ \ \ \mbox{\hyperlink{classImage}{Image}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \ \ \ \ \mbox{\hyperlink{classImage}{Image}}(\textcolor{keywordtype}{int}\ width,\ \textcolor{keywordtype}{int}\ height);}
+\DoxyCodeLine{00024\ \ \ \ \ \mbox{\hyperlink{classImage}{Image}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classColorData}{ColorData}}\ \&colorData);}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classImage}{Image}}(\mbox{\hyperlink{classtools_1_1Vector2}{tools::Vector2I}}\ size);}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keywordtype}{bool}\ load(\textcolor{keyword}{const}\ std::string\ \&imagePath);}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordtype}{bool}\ save(\textcolor{keyword}{const}\ std::string\ \&imagePath);}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keywordtype}{bool}\ getROI(\mbox{\hyperlink{classImage}{Image}}\ \&roiImg,\ \mbox{\hyperlink{classtools_1_1Rectangle}{tools::Rectangle}}\ roiRect);}
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keywordtype}{bool}\ getROI(\mbox{\hyperlink{classImage}{Image}}\ \&roiImg,\ \textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{int}\ y,\ \textcolor{keywordtype}{int}\ width,\ \textcolor{keywordtype}{int}\ height);}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keywordtype}{void}\ release();}
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordtype}{bool}\ isEmpty()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classColorData}{ColorData}}\ \&data()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classtools_1_1Vector2}{tools::Vector2I}}\ \&size()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \ \ \ \ \mbox{\hyperlink{classtools_1_1RgbColor}{tools::RgbColor}}\&\ at(\textcolor{keyword}{const}\ \mbox{\hyperlink{classtools_1_1Vector2}{tools::Vector2I}}\ \&position);}
+\DoxyCodeLine{00041\ \ \ \ \ \mbox{\hyperlink{classtools_1_1RgbColor}{tools::RgbColor}}\&\ at(\textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{int}\ y);}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classtools_1_1RgbColor}{tools::RgbColor}}\&\ at(\textcolor{keyword}{const}\ \mbox{\hyperlink{classtools_1_1Vector2}{tools::Vector2I}}\ \&position)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classtools_1_1RgbColor}{tools::RgbColor}}\&\ at(\textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{int}\ y)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \ \ \ \ \mbox{\hyperlink{classtools_1_1RgbColor}{tools::RgbColor}}*\ row(\textcolor{keywordtype}{int}\ y);}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classImage}{Image}}\ zeros(\textcolor{keywordtype}{int}\ width,\ \textcolor{keywordtype}{int}\ height);}
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classImage}{Image}}\ ones(\textcolor{keywordtype}{int}\ width,\ \textcolor{keywordtype}{int}\ height);}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keywordtype}{bool}\ operator==(\textcolor{keyword}{const}\ \mbox{\hyperlink{classImage}{Image}}\ \&other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{keywordtype}{bool}\ operator!=(\textcolor{keyword}{const}\ \mbox{\hyperlink{classImage}{Image}}\ \&other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{keyword}{friend}\ std::ostream\&\ operator<<(std::ostream\&\ os,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classImage}{Image}}\&\ dt);}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \ \ \ \ \mbox{\hyperlink{classImage}{Image}}\ operator+(\textcolor{keyword}{const}\ \mbox{\hyperlink{classImage}{Image}}\ \&i);}
+\DoxyCodeLine{00057\ \ \ \ \ \mbox{\hyperlink{classImage}{Image}}\ operator-\/(\textcolor{keyword}{const}\ \mbox{\hyperlink{classImage}{Image}}\ \&i);}
+\DoxyCodeLine{00058\ \ \ \ \ \mbox{\hyperlink{classImage}{Image}}\ operator*(\textcolor{keyword}{const}\ \mbox{\hyperlink{classImage}{Image}}\ \&i);}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{keyword}{friend}\ \mbox{\hyperlink{classImage}{Image}}\ operator+(\textcolor{keywordtype}{float}\ scalar,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classImage}{Image}}\ \&image);}
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keyword}{friend}\ \mbox{\hyperlink{classImage}{Image}}\ operator+(\textcolor{keyword}{const}\ \mbox{\hyperlink{classImage}{Image}}\ \&image,\ \textcolor{keywordtype}{float}\ scalar);}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keyword}{friend}\ \mbox{\hyperlink{classImage}{Image}}\ operator-\/(\textcolor{keyword}{const}\ \mbox{\hyperlink{classImage}{Image}}\ \&image,\ \textcolor{keywordtype}{float}\ scalar);}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{keyword}{friend}\ \mbox{\hyperlink{classImage}{Image}}\ operator*(\textcolor{keywordtype}{float}\ scalar,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classImage}{Image}}\ \&image);}
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{keyword}{friend}\ \mbox{\hyperlink{classImage}{Image}}\ operator*(\textcolor{keyword}{const}\ \mbox{\hyperlink{classImage}{Image}}\ \&image,\ \textcolor{keywordtype}{float}\ scalar);}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00068\ \};}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00072\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//IMAGE\_H}}
+
+\end{DoxyCode}

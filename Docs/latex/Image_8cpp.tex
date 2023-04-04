@@ -1,0 +1,59 @@
+\hypertarget{Image_8cpp}{}\doxysection{Libs/\+Image/\+Image.cpp File Reference}
+\label{Image_8cpp}\index{Libs/Image/Image.cpp@{Libs/Image/Image.cpp}}
+{\ttfamily \#include \char`\"{}Image.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$fstream$>$}\newline
+{\ttfamily \#include $<$sstream$>$}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::ostream \& \mbox{\hyperlink{Image_8cpp_ab12359759cf75debc1307771302d3662}{operator$<$$<$}} (std\+::ostream \&os, const \mbox{\hyperlink{classImage}{Image}} \&dt)
+\item 
+\mbox{\hyperlink{classImage}{Image}} \mbox{\hyperlink{Image_8cpp_ad5fd3678ab324ed9cd5ebf3e7b292eae}{operator+}} (float scalar, const \mbox{\hyperlink{classImage}{Image}} \&image)
+\item 
+\mbox{\hyperlink{classImage}{Image}} \mbox{\hyperlink{Image_8cpp_a23bad706dc5a3a8ce5d511d33030a4ea}{operator+}} (const \mbox{\hyperlink{classImage}{Image}} \&image, float scalar)
+\item 
+\mbox{\hyperlink{classImage}{Image}} \mbox{\hyperlink{Image_8cpp_aa3590cbaa382ee3ce8624a62d5964bfc}{operator-\/}} (const \mbox{\hyperlink{classImage}{Image}} \&image, float scalar)
+\item 
+\mbox{\hyperlink{classImage}{Image}} \mbox{\hyperlink{Image_8cpp_a1f03f4fff7b2bb92f7366d75c3318b2d}{operator$\ast$}} (float scalar, const \mbox{\hyperlink{classImage}{Image}} \&image)
+\item 
+\mbox{\hyperlink{classImage}{Image}} \mbox{\hyperlink{Image_8cpp_a5bfb2a5442a16c12519b3982043b52bb}{operator$\ast$}} (const \mbox{\hyperlink{classImage}{Image}} \&image, float scalar)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{Image_8cpp_a5bfb2a5442a16c12519b3982043b52bb}\label{Image_8cpp_a5bfb2a5442a16c12519b3982043b52bb}} 
+\index{Image.cpp@{Image.cpp}!operator$\ast$@{operator$\ast$}}
+\index{operator$\ast$@{operator$\ast$}!Image.cpp@{Image.cpp}}
+\doxysubsubsection{\texorpdfstring{operator$\ast$()}{operator*()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classImage}{Image}} operator$\ast$ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classImage}{Image}} \&}]{image,  }\item[{float}]{scalar }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{Image_8cpp_a1f03f4fff7b2bb92f7366d75c3318b2d}\label{Image_8cpp_a1f03f4fff7b2bb92f7366d75c3318b2d}} 
+\index{Image.cpp@{Image.cpp}!operator$\ast$@{operator$\ast$}}
+\index{operator$\ast$@{operator$\ast$}!Image.cpp@{Image.cpp}}
+\doxysubsubsection{\texorpdfstring{operator$\ast$()}{operator*()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classImage}{Image}} operator$\ast$ (\begin{DoxyParamCaption}\item[{float}]{scalar,  }\item[{const \mbox{\hyperlink{classImage}{Image}} \&}]{image }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{Image_8cpp_a23bad706dc5a3a8ce5d511d33030a4ea}\label{Image_8cpp_a23bad706dc5a3a8ce5d511d33030a4ea}} 
+\index{Image.cpp@{Image.cpp}!operator+@{operator+}}
+\index{operator+@{operator+}!Image.cpp@{Image.cpp}}
+\doxysubsubsection{\texorpdfstring{operator+()}{operator+()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classImage}{Image}} operator+ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classImage}{Image}} \&}]{image,  }\item[{float}]{scalar }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{Image_8cpp_ad5fd3678ab324ed9cd5ebf3e7b292eae}\label{Image_8cpp_ad5fd3678ab324ed9cd5ebf3e7b292eae}} 
+\index{Image.cpp@{Image.cpp}!operator+@{operator+}}
+\index{operator+@{operator+}!Image.cpp@{Image.cpp}}
+\doxysubsubsection{\texorpdfstring{operator+()}{operator+()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classImage}{Image}} operator+ (\begin{DoxyParamCaption}\item[{float}]{scalar,  }\item[{const \mbox{\hyperlink{classImage}{Image}} \&}]{image }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{Image_8cpp_aa3590cbaa382ee3ce8624a62d5964bfc}\label{Image_8cpp_aa3590cbaa382ee3ce8624a62d5964bfc}} 
+\index{Image.cpp@{Image.cpp}!operator-\/@{operator-\/}}
+\index{operator-\/@{operator-\/}!Image.cpp@{Image.cpp}}
+\doxysubsubsection{\texorpdfstring{operator-\/()}{operator-()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classImage}{Image}} operator-\/ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classImage}{Image}} \&}]{image,  }\item[{float}]{scalar }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{Image_8cpp_ab12359759cf75debc1307771302d3662}\label{Image_8cpp_ab12359759cf75debc1307771302d3662}} 
+\index{Image.cpp@{Image.cpp}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!Image.cpp@{Image.cpp}}
+\doxysubsubsection{\texorpdfstring{operator$<$$<$()}{operator<<()}}
+{\footnotesize\ttfamily std\+::ostream \& operator$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{os,  }\item[{const \mbox{\hyperlink{classImage}{Image}} \&}]{dt }\end{DoxyParamCaption})}
+

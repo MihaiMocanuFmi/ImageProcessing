@@ -1,0 +1,104 @@
+\hypertarget{classImage}{}\doxysection{Image Class Reference}
+\label{classImage}\index{Image@{Image}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classImage_afb0339b802ed560e69eb07358d30198f}\label{classImage_afb0339b802ed560e69eb07358d30198f}} 
+{\bfseries Image} (int width, int height)
+\item 
+\mbox{\Hypertarget{classImage_a54cd64dd1427c8b569921d70cc7f0caf}\label{classImage_a54cd64dd1427c8b569921d70cc7f0caf}} 
+{\bfseries Image} (const \mbox{\hyperlink{classColorData}{Color\+Data}} \&color\+Data)
+\item 
+\mbox{\Hypertarget{classImage_a9bddf4b5b5d56098a72edeb2ffdce659}\label{classImage_a9bddf4b5b5d56098a72edeb2ffdce659}} 
+{\bfseries Image} (\mbox{\hyperlink{classtools_1_1Vector2}{tools\+::\+Vector2I}} size)
+\item 
+\mbox{\Hypertarget{classImage_a9f98e38c2e84f7d48410535f160ef39f}\label{classImage_a9f98e38c2e84f7d48410535f160ef39f}} 
+bool {\bfseries load} (const std\+::string \&image\+Path)
+\item 
+\mbox{\Hypertarget{classImage_aa307b60a2c597e8f575ef9f61a902645}\label{classImage_aa307b60a2c597e8f575ef9f61a902645}} 
+bool {\bfseries save} (const std\+::string \&image\+Path)
+\item 
+\mbox{\Hypertarget{classImage_a48b3f00fd2b56f0aadd662bacc7c8276}\label{classImage_a48b3f00fd2b56f0aadd662bacc7c8276}} 
+bool {\bfseries get\+ROI} (\mbox{\hyperlink{classImage}{Image}} \&roi\+Img, \mbox{\hyperlink{classtools_1_1Rectangle}{tools\+::\+Rectangle}} roi\+Rect)
+\item 
+\mbox{\Hypertarget{classImage_ad098ce0bd682bc524870bd9fbee6179e}\label{classImage_ad098ce0bd682bc524870bd9fbee6179e}} 
+bool {\bfseries get\+ROI} (\mbox{\hyperlink{classImage}{Image}} \&roi\+Img, int x, int y, int width, int height)
+\item 
+\mbox{\Hypertarget{classImage_aa4d8a644bef789d80d9b6e7fed78ca5a}\label{classImage_aa4d8a644bef789d80d9b6e7fed78ca5a}} 
+void {\bfseries release} ()
+\item 
+\mbox{\Hypertarget{classImage_ad9b9016c9e5b309b338b12d76a09aa5f}\label{classImage_ad9b9016c9e5b309b338b12d76a09aa5f}} 
+bool {\bfseries is\+Empty} () const
+\item 
+\mbox{\Hypertarget{classImage_abed14eddf2258b274e6872067db1081d}\label{classImage_abed14eddf2258b274e6872067db1081d}} 
+const \mbox{\hyperlink{classColorData}{Color\+Data}} \& {\bfseries data} () const
+\item 
+\mbox{\Hypertarget{classImage_a62d9b066f89aaeb9e947fb71e7e1f445}\label{classImage_a62d9b066f89aaeb9e947fb71e7e1f445}} 
+const \mbox{\hyperlink{classtools_1_1Vector2}{tools\+::\+Vector2I}} \& {\bfseries size} () const
+\item 
+\mbox{\Hypertarget{classImage_a1d1a10a74a6fcdf6eae7969f79b315a0}\label{classImage_a1d1a10a74a6fcdf6eae7969f79b315a0}} 
+\mbox{\hyperlink{classtools_1_1RgbColor}{tools\+::\+Rgb\+Color}} \& {\bfseries at} (const \mbox{\hyperlink{classtools_1_1Vector2}{tools\+::\+Vector2I}} \&position)
+\item 
+\mbox{\Hypertarget{classImage_a67183eea8f5bfa79decd6cc14773b90e}\label{classImage_a67183eea8f5bfa79decd6cc14773b90e}} 
+\mbox{\hyperlink{classtools_1_1RgbColor}{tools\+::\+Rgb\+Color}} \& {\bfseries at} (int x, int y)
+\item 
+\mbox{\Hypertarget{classImage_a54e5c57030602a64aed6e9a164c70bcf}\label{classImage_a54e5c57030602a64aed6e9a164c70bcf}} 
+const \mbox{\hyperlink{classtools_1_1RgbColor}{tools\+::\+Rgb\+Color}} \& {\bfseries at} (const \mbox{\hyperlink{classtools_1_1Vector2}{tools\+::\+Vector2I}} \&position) const
+\item 
+\mbox{\Hypertarget{classImage_a9bf07a9e456c18b84ca9867541ab1ba1}\label{classImage_a9bf07a9e456c18b84ca9867541ab1ba1}} 
+const \mbox{\hyperlink{classtools_1_1RgbColor}{tools\+::\+Rgb\+Color}} \& {\bfseries at} (int x, int y) const
+\item 
+\mbox{\Hypertarget{classImage_a7b168c075977d8ad072f29bd29ce4e3d}\label{classImage_a7b168c075977d8ad072f29bd29ce4e3d}} 
+\mbox{\hyperlink{classtools_1_1RgbColor}{tools\+::\+Rgb\+Color}} $\ast$ {\bfseries row} (int y)
+\item 
+\mbox{\Hypertarget{classImage_a65865b76fd2a4273fd0c7e14b75e8549}\label{classImage_a65865b76fd2a4273fd0c7e14b75e8549}} 
+bool {\bfseries operator==} (const \mbox{\hyperlink{classImage}{Image}} \&other) const
+\item 
+\mbox{\Hypertarget{classImage_a438a06bd39201943dc2d9e5870acddd7}\label{classImage_a438a06bd39201943dc2d9e5870acddd7}} 
+bool {\bfseries operator!=} (const \mbox{\hyperlink{classImage}{Image}} \&other) const
+\item 
+\mbox{\Hypertarget{classImage_aab5a98397772e7560eb2031048eba7c5}\label{classImage_aab5a98397772e7560eb2031048eba7c5}} 
+\mbox{\hyperlink{classImage}{Image}} {\bfseries operator+} (const \mbox{\hyperlink{classImage}{Image}} \&i)
+\item 
+\mbox{\Hypertarget{classImage_a832b7fe46bee528f901ea8cb043fd778}\label{classImage_a832b7fe46bee528f901ea8cb043fd778}} 
+\mbox{\hyperlink{classImage}{Image}} {\bfseries operator-\/} (const \mbox{\hyperlink{classImage}{Image}} \&i)
+\item 
+\mbox{\Hypertarget{classImage_a0b52feaf95a09bc977fe4bf84b511bfa}\label{classImage_a0b52feaf95a09bc977fe4bf84b511bfa}} 
+\mbox{\hyperlink{classImage}{Image}} {\bfseries operator$\ast$} (const \mbox{\hyperlink{classImage}{Image}} \&i)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classImage_a4161a2ffe23ff58a35709384b09ff6df}\label{classImage_a4161a2ffe23ff58a35709384b09ff6df}} 
+static \mbox{\hyperlink{classImage}{Image}} {\bfseries zeros} (int width, int height)
+\item 
+\mbox{\Hypertarget{classImage_aa499914754c0164de02ed8cb7b7d3afe}\label{classImage_aa499914754c0164de02ed8cb7b7d3afe}} 
+static \mbox{\hyperlink{classImage}{Image}} {\bfseries ones} (int width, int height)
+\end{DoxyCompactItemize}
+\doxysubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classImage_ab12359759cf75debc1307771302d3662}\label{classImage_ab12359759cf75debc1307771302d3662}} 
+std\+::ostream \& {\bfseries operator$<$$<$} (std\+::ostream \&os, const \mbox{\hyperlink{classImage}{Image}} \&dt)
+\item 
+\mbox{\Hypertarget{classImage_ad5fd3678ab324ed9cd5ebf3e7b292eae}\label{classImage_ad5fd3678ab324ed9cd5ebf3e7b292eae}} 
+\mbox{\hyperlink{classImage}{Image}} {\bfseries operator+} (float scalar, const \mbox{\hyperlink{classImage}{Image}} \&image)
+\item 
+\mbox{\Hypertarget{classImage_a23bad706dc5a3a8ce5d511d33030a4ea}\label{classImage_a23bad706dc5a3a8ce5d511d33030a4ea}} 
+\mbox{\hyperlink{classImage}{Image}} {\bfseries operator+} (const \mbox{\hyperlink{classImage}{Image}} \&image, float scalar)
+\item 
+\mbox{\Hypertarget{classImage_aa3590cbaa382ee3ce8624a62d5964bfc}\label{classImage_aa3590cbaa382ee3ce8624a62d5964bfc}} 
+\mbox{\hyperlink{classImage}{Image}} {\bfseries operator-\/} (const \mbox{\hyperlink{classImage}{Image}} \&image, float scalar)
+\item 
+\mbox{\Hypertarget{classImage_a1f03f4fff7b2bb92f7366d75c3318b2d}\label{classImage_a1f03f4fff7b2bb92f7366d75c3318b2d}} 
+\mbox{\hyperlink{classImage}{Image}} {\bfseries operator$\ast$} (float scalar, const \mbox{\hyperlink{classImage}{Image}} \&image)
+\item 
+\mbox{\Hypertarget{classImage_a5bfb2a5442a16c12519b3982043b52bb}\label{classImage_a5bfb2a5442a16c12519b3982043b52bb}} 
+\mbox{\hyperlink{classImage}{Image}} {\bfseries operator$\ast$} (const \mbox{\hyperlink{classImage}{Image}} \&image, float scalar)
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Libs/\+Image/Image.\+h\item 
+Libs/\+Image/Image.\+cpp\end{DoxyCompactItemize}
