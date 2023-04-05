@@ -23,7 +23,7 @@ TEST_CASE("PPM", "[PPM]")
                                "0 0 0 0 0 0";
 
             PortablePixMap_Plain pbm;
-            ColorData data;
+            ImageData data;
             bool result = pbm.loadPlain(file, data);
             REQUIRE(result == true);
 
@@ -48,7 +48,7 @@ TEST_CASE("PPM", "[PPM]")
                        "255 255 255  # white\n"
                        "  0   0   0  # black";
 
-                data = ColorData();
+                data = ImageData();
                 result = pbm.loadPlain(file, data);
                 REQUIRE(result == false);
                 REQUIRE(data.size() == tools::Vector2I{0, 0});
@@ -66,7 +66,7 @@ TEST_CASE("PPM", "[PPM]")
                                    "000010000010000010000010000010000010100010011100000000000000";
 
                 PortablePixMap_Plain pbm;
-                ColorData data;
+                ImageData data;
                 pbm.loadPlain(file, data);
 
                 CHECK(data.size() == tools::Vector2I{6, 10});
@@ -95,7 +95,7 @@ TEST_CASE("PPM", "[PPM]")
                                "0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0";
 
             PortablePixMap_Plain pgm;
-            ColorData data;
+            ImageData data;
             bool result = pgm.loadPlain(file, data);
             REQUIRE(result == true);
 
@@ -125,7 +125,7 @@ TEST_CASE("PPM", "[PPM]")
                        "255 255 255  # white\n"
                        "  0   0   0  # black";
 
-                data = ColorData();
+                data = ImageData();
                 result = pgm.loadPlain(file, data);
                 REQUIRE(result == false);
                 REQUIRE(data.size() == tools::Vector2I{0, 0});
@@ -148,7 +148,7 @@ TEST_CASE("PPM", "[PPM]")
                                "  0   0   0  # black";
 
             PortablePixMap_Plain ppm;
-            ColorData data;
+            ImageData data;
             bool result = ppm.loadPlain(file, data);
             REQUIRE(result == true);
 
@@ -174,7 +174,7 @@ TEST_CASE("PPM", "[PPM]")
                        "255 255 255  # white\n"
                        "  0   0   0  # black";
 
-                data = ColorData();
+                data = ImageData();
                 result = ppm.loadPlain(file, data);
                 REQUIRE(result == false);
                 REQUIRE(data.size() == tools::Vector2I{0, 0});
@@ -196,7 +196,7 @@ TEST_CASE("PPM", "[PPM]")
                                "  0   0   0  # black";
 
             PortablePixMap_Plain ppm;
-            ColorData data;
+            ImageData data;
             bool result = ppm.loadPlain(file, data);
             REQUIRE(result == false);
             REQUIRE(data.size() == tools::Vector2I{0, 0});
@@ -209,7 +209,7 @@ TEST_CASE("PPM", "[PPM]")
 
 
             PortablePixMap_Plain ppm;
-            ColorData data;
+            ImageData data;
             bool result = ppm.loadPlain(file, data);
             REQUIRE(result == false);
             REQUIRE(data.size() == tools::Vector2I{0, 0});
@@ -222,7 +222,7 @@ TEST_CASE("PPM", "[PPM]")
 
 
             PortablePixMap_Plain ppm;
-            ColorData data;
+            ImageData data;
             bool result = ppm.loadPlain(file, data);
             REQUIRE(result == false);
             REQUIRE(data.size() == tools::Vector2I{0, 0});
@@ -243,7 +243,7 @@ TEST_CASE("PPM", "[PPM]")
                                "  0   0   0  # black";
 
             PortablePixMap_Plain ppm;
-            ColorData data;
+            ImageData data;
             bool result = ppm.loadPlain(file, data);
             REQUIRE(result == false);
             REQUIRE(data.size() == tools::Vector2I{0, 0});
@@ -253,7 +253,7 @@ TEST_CASE("PPM", "[PPM]")
 
     SECTION("Save")
     {
-        ColorData data({3, 2});
+        ImageData data({3, 2});
         data.at(0, 0) = tools::RgbColor(255, 0, 0);
         data.at(1, 0) = tools::RgbColor(0, 255, 0);
         data.at(2, 0) = tools::RgbColor(0, 0, 255);
@@ -275,7 +275,7 @@ TEST_CASE("PPM", "[PPM]")
                           "255 255 0 255 255 255 0 0 0 ");
 
 
-        data = ColorData({100, 100}, tools::RgbColor(255, 255, 255));
+        data = ImageData({100, 100}, tools::RgbColor(255, 255, 255));
         result = ppm.saveToString(output, data);
         REQUIRE(result == true);
         REQUIRE(output.length() > 100 * 100 * 3);

@@ -6,16 +6,16 @@
 #include "PortablePixMap_Plain.h"
 #include "../Tools/Vector2.h"
 #include "../Tools/Rectangle.h"
-#include "ColorData.h"
+#include "ImageData.h"
 
-///\brief Class representing an Image. It manages the ColorData and also loading/saving
+///\brief Class representing an Image. It manages the ImageData and also loading/saving
 class Image
 {
 private:
     //Tools::Vector2I m_size = {};
 
     PortablePixMap_Plain ppm = {};
-    ColorData m_colorData = {};
+    ImageData m_ImageData = {};
 
 public:
     /// \brief Creates an Image having all elements ones: RgbColor(1, 1, 1)
@@ -33,21 +33,21 @@ public:
     /// \brief The default constructor, it initialises all values to their zero or null value
     Image() = default;
 
-    /// \brief It creates an Image with a specified size. The element inside colorData are not initialised
+    /// \brief It creates an Image with a specified size. The element inside ImageData are not initialised
     /// \param width The width of the image (.x)
     /// \param height The height of the image (.y)
-    /// \note The size of the Image coincides with the size of the ColorData contained.
+    /// \note The size of the Image coincides with the size of the ImageData contained.
     Image(int width, int height);
 
-    /// \brief It creates an Image with a specified size. The element inside colorData are not initialised
+    /// \brief It creates an Image with a specified size. The element inside ImageData are not initialised
     /// \param size The size of the Image;
-    /// \note The size of the Image coincides with the size of the ColorData contained.
+    /// \note The size of the Image coincides with the size of the ImageData contained.
     explicit Image(tools::Vector2I size);
 
-    /// \brief It creates an Image knowing its ColorData
-    /// \param colorData The ColorData of the image
-    /// \note The size of the ColorData will coincide with the size of the Image.
-    Image(const ColorData &colorData);
+    /// \brief It creates an Image knowing its ImageData
+    /// \param imageData The ImageData of the image
+    /// \note The size of the ImageData will coincide with the size of the Image.
+    Image(const ImageData &imageData);
 
 
     /// \brief Loads into Image.data() the image found at the given path
@@ -88,7 +88,7 @@ public:
 
     /// \brief Getter for data.
     /// \return Const reference to the data;
-    const ColorData &data() const;
+    const ImageData &data() const;
 
     /// \brief Getter for size
     /// \return Const reference to the size;

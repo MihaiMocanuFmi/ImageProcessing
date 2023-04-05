@@ -4,7 +4,7 @@
 
 namespace tests
 {
-    void __scaleConvolution(ColorData &colorData)
+    void __scaleConvolution(ImageData &colorData)
     {
         for (int y = 0; y < colorData.size().y; ++y)
             for (int x = 0; x < colorData.size().x; ++x)
@@ -29,7 +29,7 @@ TEST_CASE("Convolution", "[Convolution]")
                         REQUIRE(convolution.getKernel().at(x, y) == tools::RgbColor(0, 0, 0));
 
             auto scalingMethodPointer = convolution.getScalingMethod();
-            ColorData data({6, 6}, tools::RgbColor(100, 200, 50));
+            ImageData data({6, 6}, tools::RgbColor(100, 200, 50));
             scalingMethodPointer(data);
             REQUIRE(data.size() == tools::Vector2I{6, 6});
 
@@ -41,7 +41,7 @@ TEST_CASE("Convolution", "[Convolution]")
         SECTION("Parameter")
         {
 
-            Convolution convolution(ColorData({1,1}, tools::RgbColor(177, 177, 177)),
+            Convolution convolution(ImageData({1, 1}, tools::RgbColor(177, 177, 177)),
                                     nullptr);
             REQUIRE(convolution.getKernel().size() == tools::Vector2I {1, 1});
             REQUIRE(convolution.getKernel().at(0, 0) == tools::RgbColor{177, 177, 177});
@@ -49,7 +49,7 @@ TEST_CASE("Convolution", "[Convolution]")
 
         SECTION("Getters")
         {
-            Convolution convolution(ColorData({1,1}, tools::RgbColor(177, 177, 177)),
+            Convolution convolution(ImageData({1, 1}, tools::RgbColor(177, 177, 177)),
                                     nullptr);
             REQUIRE(convolution.getKernel().size() == tools::Vector2I{1, 1});
             REQUIRE(convolution.getKernel().at(0, 0) == tools::RgbColor{177, 177, 177});
@@ -63,7 +63,7 @@ TEST_CASE("Convolution", "[Convolution]")
             convolution.getScalingMethod() = tests::__scaleConvolution;
             REQUIRE(convolution.getKernel().size() == tools::Vector2I {3, 3});
 
-            Image src(ColorData({10, 10}, tools::RgbColor(127, 50, 200)));
+            Image src(ImageData({10, 10}, tools::RgbColor(127, 50, 200)));
             Image dst;
             convolution.process(src, dst);
 

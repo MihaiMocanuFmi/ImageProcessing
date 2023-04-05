@@ -6,7 +6,7 @@
 
 #include "../Tools/Vector2.h"
 #include "../Tools/RgbColor.h"
-#include "ColorData.h"
+#include "ImageData.h"
 
 /// \brief  Class responsible for loading and saving .ppm, .pgm and .pbm images
 class PortablePixMap_Plain
@@ -48,26 +48,26 @@ private:
     /// Will search for colors in a string following the P1 format. The output colorMatrix will be converted into
     /// P3 format
     ///
-    bool m_findColorsP1Format(const std::string &rPlainFile, ColorData &outColorMatrix);
+    bool m_findColorsP1Format(const std::string &rPlainFile, ImageData &outColorMatrix);
 
     ///
     /// Will search for colors in a string following the P2format. The output colorMatrix will be converted into
     /// P3 format
     ///
-    bool m_findColorsP2Format(const std::string &rPlainFile, ColorData &outColorMatrix);
+    bool m_findColorsP2Format(const std::string &rPlainFile, ImageData &outColorMatrix);
 
     ///
     /// Will search for colors in a string following the P3 format. The output colorMatrix will be converted into
     /// P3 format
     ///
-    bool m_findColorsP3Format(const std::string &rPlainFile, ColorData &outColorMatrix);
+    bool m_findColorsP3Format(const std::string &rPlainFile, ImageData &outColorMatrix);
 
     ///
     /// Will find the color matrix in the given string file
     ///
-    bool m_findColors(const std::string &rPlainFile, ColorData &outColorMatrix);
+    bool m_findColors(const std::string &rPlainFile, ImageData &outColorMatrix);
 
-    void cacheDataParameters(const ColorData &data);
+    void cacheDataParameters(const ImageData &data);
 public:
     /// \brief The Magic Number that represents .ppm files
     static constexpr char PPM_MAGIC_NUMBER[] = "P3";
@@ -82,19 +82,19 @@ public:
     PortablePixMap_Plain() = default;
 
 
-    /// \brief Given a string, representing the data of an image, it creates a ColorData with the given data.
+    /// \brief Given a string, representing the data of an image, it creates a ImageData with the given data.
     /// \param plainFile String containing the image format.
     /// \param outData Output parameter, representing the loaded image.
     /// \return True if it succeeded, false otherwise.
     /// \note It supports loading plain (ASCII) .ppm, .pgm and .pbm images, but they will be converted all to the .ppm
     /// format inside outData.
-    bool loadPlain(std::string plainFile, ColorData &outData);
+    bool loadPlain(std::string plainFile, ImageData &outData);
 
-    /// \brief Given the colorData of an image, it saves it to the given string after the standard of the .ppm format.
-    /// \param outPlainFile String representing the image in .ppm format which was contained inside ColorData
-    /// \param data The ColorData to be saved to string
+    /// \brief Given the ImageData, it saves it to the given string after the standard of the .ppm format.
+    /// \param outPlainFile String representing the image in .ppm format which was contained inside ImageData
+    /// \param data The ImageData to be saved to string
     /// \return True if it succeeded, false otherwise.
-    bool saveToString(std::string &outPlainFile, const ColorData &data);
+    bool saveToString(std::string &outPlainFile, const ImageData &data);
 
 };
 

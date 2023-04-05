@@ -1,4 +1,4 @@
-#include "ColorData.h"
+#include "ImageData.h"
 
 #include <stdexcept>
 #include <iomanip>
@@ -7,14 +7,14 @@
 
 /////////////////////////PUBLIC////////////////////////////////////////////////////////////////////////////////////
 
-ColorData::ColorData(const tools::Vector2I &size) : m_size{size}
+ImageData::ImageData(const tools::Vector2I &size) : m_size{size}
 {
     m_matrix = new tools::RgbColor[m_size.y * m_size.x];
 }
 
 
 
-ColorData::ColorData(const tools::Vector2I &size, const tools::RgbColor &defaultValue) :  m_size{size}
+ImageData::ImageData(const tools::Vector2I &size, const tools::RgbColor &defaultValue) : m_size{size}
 {
     m_matrix = new tools::RgbColor[m_size.y * m_size.x];
     for (int y = 0; y < m_size.y; ++y)
@@ -25,7 +25,7 @@ ColorData::ColorData(const tools::Vector2I &size, const tools::RgbColor &default
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-ColorData &ColorData::operator=(const ColorData &other)
+ImageData &ImageData::operator=(const ImageData &other)
 {
     if (this == &other)
         return *this;
@@ -53,7 +53,7 @@ ColorData &ColorData::operator=(const ColorData &other)
 }
 
 
-ColorData::ColorData(const ColorData &other)
+ImageData::ImageData(const ImageData &other)
 {
     this->m_size = other.m_size;
 
@@ -68,14 +68,14 @@ ColorData::ColorData(const ColorData &other)
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-ColorData::~ColorData()
+ImageData::~ImageData()
 {
     delete[] m_matrix;
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void ColorData::resize(const tools::Vector2I &newSize)
+void ImageData::resize(const tools::Vector2I &newSize)
 {
     if(m_size.x * m_size.y < newSize.x * newSize.y)
     {
@@ -90,7 +90,7 @@ void ColorData::resize(const tools::Vector2I &newSize)
     }
 }
 
-void ColorData::resize(const tools::Vector2I &newSize, const tools::RgbColor &defaultValue)
+void ImageData::resize(const tools::Vector2I &newSize, const tools::RgbColor &defaultValue)
 {
     delete[] m_matrix;
     m_matrix = new tools::RgbColor[newSize.y * newSize.x];
@@ -103,12 +103,12 @@ void ColorData::resize(const tools::Vector2I &newSize, const tools::RgbColor &de
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-bool ColorData::getROI(ColorData &roiColorData, tools::Rectangle roiRect)
+bool ImageData::getROI(ImageData &roiImageData, tools::Rectangle roiRect)
 {
     if (not tools::Rectangle::isContainedInside(roiRect,tools::Rectangle({0, 0},m_size)))
         return false;
 
-    roiColorData = ColorData(roiRect.size);
+    roiImageData = ImageData(roiRect.size);
     for (int y = 0; y < roiRect.size.y; ++y)
     {
         for (int x = 0; x < roiRect.size.x; ++x)
@@ -120,7 +120,7 @@ bool ColorData::getROI(ColorData &roiColorData, tools::Rectangle roiRect)
             int currentElement = y * roiRect.size.x + x;
             int xInParent = roiRect.upperLeftCorner.x + x;
             int yInParent = roiRect.upperLeftCorner.y + y;
-            *(roiColorData.m_matrix + currentElement) = *(this->m_matrix + m_size.x * yInParent  + xInParent);
+            *(roiImageData.m_matrix + currentElement) = *(this->m_matrix + m_size.x * yInParent + xInParent);
 
         }
     }
@@ -129,42 +129,42 @@ bool ColorData::getROI(ColorData &roiColorData, tools::Rectangle roiRect)
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-tools::RgbColor& ColorData::at(const tools::Vector2I &position)
+tools::RgbColor& ImageData::at(const tools::Vector2I &position)
 {
     return m_matrix[m_size.x * position.y + position.x];
 }
 
-tools::RgbColor& ColorData::at(int x, int y)
+tools::RgbColor& ImageData::at(int x, int y)
 {
     return at({x, y});
 }
 
-const tools::RgbColor& ColorData::at(const tools::Vector2I &position) const
+const tools::RgbColor& ImageData::at(const tools::Vector2I &position) const
 {
     return m_matrix[m_size.x * position.y + position.x];
 }
 
-const tools::RgbColor& ColorData::at(int x, int y) const
+const tools::RgbColor& ImageData::at(int x, int y) const
 {
     return at({x, y});
 }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-tools::RgbColor *ColorData::row(int y)
+tools::RgbColor *ImageData::row(int y)
 {
     return &(this->at(0,y));
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-const tools::Vector2I &ColorData::size() const
+const tools::Vector2I &ImageData::size() const
 {
     return m_size;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-std::ostream &operator<<(std::ostream &os, const ColorData &dt)
+std::ostream &operator<<(std::ostream &os, const ImageData &dt)
 {
     const int emptySize = std::string("(, , )").length();
     const int maxSize = emptySize + 3 * std::to_string(dt.MAX_VALUE).length();
@@ -185,7 +185,7 @@ std::ostream &operator<<(std::ostream &os, const ColorData &dt)
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-bool ColorData::operator==(const ColorData &other) const
+bool ImageData::operator==(const ImageData &other) const
 {
     if (this->m_size != other.m_size)
         return false;
@@ -197,19 +197,19 @@ bool ColorData::operator==(const ColorData &other) const
     return true;
 }
 
-bool ColorData::operator!=(const ColorData &other) const
+bool ImageData::operator!=(const ImageData &other) const
 {
     return not (*this == other);
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-ColorData ColorData::operator+(const ColorData &other)
+ImageData ImageData::operator+(const ImageData &other)
 {
     if (this->m_size != other.m_size)
         throw std::runtime_error("The matrices aren't of same size");
 
-    ColorData newMatrix(m_size);
+    ImageData newMatrix(m_size);
     for (int y = 0; y < this->m_size.y; ++y)
         for (int x = 0; x < this->m_size.x; ++x)
             newMatrix.at(x,y) = this->at(x, y) + other.at(x, y);
@@ -217,12 +217,12 @@ ColorData ColorData::operator+(const ColorData &other)
     return newMatrix;
 }
 
-ColorData ColorData::operator-(const ColorData &other)
+ImageData ImageData::operator-(const ImageData &other)
 {
     if (this->m_size != other.m_size)
         throw std::runtime_error("The matrices aren't of same size");
 
-    ColorData newMatrix(m_size);
+    ImageData newMatrix(m_size);
     for (int y = 0; y < this->m_size.y; ++y)
         for (int x = 0; x < this->m_size.x; ++x)
             newMatrix.at(x,y) = this->at(x, y) - other.at(x, y);
@@ -230,12 +230,12 @@ ColorData ColorData::operator-(const ColorData &other)
     return newMatrix;
 }
 
-ColorData ColorData::operator*(const ColorData &other)
+ImageData ImageData::operator*(const ImageData &other)
 {
     if (this->m_size != other.m_size)
         throw std::runtime_error("The matrices aren't of same size");
 
-    ColorData newMatrix(m_size);
+    ImageData newMatrix(m_size);
     for (int y = 0; y < this->m_size.y; ++y)
         for (int x = 0; x < this->m_size.x; ++x)
             newMatrix.at(x, y) = this->at(x, y) * other.at(x, y);
@@ -245,49 +245,49 @@ ColorData ColorData::operator*(const ColorData &other)
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-ColorData operator+(float scalar, const ColorData &colorMatrix)
+ImageData operator+(float scalar, const ImageData &imageData)
 {
-    ColorData newMatrix(colorMatrix.m_size);
-    for (int y = 0; y < colorMatrix.m_size.y; ++y)
-        for (int x = 0; x < colorMatrix.m_size.x; ++x)
-            newMatrix.at(x,y) =  scalar + colorMatrix.at(x, y);
+    ImageData newMatrix(imageData.m_size);
+    for (int y = 0; y < imageData.m_size.y; ++y)
+        for (int x = 0; x < imageData.m_size.x; ++x)
+            newMatrix.at(x,y) = scalar + imageData.at(x, y);
 
     return newMatrix;
 }
 
-ColorData operator+(const ColorData &colorMatrix, float scalar)
+ImageData operator+(const ImageData &imageData, float scalar)
 {
-    return scalar + colorMatrix;
+    return scalar + imageData;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-ColorData operator-(const ColorData &colorMatrix, float scalar)
+ImageData operator-(const ImageData &imageData, float scalar)
 {
-    ColorData newMatrix(colorMatrix.m_size);
-    for (int y = 0; y < colorMatrix.m_size.y; ++y)
-        for (int x = 0; x < colorMatrix.m_size.x; ++x)
-            newMatrix.at(x,y) = colorMatrix.at(x, y) - scalar;
+    ImageData newMatrix(imageData.m_size);
+    for (int y = 0; y < imageData.m_size.y; ++y)
+        for (int x = 0; x < imageData.m_size.x; ++x)
+            newMatrix.at(x,y) = imageData.at(x, y) - scalar;
 
     return newMatrix;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-ColorData operator*(float scalar, const ColorData &colorMatrix)
+ImageData operator*(float scalar, const ImageData &imageData)
 {
-    ColorData newMatrix(colorMatrix.m_size);
-    for (int y = 0; y < colorMatrix.m_size.y; ++y)
-        for (int x = 0; x < colorMatrix.m_size.x; ++x)
-            newMatrix.at(x,y) =  scalar * colorMatrix.at(x, y);
+    ImageData newMatrix(imageData.m_size);
+    for (int y = 0; y < imageData.m_size.y; ++y)
+        for (int x = 0; x < imageData.m_size.x; ++x)
+            newMatrix.at(x,y) = scalar * imageData.at(x, y);
 
     return newMatrix;
 }
 
-ColorData operator*(const ColorData &colorMatrix, float scalar)
+ImageData operator*(const ImageData &imageData, float scalar)
 {
-    return scalar * colorMatrix;
+    return scalar * imageData;
 }
 
 

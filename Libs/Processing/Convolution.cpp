@@ -2,7 +2,7 @@
 
 using namespace Kernels;
 
-tools::RgbColor Convolution::m_multiplyWithKernel(const ColorData &colorData, tools::Vector2I position)
+tools::RgbColor Convolution::m_multiplyWithKernel(const ImageData &imageData, tools::Vector2I position)
 {
     tools::RgbColor result;
     //we don't want any boundaries for pixel values
@@ -17,17 +17,17 @@ tools::RgbColor Convolution::m_multiplyWithKernel(const ColorData &colorData, to
             //If we get outside the bounds of the ColorDataMatrix, then we consider the nearest pixel inside the matrix
             if(indexInColorData.x <= -1)
                 indexInColorData.x = 0;
-            else if(indexInColorData.x >= colorData.size().x)
-                indexInColorData.x = colorData.size().x - 1;
+            else if(indexInColorData.x >= imageData.size().x)
+                indexInColorData.x = imageData.size().x - 1;
 
             if(indexInColorData.y <= -1)
                 indexInColorData.y = 0;
-            else if(indexInColorData.y >= colorData.size().y)
-                indexInColorData.y = colorData.size().y - 1;
+            else if(indexInColorData.y >= imageData.size().y)
+                indexInColorData.y = imageData.size().y - 1;
 
-            float R = result.getColorR() + m_kernel.at(x, y).getColorR() * colorData.at(indexInColorData).getColorR();
-            float G = result.getColorG() + m_kernel.at(x, y).getColorG() * colorData.at(indexInColorData).getColorG();
-            float B = result.getColorB() + m_kernel.at(x, y).getColorB() * colorData.at(indexInColorData).getColorB();
+            float R = result.getColorR() + m_kernel.at(x, y).getColorR() * imageData.at(indexInColorData).getColorR();
+            float G = result.getColorG() + m_kernel.at(x, y).getColorG() * imageData.at(indexInColorData).getColorG();
+            float B = result.getColorB() + m_kernel.at(x, y).getColorB() * imageData.at(indexInColorData).getColorB();
             result = tools::RgbColor(R, G, B, true);
         }
 
@@ -46,7 +46,7 @@ Convolution::Convolution()
     m_scaling = IdentityKernel::scalingMethod;
 }
 
-Convolution::Convolution(const ColorData &kernel, ScalingMethod method) : m_kernel{kernel}, m_scaling{method}
+Convolution::Convolution(const ImageData &kernel, ScalingMethod method) : m_kernel{kernel}, m_scaling{method}
 {
 
 }
@@ -57,7 +57,7 @@ void Convolution::process(const Image &src, Image &dst)
 
     //we dont want any bounds for now;
 
-    ColorData buffer(src.size());
+    ImageData buffer(src.size());
 
     for (int y = 0; y < src.size().y; ++y)
         for (int x = 0; x < src.size().x; ++x)
@@ -68,12 +68,12 @@ void Convolution::process(const Image &src, Image &dst)
     dst = Image(buffer);
 }
 
-ColorData &Convolution::getKernel()
+ImageData &Convolution::getKernel()
 {
     return m_kernel;
 }
 
-const ColorData &Convolution::getKernel() const
+const ImageData &Convolution::getKernel() const
 {
     return m_kernel;
 }

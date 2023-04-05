@@ -28,7 +28,7 @@ TEST_CASE("Contrast and Brightness", "[ContrastBrightness]")
 
         SECTION("Process")
         {
-            Image src(ColorData({10, 10}, tools::RgbColor(127, 50, 200)));
+            Image src(ImageData({10, 10}, tools::RgbColor(127, 50, 200)));
             Image dst;
             ContrastBrightness cb(1, 0);
             cb.process(src, dst);

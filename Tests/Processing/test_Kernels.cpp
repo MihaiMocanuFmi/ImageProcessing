@@ -5,16 +5,16 @@
 TEST_CASE("Kernels", "[Kernels]")
 {
     using namespace Kernels;
-    ColorData data0({3, 3}, tools::RgbColor(0, 0, 0));
-    ColorData data1({3, 3}, tools::RgbColor(1, 1, 1));
-    ColorData data255({3, 3}, tools::RgbColor(255, 255, 255));
+    ImageData data0({3, 3}, tools::RgbColor(0, 0, 0));
+    ImageData data1({3, 3}, tools::RgbColor(1, 1, 1));
+    ImageData data255({3, 3}, tools::RgbColor(255, 255, 255));
 
 
     SECTION("Basic Type")
     {
         SECTION("Method")
         {
-            ColorData copy = data0;
+            ImageData copy = data0;
             KernelType::scalingMethod(copy);
             REQUIRE(copy == data0);
 
@@ -32,7 +32,7 @@ TEST_CASE("Kernels", "[Kernels]")
     {
         SECTION("Kernel")
         {
-            ColorData kernel = MeanBlurKernel().kernel;
+            ImageData kernel = MeanBlurKernel().kernel;
             REQUIRE(kernel.size() == tools::Vector2I{3, 3});
             for (int y = 0; y < kernel.size().y; ++y)
                 for (int x = 0; x < kernel.size().x; ++x)
@@ -66,7 +66,7 @@ TEST_CASE("Kernels", "[Kernels]")
     {
         SECTION("Kernel")
         {
-            ColorData kernel = GaussianBlur3x3Kernel().kernel;
+            ImageData kernel = GaussianBlur3x3Kernel().kernel;
             REQUIRE(kernel.size() == tools::Vector2I{3, 3});
 
             REQUIRE(kernel.at(0, 0) == tools::RgbColor(1, 1, 1));
@@ -106,7 +106,7 @@ TEST_CASE("Kernels", "[Kernels]")
     {
         SECTION("Kernel")
         {
-            ColorData kernel = HorizontalSobelKernel().kernel;
+            ImageData kernel = HorizontalSobelKernel().kernel;
             REQUIRE(kernel.size() == tools::Vector2I{3, 3});
 
             REQUIRE(kernel.at(0, 0) == tools::RgbColor(1, 1, 1));
@@ -146,7 +146,7 @@ TEST_CASE("Kernels", "[Kernels]")
     {
         SECTION("Kernel")
         {
-            ColorData kernel = VerticalSobelKernel().kernel;
+            ImageData kernel = VerticalSobelKernel().kernel;
             REQUIRE(kernel.size() == tools::Vector2I{3, 3});
 
             REQUIRE(kernel.at(0, 0) == tools::RgbColor(-1, -1, -1, true));

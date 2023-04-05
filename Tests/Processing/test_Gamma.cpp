@@ -26,7 +26,7 @@ TEST_CASE("Gamma", "[Gamma]")
 
         SECTION("Process")
         {
-            Image src(ColorData({10, 10}, tools::RgbColor(127, 50, 200)));
+            Image src(ImageData({10, 10}, tools::RgbColor(127, 50, 200)));
             Image dst;
             Gamma cb(1);
             cb.process(src, dst);
@@ -44,7 +44,7 @@ TEST_CASE("Gamma", "[Gamma]")
                 for (int x = 0; x < 10; ++x)
                     REQUIRE(dst.at(x, y) == tools::RgbColor{127, 50, 200});
 
-            src = Image(ColorData({10, 10}, tools::RgbColor(255, 128, 64)));
+            src = Image(ImageData({10, 10}, tools::RgbColor(255, 128, 64)));
             cb.setGamma(0.44);
             cb.process(src, dst);
 

@@ -13,14 +13,14 @@ TEST_CASE( "Image", "[Image]")
 
         Image image2(tools::Vector2I {2, 3});
 
-        Image image1(ColorData({10, 11}, tools::RgbColor(255, 300, -200)));
+        Image image1(ImageData({10, 11}, tools::RgbColor(255, 300, -200)));
         REQUIRE(image1.size() == tools::Vector2I(10, 11));
 
         for (int y = 0; y < image1.size().y; ++y)
             for (int x = 0; x < image1.size().x; ++x)
                 REQUIRE(image1.at(x, y) == tools::RgbColor(255, 255, 0));
 
-        Image image3 = ColorData(tools::Vector2I{5, 6});
+        Image image3 = ImageData(tools::Vector2I{5, 6});
         REQUIRE(image3.size() == tools::Vector2I{5, 6});
 
         Image image4(2, 3);
@@ -31,7 +31,7 @@ TEST_CASE( "Image", "[Image]")
     SECTION("accessing elements")
     {
         Image image1(100, 100);
-        Image image2(ColorData({100, 100}, tools::RgbColor(5, 5, 5)));
+        Image image2(ImageData({100, 100}, tools::RgbColor(5, 5, 5)));
         const Image &image3 = image2;
         for (int y = 0; y < 100; ++y)
         {
@@ -70,7 +70,7 @@ TEST_CASE( "Image", "[Image]")
 
     SECTION("ROI")
     {
-        Image imageData1(ColorData({100, 100}, tools::RgbColor(255, 100, 50)));
+        Image imageData1(ImageData({100, 100}, tools::RgbColor(255, 100, 50)));
         tools::Rectangle region(0, 0, 100, 100);
         Image output;
         bool result = imageData1.getROI(output, region);
@@ -115,7 +115,7 @@ TEST_CASE( "Image", "[Image]")
 
     SECTION("Helper methods")
     {
-        Image image1(ColorData({10, 11}, tools::RgbColor(255, 300, -200)));
+        Image image1(ImageData({10, 11}, tools::RgbColor(255, 300, -200)));
 
         SECTION("Release")
         {
@@ -130,19 +130,19 @@ TEST_CASE( "Image", "[Image]")
             image1 = Image();
             REQUIRE(image1.isEmpty());
 
-            image1 = ColorData({0, 1});
+            image1 = ImageData({0, 1});
             REQUIRE(image1.isEmpty());
 
-            image1 = ColorData({1, 0});
+            image1 = ImageData({1, 0});
             REQUIRE(image1.isEmpty());
 
-            image1 = ColorData({-1, 0});
+            image1 = ImageData({-1, 0});
             REQUIRE(image1.isEmpty());
         }
 
         SECTION("Data")
         {
-            ColorData data = image1.data();
+            ImageData data = image1.data();
 
             REQUIRE(data.size() == tools::Vector2I(10, 11));
 
@@ -207,16 +207,16 @@ TEST_CASE( "Image", "[Image]")
 
         }
 
-        Image image1(ColorData({4, 4}, tools::RgbColor(200, 100, 0)));
-        Image image2(ColorData({4, 4}, tools::RgbColor(100, 150, 200)));
+        Image image1(ImageData({4, 4}, tools::RgbColor(200, 100, 0)));
+        Image image2(ImageData({4, 4}, tools::RgbColor(100, 150, 200)));
 
-        Image image3(ColorData({5, 5}, tools::RgbColor(100, 150, 200)));
-        Image image4(ColorData({2, 8}, tools::RgbColor(100, 150, 200)));
+        Image image3(ImageData({5, 5}, tools::RgbColor(100, 150, 200)));
+        Image image4(ImageData({2, 8}, tools::RgbColor(100, 150, 200)));
 
-        Image image5(ColorData({2, 8}, tools::RgbColor(100, 150, 200)));
-        Image image6(ColorData({4, 4}, tools::RgbColor(255, 250, 200)));
+        Image image5(ImageData({2, 8}, tools::RgbColor(100, 150, 200)));
+        Image image6(ImageData({4, 4}, tools::RgbColor(255, 250, 200)));
 
-        Image image7(ColorData({4, 4}, tools::RgbColor(2, 1, -2)));
+        Image image7(ImageData({4, 4}, tools::RgbColor(2, 1, -2)));
 
         SECTION("Comparison")
         {
@@ -241,7 +241,7 @@ TEST_CASE( "Image", "[Image]")
         SECTION("Subtract")
         {
             Image result = image2 - image1;
-            REQUIRE(result == ColorData({4, 4}, tools::RgbColor(0, 50, 200)));
+            REQUIRE(result == ImageData({4, 4}, tools::RgbColor(0, 50, 200)));
 
             REQUIRE_THROWS_AS(image1 - image3, std::runtime_error);
         }
@@ -249,7 +249,7 @@ TEST_CASE( "Image", "[Image]")
         SECTION("Multiply")
         {
             Image result = image2 * image7;
-            REQUIRE(result == ColorData({4, 4}, tools::RgbColor(200, 150, 0)));
+            REQUIRE(result == ImageData({4, 4}, tools::RgbColor(200, 150, 0)));
             REQUIRE(result == image7 * image2);
 
             REQUIRE_THROWS_AS(image1 * image3, std::runtime_error);
@@ -259,12 +259,12 @@ TEST_CASE( "Image", "[Image]")
         {
             float scalar = 60;
             Image result = scalar + image1;
-            REQUIRE(result == ColorData({4, 4}, tools::RgbColor(255, 160, 60)));
+            REQUIRE(result == ImageData({4, 4}, tools::RgbColor(255, 160, 60)));
             REQUIRE(result == image1 + scalar);
 
             scalar = -105;
             result = scalar + image4;
-            REQUIRE(result == ColorData({2, 8}, tools::RgbColor(0, 45, 95)));
+            REQUIRE(result == ImageData({2, 8}, tools::RgbColor(0, 45, 95)));
             REQUIRE(result == image4 + scalar);
         }
 
@@ -272,23 +272,23 @@ TEST_CASE( "Image", "[Image]")
         {
             float scalar = 60;
             Image result = image1 - scalar;
-            REQUIRE(result == ColorData({4, 4}, tools::RgbColor(140, 40, 0)));
+            REQUIRE(result == ImageData({4, 4}, tools::RgbColor(140, 40, 0)));
 
             scalar = -60;
             result = image4 - scalar;
-            REQUIRE(result == ColorData({2, 8}, tools::RgbColor(160, 210, 255)));
+            REQUIRE(result == ImageData({2, 8}, tools::RgbColor(160, 210, 255)));
         }
 
         SECTION("Scalar multiplication")
         {
             float scalar = 1.0f/2;
             Image result = scalar * image1;
-            REQUIRE(result == ColorData({4, 4}, tools::RgbColor(100, 50, 0)));
+            REQUIRE(result == ImageData({4, 4}, tools::RgbColor(100, 50, 0)));
             REQUIRE(result == image1 * scalar);
 
             scalar = -100;
             result = scalar * image4;
-            REQUIRE(result == ColorData({2, 8}, tools::RgbColor(0, 0, 0)));
+            REQUIRE(result == ImageData({2, 8}, tools::RgbColor(0, 0, 0)));
             REQUIRE(result == image4 * scalar);
         }
 

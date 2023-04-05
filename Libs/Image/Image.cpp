@@ -10,16 +10,16 @@
 
 
 
-Image::Image(int width, int height) : m_colorData{{width, height}}
+Image::Image(int width, int height) : m_ImageData{{width, height}}
 {
 }
 
-Image::Image(const ColorData &colorData) : m_colorData{colorData}
+Image::Image(const ImageData &imageData) : m_ImageData{imageData}
 {
 
 
 }
-Image::Image(tools::Vector2I size) : m_colorData{size}
+Image::Image(tools::Vector2I size) : m_ImageData{size}
 {
 
 }
@@ -32,13 +32,13 @@ bool Image::load(const std::string &imagePath)
     std::stringstream buffer;
     buffer << inputFile.rdbuf();
 
-    if (not ppm.loadPlain(buffer.str(), m_colorData))
+    if (not ppm.loadPlain(buffer.str(), m_ImageData))
     {
         inputFile.close();
         return false;
     }
 
-    //m_size = m_colorData.size();
+    //m_size = m_ImageData.size();
 
     inputFile.close();
     return true;
@@ -48,7 +48,7 @@ bool Image::save(const std::string &imagePath)
 {
     std::string imageStr;
 
-    if (not ppm.saveToString(imageStr, m_colorData))
+    if (not ppm.saveToString(imageStr, m_ImageData))
         return false;
 
 
@@ -63,8 +63,8 @@ bool Image::save(const std::string &imagePath)
 
 bool Image::getROI(Image &roiImg, tools::Rectangle roiRect)
 {
-    ColorData colorData;
-    if (not m_colorData.getROI(colorData, roiRect))
+    ImageData colorData;
+    if (not m_ImageData.getROI(colorData, roiRect))
         return false;
 
    roiImg = Image(colorData);
@@ -81,27 +81,27 @@ bool Image::getROI(Image &roiImg, int x, int y, int width, int height)
 void Image::release()
 {
     ppm = PortablePixMap_Plain();
-    m_colorData = ColorData();
+    m_ImageData = ImageData();
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 bool Image::isEmpty() const
 {
-    return m_colorData.size().x <= 0 or m_colorData.size().y <= 0;
+    return m_ImageData.size().x <= 0 or m_ImageData.size().y <= 0;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const tools::Vector2I &Image::size() const
 {
-    return m_colorData.size();
+    return m_ImageData.size();
 }
 
 
-const ColorData &Image::data() const
+const ImageData &Image::data() const
 {
-    return m_colorData;
+    return m_ImageData;
 }
 
 
@@ -109,22 +109,22 @@ const ColorData &Image::data() const
 
 tools::RgbColor& Image::at(const tools::Vector2I &position)
 {
-    return m_colorData.at(position);
+    return m_ImageData.at(position);
 }
 
 tools::RgbColor& Image::at(int x, int y)
 {
-    return m_colorData.at(x, y);
+    return m_ImageData.at(x, y);
 }
 
 const tools::RgbColor& Image::at(const tools::Vector2I &position) const
 {
-    return m_colorData.at(position);
+    return m_ImageData.at(position);
 }
 
 const tools::RgbColor& Image::at(int x, int y) const
 {
-    return m_colorData.at(x, y);
+    return m_ImageData.at(x, y);
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -133,7 +133,7 @@ Image Image::zeros(int width, int height)
 {
     tools::Vector2I size = {width, height};
     tools::RgbColor defaultColor = {0, 0, 0};
-    ColorData colorMatrix(size, defaultColor);
+    ImageData colorMatrix(size, defaultColor);
     return Image(colorMatrix);
 }
 
@@ -141,7 +141,7 @@ Image Image::ones(int width, int height)
 {
     tools::Vector2I size = {width, height};
     tools::RgbColor defaultColor = {1, 1, 1};
-    ColorData colorMatrix(size, defaultColor);
+    ImageData colorMatrix(size, defaultColor);
     return Image(colorMatrix);
 }
 
@@ -149,7 +149,7 @@ Image Image::ones(int width, int height)
 
 std::ostream &operator<<(std::ostream &os, const Image &dt)
 {
-    os << dt.m_colorData;
+    os << dt.m_ImageData;
     return os;
 }
 
@@ -158,58 +158,58 @@ std::ostream &operator<<(std::ostream &os, const Image &dt)
 Image Image::operator+(const Image &i)
 {
 
-    return Image(this->m_colorData + i.m_colorData);
+    return Image(this->m_ImageData + i.m_ImageData);
 }
 
 Image Image::operator-(const Image &i)
 {
-    return Image(this->m_colorData - i.m_colorData);
+    return Image(this->m_ImageData - i.m_ImageData);
 }
 
 Image Image::operator*(const Image &i)
 {
-    return Image(this->m_colorData * i.m_colorData);
+    return Image(this->m_ImageData * i.m_ImageData);
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 Image operator+(float scalar, const Image &image)
 {
-    return Image(scalar + image.m_colorData);
+    return Image(scalar + image.m_ImageData);
 }
 
 Image operator+(const Image &image, float scalar)
 {
-    return Image( image.m_colorData + scalar);
+    return Image(image.m_ImageData + scalar);
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 Image operator-(const Image &image, float scalar)
 {
-    return Image( image.m_colorData - scalar);
+    return Image(image.m_ImageData - scalar);
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 Image operator*(float scalar, const Image &image)
 {
-    return Image(scalar * image.m_colorData);
+    return Image(scalar * image.m_ImageData);
 }
 
 Image operator*(const Image &image, float scalar)
 {
-    return Image( image.m_colorData * scalar);
+    return Image(image.m_ImageData * scalar);
 }
 
 tools::RgbColor *Image::row(int y)
 {
-    return m_colorData.row(y);
+    return m_ImageData.row(y);
 }
 
 bool Image::operator==(const Image &other) const
 {
-    return this->m_colorData == other.m_colorData;
+    return this->m_ImageData == other.m_ImageData;
 }
 
 bool Image::operator!=(const Image &other) const

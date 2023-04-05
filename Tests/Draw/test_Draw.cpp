@@ -8,7 +8,7 @@ TEST_CASE("Draw", "[Draw]")
     const tools::RgbColor WHITE = tools::RgbColor(255, 255, 255);
     const tools::RgbColor BLACK = tools::RgbColor(0, 0, 0);
 
-    Image whiteCanvas(ColorData({100, 100}, WHITE));
+    Image whiteCanvas(ImageData({100, 100}, WHITE));
 
     SECTION("Circle")
     {

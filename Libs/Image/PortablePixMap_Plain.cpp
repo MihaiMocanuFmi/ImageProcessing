@@ -161,7 +161,7 @@ bool PortablePixMap_Plain::m_findMaxValue(const std::string &rPlainFile, int &ou
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-bool PortablePixMap_Plain::m_findColorsP1Format(const std::string &rPlainFile, ColorData &outColorMatrix)
+bool PortablePixMap_Plain::m_findColorsP1Format(const std::string &rPlainFile, ImageData &outColorMatrix)
 {
     //TODO: Maybe add checking for these searches, even though if the rest of the methods were called, these calls will
     // also be valid
@@ -174,7 +174,7 @@ bool PortablePixMap_Plain::m_findColorsP1Format(const std::string &rPlainFile, C
     std::size_t startingPos;
     std::size_t endingPos = posNextWhiteSpace;
 
-    outColorMatrix = ColorData(m_size);
+    outColorMatrix = ImageData(m_size);
     for (int y = 0; y < m_size.y; ++y)
     {
         for (int x = 0; x < m_size.x; ++x)
@@ -196,7 +196,7 @@ bool PortablePixMap_Plain::m_findColorsP1Format(const std::string &rPlainFile, C
     return true;
 }
 
-bool PortablePixMap_Plain::m_findColorsP2Format(const std::string &rPlainFile, ColorData &outColorMatrix)
+bool PortablePixMap_Plain::m_findColorsP2Format(const std::string &rPlainFile, ImageData &outColorMatrix)
 {
     //TODO: Maybe add checking for these searches, even though if the rest of the methods were called, these calls will
     // also be valid
@@ -209,7 +209,7 @@ bool PortablePixMap_Plain::m_findColorsP2Format(const std::string &rPlainFile, C
     std::size_t startingPos;
     std::size_t endingPos = posNextWhiteSpace;
 
-    outColorMatrix = ColorData(m_size);
+    outColorMatrix = ImageData(m_size);
     for (int y = 0; y < m_size.y; ++y)
     {
         for (int x = 0; x < m_size.x; ++x)
@@ -232,7 +232,7 @@ bool PortablePixMap_Plain::m_findColorsP2Format(const std::string &rPlainFile, C
     return true;
 }
 
-bool PortablePixMap_Plain::m_findColorsP3Format(const std::string &rPlainFile, ColorData &outColorMatrix)
+bool PortablePixMap_Plain::m_findColorsP3Format(const std::string &rPlainFile, ImageData &outColorMatrix)
 {
     //TODO: Maybe add checking for these searches, even though if the rest of the methods were called, these calls will
     // also be valid
@@ -246,7 +246,7 @@ bool PortablePixMap_Plain::m_findColorsP3Format(const std::string &rPlainFile, C
     std::size_t endingPos = posNextWhiteSpace;
 
 
-    outColorMatrix = ColorData(m_size);
+    outColorMatrix = ImageData(m_size);
     for (int y = 0; y < m_size.y; ++y)
     {
         for (int x = 0; x < m_size.x; ++x)
@@ -277,7 +277,7 @@ bool PortablePixMap_Plain::m_findColorsP3Format(const std::string &rPlainFile, C
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-bool PortablePixMap_Plain::m_findColors(const std::string &rPlainFile, ColorData &outColorMatrix)
+bool PortablePixMap_Plain::m_findColors(const std::string &rPlainFile, ImageData &outColorMatrix)
 {
     if (m_magicNumber == PBM_MAGIC_NUMBER)
         return m_findColorsP1Format(rPlainFile, outColorMatrix);
@@ -290,7 +290,7 @@ bool PortablePixMap_Plain::m_findColors(const std::string &rPlainFile, ColorData
 }
 
 
-void PortablePixMap_Plain::cacheDataParameters(const ColorData &data)
+void PortablePixMap_Plain::cacheDataParameters(const ImageData &data)
 {
     //We assume it's a PPM, (it has color after all)
     m_magicNumber = PPM_MAGIC_NUMBER;
@@ -309,7 +309,7 @@ void PortablePixMap_Plain::cacheDataParameters(const ColorData &data)
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-bool PortablePixMap_Plain::loadPlain(std::string plainFile, ColorData &outData)
+bool PortablePixMap_Plain::loadPlain(std::string plainFile, ImageData &outData)
 {
     m_preProcessPPM(plainFile);
 
@@ -334,7 +334,7 @@ bool PortablePixMap_Plain::loadPlain(std::string plainFile, ColorData &outData)
 
     m_maxValue = maxValue;
 
-    ColorData colorMatrix;
+    ImageData colorMatrix;
     if (not m_findColors(plainFile, colorMatrix))
         return false;
 
@@ -345,7 +345,7 @@ bool PortablePixMap_Plain::loadPlain(std::string plainFile, ColorData &outData)
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-bool PortablePixMap_Plain::saveToString(std::string &outPlainFile, const ColorData &data)
+bool PortablePixMap_Plain::saveToString(std::string &outPlainFile, const ImageData &data)
 {
     cacheDataParameters(data);
 

@@ -2,7 +2,7 @@ find_package(Catch2 3 REQUIRED)
 # These tests can use the Catch2-provided main
 add_executable(tests test.cpp
         Draw/test_Draw.cpp
-        Image/test_ColorData.cpp Image/test_Image.cpp Image/test_PortablePixMap_Plain.cpp
+        Image/test_ImageData.cpp Image/test_Image.cpp Image/test_PortablePixMap_Plain.cpp
         Processing/test_ContrastBrightness.cpp Processing/test_Convolution.cpp Processing/test_Gamma.cpp Processing/test_ImageProcessing.cpp
         Tools/test_Rectangle.cpp Tools/test_RgbColor.cpp Tools/test_Vector2.cpp Processing/test_Kernels.cpp)
 
