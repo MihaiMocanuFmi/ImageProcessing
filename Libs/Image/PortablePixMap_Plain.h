@@ -8,7 +8,7 @@
 #include "../Tools/RgbColor.h"
 #include "ColorData.h"
 
-
+/// \brief  Class responsible for loading and saving .ppm, .pgm and .pbm images
 class PortablePixMap_Plain
 {
 private:
