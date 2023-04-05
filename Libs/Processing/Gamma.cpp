@@ -51,7 +51,7 @@ void Gamma::process(const Image &src, Image &dst)
 void Gamma::setGamma(float gamma)
 {
     if(gamma <= 0)
-        gamma = 0.0001;
+        gamma = 1;
     m_gamma = gamma;
 }
 

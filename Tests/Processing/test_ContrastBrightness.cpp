@@ -21,7 +21,7 @@ TEST_CASE("Contrast and Brightness", "[ContrastBrightness]")
             REQUIRE(cb.getBeta() == 20);
 
             ContrastBrightness cb2(0, -20);
-            REQUIRE((cb2.getAlpha() > 0 and cb2.getAlpha() < 0.001));
+            REQUIRE(cb2.getAlpha() == 1);
             REQUIRE(cb2.getBeta() == -20);
         }
 

@@ -20,7 +20,7 @@ TEST_CASE("Gamma", "[Gamma]")
             REQUIRE(gamma.getGamma() == 2);
 
             Gamma cb2(-2);
-            REQUIRE((cb2.getGamma() > 0 and cb2.getGamma() < 0.001));
+            REQUIRE((cb2.getGamma() == 1));
         }
 
 
@@ -42,7 +42,7 @@ TEST_CASE("Gamma", "[Gamma]")
             REQUIRE(dst.size() == tools::Vector2I{10, 10});
             for (int y = 0; y < 10; ++y)
                 for (int x = 0; x < 10; ++x)
-                    REQUIRE(dst.at(x, y) == tools::RgbColor{0, 0, 0});
+                    REQUIRE(dst.at(x, y) == tools::RgbColor{127, 50, 200});
 
             src = Image(ColorData({10, 10}, tools::RgbColor(255, 128, 64)));
             cb.setGamma(0.44);

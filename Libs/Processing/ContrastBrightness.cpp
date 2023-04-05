@@ -27,7 +27,7 @@ void ContrastBrightness::process(const Image &src, Image &dst)
 void ContrastBrightness::setAlpha(float alpha)
 {
     if (alpha <= 0)
-        alpha = 0.000000000001;
+        alpha = 1;
 
 
     m_alpha = alpha;
