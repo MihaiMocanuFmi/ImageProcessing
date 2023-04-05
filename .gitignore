@@ -114,5 +114,6 @@ fabric.properties
 
 builds/
 
-Docs/
+Docs/html
+Docs/latex
 
